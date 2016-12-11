@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
+<head>
+    <!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
+    <title>Segelverein Steife Brise</title>
+
+    <meta name="author" content="Gruppe 5">
+    <meta name="keywords" content="Segeln, Segelverein, Steife Brise, Hamburg">
+    <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
+
+    <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
+    <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+
+	<script type="text/javascript" src="js/bootsquiz.js"></script>
+	
+</head>
+
+<!-- sichtbarer Inhalt der Seite-->
+<body>
+    <div id="site">
+
+         <header>
+                 <!-- div-Container für das Logo | Logo ist gleichzeitig Link auf Startseite -->
+                 <div id="Logo">
+                    <a href="index.html">
+						<img src="pictures/querbild2.jpg" id="querbild">
+					</a>
+                 </div>
+
+                 <!-- Menüleiste - als unsorted list -->
+                 <nav>
+                         <ul>
+                                 <li><a href="index.html">Startseite</a></li>
+                                 <li><a href="preise.html">Preisrechner</a></li>
+                                 <li><a href="quiz.html">Quiz</a></li>
+								 <li><a href="kontakt.html">Kontakt</a></li>
+                                 <li><a href="impressum.html">Impressum</a></li>
+                         </ul>
+                 </nav>
+         </header>
+
+         <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
+        <main>
+            <!-- Ueberschrift -->
+            <h1>Fit f&uuml;r deinen Segelschein</h1>
+
+            <form class="f1" method="POST" name="quizErstellen">
+                <div class="benutzerInfo">
+                    <!-- Implementierung von EA3 Aufgabe 1 und 2
+                    1) Erstellen Sie ein Formular, in welchem ein Nutzer Daten eingeben kann. (5 P)
+                    Das Formular soll folgende Elemente beinhalten -->
+
+
+                    <!--2 Textfelder: EA3 Aufgabe 1
+                        Textfeld 1 muss mindestens 5 Buchstaben lang sein: EA3 Aufgabe 2-->
+                    <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id=nameEingabeVorname" type="text"  minlength="5"></p>
+                    <!--Textfeld 2 ist Pflichtfeld: EA3 Aufgabe 2-->
+                    <p>Gib deine E-Mail-Adresse ein (Pflichtfeld): <input id=nameEingabeNachname" type="email" required></p>
+
+                    <!--Drop-Down-Menü mit mind. 6 Optionen: EA3 Aufgabe 1
+                        Die Dropdown-Liste erlaubt mehrfach-Auswahl: EA3 Aufgabe 2
+                        In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden: EA3 Aufgabe 2
+                        Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
+                    <div class="schwierigkeit">
+                        <p>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): <select id="schwierigkeitID"  multiple name="schwierigkeit">
+                            <option name="schwierigkeit" value="sehrLeicht">Sehr Leicht</option>
+                            <option name="schwierigkeit" value="leicht">Leicht</option>
+                            <option name="schwierigkeit" value="normal">Normal</option>
+                            <option name="schwierigkeit" value="schwer">Schwer</option>
+                            <option name="schwierigkeit" value="sehrSchwer">Sehr Schwer</option>
+                            <option name="schwierigkeit" value="experte">Experte</option>
+                        </select> <br></p>
+                    </div>
+
+                    <!--Radiobuttons mit mind. 3 Optionen: EA3 Aufgabe 1
+                        Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
+                    <div class="kategoryHeader">
+                            <p>W&auml;hle eine Kategorie aus</p>
+                            <div class="kselections">
+                                <ul>
+                                    <li><input type="radio" name="kategorie" value="a">Binnengew&auml;sser</li>
+                                    <li><input type="radio" name="kategorie" value="b">Binnengew&auml;sser - Spezifisch</li>
+                                    <li><input type="radio" name="kategorie" value="c">Die See</li>
+                                    <li><input type="radio" name="kategorie" value="d">Die See - Spezifisch</li>
+                                </ul>
+                            </div>
+
+                    </div>
+
+                    <!-- 1 Feld zur Eingabe von Zahlen: EA3 Aufgabe 1
+                        Die eingegebene Zahl muss zwischen 1 und 8 liegen: EA3 Aufgabe 2-->
+                    <p>W&auml;hle bis zu 8 Fragen: <input type="number" id="number" min="1" max="8" value=""></p>
+
+
+                    <!-- Eine Datalist mit mind. 3 Einträgen: EA3 Aufgabe 1-->
+                        <div class="bootsTypen">
+                            <p>W&auml;hle einen Bootstyp aus:  <input list="bootsTypen" name="boote"></p>
+
+                            <datalist id="bootsTypen">
+                                <option value="Segelboot">
+                                <option value="Katamaran">
+                                <option value="Motorboot">
+                                <option value="Ruderboot">
+                            </datalist>
+                    </div>
+
+
+                    <p><input type="submit" id="random" value="Neues Quiz erstellen" onclick="check(document.quizErstellen.schwierigkeit)"></p>
+                </div>
+            </form>
+
+
+
+            <form class="f2" method="GET" name="meinQuiz">
+
+                <!-- Radio -->
+                <section class="a" id="a1">
+                    <div class="qheader">
+                        <h3>1. Frage: Was ist zu tun, wenn vor Antritt der Fahrt nicht feststeht, wer Fahrzeugf&uuml;hrer ist?</h3>
+                        <div class="qselections">
+                            <ul>
+                                <li><input type="radio" name="frage1" value="a">Der verantwortliche Fahrzeugf&uuml;hrer muss bestimmt werden.</li>
+                                <li><input type="radio" name="frage1" value="b">Der verantwortliche Fahrzeugf&uuml;hrer muss gew&auml;hlt werden.</li>
+                                <li><input type="radio" name="frage1" value="c">Ein Inhaber des Sportbootf&uuml;hrerscheins muss die Fahrzeugf&uuml;hrung &uuml;bernehmen.</li>
+                                <li><input type="radio" name="frage1" value="d">Ein Inhaber des Sportbootf&uuml;hrerscheins muss die Verantwortung &uuml;bernehmen.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Radio -->
+                <section class="a" id="a2">
+                    <div class="qheader">
+                        <h3>2. Frage: In welchen F&auml;llen darf weder ein Sportboot gef&uuml;hrt noch dessen Kurs oder Geschwindigkeit selbstst&auml;ndig bestimmt werden?</h3>
+                        <div class="qselections">
+                            <ul>
+                                <li><input type="radio" name="frage2" value="a">Ab eine Blutalkoholkonzentration von 0,8 &permil; oder mehr.</li>
+                                <li><input type="radio" name="frage2" value="b">Ab eine Blutalkoholkonzentration von 0,5 &permil; oder mehr.</li>
+                                <li><input type="radio" name="frage2" value="c">Ab eine Blutalkoholkonzentration von 1,0 &permil; oder mehr.</li>
+                                <li><input type="radio" name="frage2" value="d">Ab eine Blutalkoholkonzentration von 0,3 &permil; oder mehr.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Radio -->
+                <section class="a" id="a3">
+                    <div class="qheader">
+                        <h3>3. Frage: Wann ist ein Fahrzeug in Fahrt?</h3>
+                        <div class="qselections">
+                            <ul>
+                                <li><input type="radio" name="frage3" value="a">Wenn es weder vor Anker liegt noch an Land festgemacht ist noch Fahrt &uuml;ber Grund macht.</li>
+                                <li><input type="radio" name="frage3" value="b">Wenn es weder auf Grund sitzt noch vor Anker liegt noch man&ouml;vrierbehindert oder man&ouml;vrierunf&auml;hig ist.</li>
+                                <li><input type="radio" name="frage3" value="c">Wenn es weder vor Anker liegt noch an Land festgemacht ist noch auf Grund sitzt.</li>
+                                <li><input type="radio" name="frage3" value="d">Wenn es weder an Land festgemacht ist noch vor Anker liegt noch Fahrt durchs Wasser macht.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- Checkbox -->
+                <section class="a" id="a4">
+                    <div class="qheader">
+                        <h3>4. Frage: Welche Anforderungen muss der Ruderg&auml;nger eines Sportbootes mit Antriebsmaschine grunds&auml;tzlich auf den Binnenschifffahrtsstra&szlig;en erf&uuml;llen?</h3>
+                        <div class="qselections">
+                            <ul>
+                                <li><input type="checkbox" name="frage4" value="a">Er muss Inhaber des Sportbootf&uuml;hrerscheins-Binnen sein.</li>
+                                <li><input type="checkbox" name="frage4" value="b">Er muss mindestens 18 Jahre alt sein</li>
+                                <li><input type="checkbox" name="frage4" value="c">Er muss mindestens 16 Jahre alt sein</li>
+                                <li><input type="checkbox" name="frage4" value="d">Er muss k&ouml;rperlich, geistig und fachlich geeignet sein</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </section>
+
+                <div class="f3">
+                    <!--<input type="button" value="Ergebnis" name="B1" onClick="korrektur()"> -->
+                    <input type="button" value="Ergebnis" name="B1" onClick="korrektur()">
+                    <input type="button" value="Eingabe l&ouml;schen" name="B2" onClick="document.meinQuiz.reset()">
+                </div>
+
+            </form>
+
+
+        </main>
+
+          <!-- footer Bereich f�r Impressum und Kontakt -->
+          <footer>
+                 <ul>
+                         <li><a href="impressum.html">Impressum</a></li>
+                         <li><a href="kontakt.html">Kontakt</a></li>
+                 </ul>
+          </footer>
+    </div>
+</body>
+</html>

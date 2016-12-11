@@ -1,0 +1,99 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
+<head>
+         <title>Segelverein Steife Brise</title>
+         <meta name="author" content="Gruppe 5">
+         <meta name="keywords" content="Segeln, Segelverein, Steife Brise, Hamburg">
+         <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
+         <meta name="editor" content="html-editor phase 5">
+
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+		
+		<script type="text/javascript" src="js/kontakt_javascript.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/kontakt.css">
+		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">			
+</head>
+
+<!-- sichtbarer Inhalt der Seite-->
+<body>
+         <header>
+                 <!-- div-Container für das Logo | Logo ist gleichzeitig Link auf Startseite -->
+                 <div id="Logo">
+                    <a href="index.html">
+						<img src="pictures/querbild2.jpg" id="querbild">
+					</a>
+                 </div>
+
+                 <!-- Menüleiste - als unsorted list -->
+                 <nav>
+                         <ul>
+                                 <li><a href="index.html">Startseite</a></li>
+                                 <li><a href="preise.html">Preisrechner</a></li>
+                                 <li><a href="quiz.html">Quiz</a></li>
+								 <li><a href="kontakt.html">Kontakt</a></li>
+                                 <li><a href="impressum.html">Impressum</a></li>
+                         </ul>
+                 </nav>
+         </header>
+
+         <main> <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
+				<h1>
+					Kontakt :
+				</h1>
+			  			  
+			<form action="mailto:nikog3@tlen.pl" method="POST" enctype="text/plain">
+			  
+				<p>
+					Vorname 
+					</br>
+					<input type="text" name="vorname" size="25" maxlength="25" />
+				</p>
+				
+				<p>
+					Nachname 
+					</br>
+					<input type="text" name="nachname" size="25" maxlength="25" />
+				</p>
+				
+				<p>
+					Ihre E-Mail Adresse 
+					</br>
+					<input type="email" name="email" size="25" maxlength="25" />
+				</p>	
+
+				<p>
+					Ihre Nachricht 
+					</br>
+					<textarea rows="5" cols="50"></textarea>
+				</p>
+				
+				
+				<button onclick="return clickSubmit()">
+					Abschicken
+				</button>
+				
+								
+				<button id="reset">
+					Zur&uuml;cksetzen
+				</button>
+				
+			  </form>
+			 
+			  
+          </main>
+
+          <!-- footer Bereich für Impressum und Kontakt -->
+          <footer>
+                 <ul id="footer">
+                         <li><a href="index.html">Created by Gruppe 5</a></li>
+                         <li><a href="impressum.html">Impressum</a></li>
+                         <li><a href="kontakt.html">Kontakt</a></li>
+                 </ul>
+          </footer>
+
+</body>
+</html>

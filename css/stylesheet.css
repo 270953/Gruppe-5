@@ -1,0 +1,109 @@
+html
+{
+	background-color: white;	
+	
+	height: 100%;
+}
+
+body
+{
+	margin : 0px 10%;
+	background-color: #D0D7F2;
+	
+	font: 15px sans-serif;
+}
+
+
+ul
+{	
+	padding: 0px; /* set auto padding to 0 */
+	list-style-type: none;	
+}
+
+header img
+{
+	width: 100%;
+	float: left;
+}
+
+nav 
+{
+	background-color: white;
+	color: black;
+}
+
+nav ul 
+{
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+}
+
+nav li
+{
+	line-height: 40px;
+	display: inline;
+	padding: 14px 52px 12px 52px;
+	list-style-type: none;
+}
+
+nav li:hover 
+{
+	height: 40px;
+	width: 100%;
+	background-color: #e6e6e6;
+}
+
+nav a 
+{
+	color: black;
+	font-size: x-large;
+	text-decoration: none;
+}
+
+
+a.visited 
+{
+	color: black;
+	text-decoration: none;
+}
+
+h1
+{
+	background-color: #479bf5;
+	font-size: x-large;
+	color: white;
+	padding-left: 25px; /*same as form padding-left!*/
+}
+
+footer
+{
+	width: 100%;
+	
+	
+	background-color: #479bf5;	
+}
+
+footer ul
+{	
+	padding: 25px;
+}
+
+footer ul li
+{
+	display: inline;
+	padding-right: 20px;
+}
+
+footer a
+{
+	color: white;
+	font: 18px sans-serif;
+}
+
+footer a:hover
+{
+	color: black;
+}
+
+

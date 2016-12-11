@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
+<head>
+    <!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
+    <title>Segelverein Steife Brise</title>
+
+    <meta name="author" content="Gruppe 5">
+    <meta name="keywords" content="Segeln, Segelverein, Steife Brise, Hamburg">
+    <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
+
+    <script type="text/javascript" src="js/preise.js"></script>
+
+    <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
+    <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+	<link rel="stylesheet" type="text/css" href="css/preistabelle.css" />
+</head>
+
+<!-- sichtbarer Inhalt der Seite-->
+<body>
+    <div id="site">
+        <header>
+            <div>
+                <img src="pictures/querbild2.jpg" id="querbild">
+            </div>
+        </header>
+		
+        <!-- Menüleiste - als unsorted list -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Startseite</a></li>
+				<li><a href="preise.html">Preisrechner</a></li>
+				<li><a href="quiz.html">Quiz</a></li>
+				<li><a href="kontakt.html">Kontakt</a></li>
+				<li><a href="impressum.html">Impressum</a></li>
+			</ul>
+		</nav>
+
+         <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
+         <main>
+
+                 <section id="preisTabelle">
+
+                         <h1>Preistabelle</h1>
+
+                                 <!-- Preistabelle am besten aus Json einlesen -->
+                                 <table id="preise">
+                                     <tr>
+                                         <th>Bootsklasse</th>
+                                         <th>max. Personen</th>
+                                         <th>Abrechnungszeitraum</th>
+                                         <th>Preis Hauptsaison</th>
+                                         <th>Preis Nebensaison</th>
+                                         <th>Rabatt in %</th>
+                                     </tr>
+                                 </table>
+
+                 </section>
+
+
+                 <section id="preisRechner">
+
+                     <h1>Preisrechner</h1>
+
+                     <p>Treffen Sie Ihre Auswahl:</p>
+
+                     <div>
+
+                         <div>
+                             Personenanzahl:
+                             <input type="number" class="eingabeFeld" id="personen" min="0" max="24" step="1" placeholder="1">
+                         </div>
+
+                         <div>
+                             Bootsklasse:
+                             <select class="eingabeFeld" id="bootsKlasse" title="Bootsklasse wählen">
+
+                             </select>
+                         </div>
+
+                         <div>
+                             Zu welcher Zeit möchten Sie mieten:
+                             <select title="Saison" class="eingabeFeld" id="saison">
+                                 <option value="Hauptsaison">Hauptsaison</option>
+                                 <option value="Nebensaison">Nebensaison</option>
+
+                             </select>
+                         </div>
+
+                         <div>
+                             Sind Sie rabattberechtigt?
+                             <select title="Rabatt" class="eingabeFeld" id="rabatt">
+                                 <option value="ja">ja</option>
+                                 <option value="nein">nein</option>
+
+                             </select>
+                         </div>
+
+                         <div>
+                             <span id='mietdauerText'>Mietdauer in Tagen: </span>
+                             <input type="number" class="eingabeFeld" id="mietdauer" min="1" max="30" placeholder="0">
+                         </div>
+
+                         <div>
+                             <input type="button" id="berechnePreis" value="Preis berechnen">
+                         </div>
+
+                     </div>
+
+                     <div id="ergebnis"></div>
+
+
+                 </section>
+
+         </main>
+
+         <!-- footer Bereich f�r Impressum und Kontakt -->
+         <footer>
+                <ul>
+                        <li><a href="impressum.html">Impressum</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+         </footer>
+    </div>
+</body>
+</html>
