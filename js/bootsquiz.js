@@ -125,6 +125,7 @@ function auswerten() {
     for (var n = 0; n <= ergebnisse.length - 1; n++) {
         if (ergebnisse[n].charAt(1) == 'q') {
             var warumParse = n;
+            console.log(warumParse);
         }
     }
 
