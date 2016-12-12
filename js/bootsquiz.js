@@ -124,7 +124,7 @@ function auswerten() {
     var ergebnisse = document.cookie.split(";");            // mit var initialisiert, da nur in dieser Funktion vorhanden
     for (var n = 0; n <= ergebnisse.length - 1; n++) {
         if (ergebnisse[n].charAt(1) == 'q') {
-            var warumParse = n;
+            var warumParse = n;                             // Warum hattest du hier parse als Variablennamen? Könnte missverständlich sein
             console.log(warumParse);
         }
     }
