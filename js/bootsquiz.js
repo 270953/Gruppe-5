@@ -21,6 +21,62 @@ var eingabe = ['','','',''];
  */
 function check(sObj) {
 
+  var zaehler_schwierigkeitSelect = 0;
+    var zaehler_kategorie = 0;
+    var zaehler_schwierigkeit = 0;
+
+    //Prüft, ob EIngabe mind. 5 lang ist
+    if (document.getElementById("benutzernameID").lang < 5) {
+        document.getElementById("fehlerMeldung1").innerHTML =("Eingabe muss mind. 5 Zeichen haben.");
+    }
+
+    //EA3 Aufgabe 3 checkValidity(), prüft, ob 2. Textfeld gecheckt ist, da verpflichtend
+    var inpObj_2 = document.getElementById("emailID");
+    if (inpObj_2.checkValidity() == false) {
+        document.getElementById("fehlerMeldung2").innerHTML = "Bitte eine Angabe machen.";
+    }
+
+
+    //prüft, ob dropdown nicht gecheckt ist
+    if (document.getElementById("schwierigkeitID").value == "") {
+        zaehler_schwierigkeit = 1;
+    }
+
+    for (var i = 0; i < sObj.options.length; i++)  {
+        if (sObj.options[i].selected) {
+            zaehler_schwierigkeitSelect++;
+        }
+    }
+    if (zaehler_schwierigkeitSelect > 2) {
+        window.alert("Bitte nicht mehr als zwei Schwierigkeiten angeben!");
+    }
+
+
+
+    //prüft, ob Katgorie gecheckt ist
+    for (var j = 0; j < 4; j++) {
+
+        if (document.quizErstellen.kategorie[j].checked == true) {
+            zaehler_kategorie = 1;
+
+        }
+    }
+    //Vergleicht, ob Kategorie und dropdown NICHT gecheckt sind, da beim logischen oder beider falsch sein müssen
+    if ((zaehler_schwierigkeit == 1) && (zaehler_kategorie == 0)) {
+        document.getElementById("fehlerMeldung3").innerHTML =("Bitte eine Kategorie oder eine Schwierigkeit angeben!");
+        document.getElementById("fehlerMeldung4").innerHTML =("Bitte eine Kategorie oder eine Schwierigkeit angeben!");
+    }
+
+    //Eingabe von 1-8
+
+    if (document.getElementById("numberID").validity.rangeUnderflow) {
+       document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu klein";
+    }
+    if (document.getElementById("numberID").validity.rangeOverflow) {
+        document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu gross";
+    }
+
+ /*
     var zaehlerSchSel = 0;
 
 
@@ -59,6 +115,7 @@ function check(sObj) {
 
 
     }
+    */
 
 }
 
