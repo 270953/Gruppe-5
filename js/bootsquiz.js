@@ -2,6 +2,7 @@ var auswahl = [];//new Array();
 document.cookie = "ready=yes";
 
 var anzahlFragen = 4;
+var nichtRichtig;
 
 //L�sungen
 var loesung=[];//new Array();
@@ -21,7 +22,9 @@ var eingabe = ['','','',''];
  */
 function check(sObj) {
 
-  var zaehler_schwierigkeitSelect = 0;
+    inObjektUmwandeln('Robert', 'hans@wurst.de', 'schwer', 'See', 8, 'Katamaran');
+
+    var zaehler_schwierigkeitSelect = 0;
     var zaehler_kategorie = 0;
     var zaehler_schwierigkeit = 0;
 
@@ -76,6 +79,7 @@ function check(sObj) {
         document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu gross";
     }
 
+
  /*
     var zaehlerSchSel = 0;
 
@@ -121,13 +125,13 @@ function check(sObj) {
 
 
 
-function myFunction(){
+/* function myFunction(){                                           // auskommentiert, da scheinbar nicht gebraucht. Habe es weder in quiz.html noch in der auswertung.html gefunden
     var inpObj = document.getElementById("benutzername");
     if(inpObj.checkValidity()== false){
         document.getElementById("invisible_1").innerHTML = inpObj.validationMessage;
     }
 }
-
+*/
 
 
 
@@ -136,13 +140,15 @@ function korrektur(){
     //1. Schleife
     for (var q=1 ; q <= anzahlFragen ; q++){
         //Argument übergeben per name
-        aktuelleFrage = eval("document.meinQuiz.frage"+q);
+        var aktuelleFrage = eval("document.meinQuiz.frage"+q);    // mit var initialisiert, da nur in dieser Funktion vorhanden
         //2. Schleife
         for (var c=0 ; c < aktuelleFrage.length ; c++){
             if (aktuelleFrage[c].checked == true) {
                 eingabe[q-1] += aktuelleFrage[c].value;
+                console.log(eingabe[q-1]);                      // gleiche Ausgabe, wie drei Zeilen weiter
                 //Wert der Frage wird auswahl zugeordnet
                 auswahl[q] = aktuelleFrage[c].value;
+                console.log(auswahl[q]);                        // gleiche Ausgabe, wie drei Zeilen zuvor; erforderlich?
             }
 
         }
@@ -175,14 +181,15 @@ function auswerten() {
     for (var e = 0; e <= 2; e++)
         document.result[e].value = "";
 
-    ergebnisse = document.cookie.split(";");
+    var ergebnisse = document.cookie.split(";");            // mit var initialisiert, da nur in dieser Funktion vorhanden
     for (var n = 0; n <= ergebnisse.length - 1; n++) {
         if (ergebnisse[n].charAt(1) == 'q') {
-            parse = n;
+            var warumParse = n;                             // Warum hattest du hier parse als Variablennamen? Könnte missverständlich sein
+            console.log(warumParse);
         }
     }
 
-    nichtRichtig = ergebnisse[parse].split("=");
+    nichtRichtig = ergebnisse[warumParse].split("=");
     nichtRichtig = nichtRichtig[1].split("/");
     if (nichtRichtig[nichtRichtig.length - 1] == 'b') {
         nichtRichtig = "";
@@ -191,7 +198,7 @@ function auswerten() {
     document.result[0].value = anzahlFragen - nichtRichtig.length + " von " + anzahlFragen;
     document.result[2].value = (anzahlFragen - nichtRichtig.length) / anzahlFragen * 100 + "%";
 
-    for (t = 0; t < nichtRichtig.length; t++) {
+    for (var t = 0; t < nichtRichtig.length; t++) {                 // t mit var initialisiert
         document.result[1].value += nichtRichtig[t] + ", ";
     }
 
@@ -200,10 +207,11 @@ function auswerten() {
 //aus bootsquizAuswertung
 function zeigeErgebnisse(){
 
-    text = '';
+    var text = '';                              // mit var initialisiert, da nur lokal von Bedeutung
+    var falsch;                                 // falsch mit var initialisiert, da nur lokal von Bedeutung
 
     for (var i=1 ; i <= anzahlFragen ; i++){
-        for (temp=0 ; temp < nichtRichtig.length ; temp++){
+        for (var temp=0 ; temp < nichtRichtig.length ; temp++){     // temp mit var initialisiert
             if (i == nichtRichtig[temp]){
                 falsch = 1;
             }
@@ -223,11 +231,39 @@ function zeigeErgebnisse(){
 
 
 
+function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kategorie, fragenAnzahl, bootsTyp) {
+
+    var formularObjekt = new Object();
+    formularObjekt.benutzerName = benutzerName;
+    formularObjekt.eMailAdresse = eMailAdresse;
+    formularObjekt.schwierigkeitsStufe = schwierigkeitsStufe;
+    formularObjekt.kategorie = kategorie;
+    formularObjekt.fragenAnzahl = fragenAnzahl;
+    formularObjekt.bootsTyp = bootsTyp;
+
+    var jsonObjekt = JSON.stringify(formularObjekt);
+    console.log(jsonObjekt);
+
+    inHTMLwiedergeben(jsonObjekt);
+
+}
 
 
+function inHTMLwiedergeben(jsonObjekt) {
 
+    var formularEingaben = JSON.parse(jsonObjekt);
+    console.log(formularEingaben);
+    console.log(Object.getOwnPropertyNames(formularEingaben));
 
+    var ausgabeBereich = document.getElementById('ausgabeDerFormularDaten');
 
+    for (var eigenschaft in formularEingaben) {             // iteriert durch das Objekt
+
+        ausgabeBereich.innerHTML += eigenschaft + ': ' + formularEingaben[eigenschaft] + '<br>';
+
+    }
+
+}
 
 
 
