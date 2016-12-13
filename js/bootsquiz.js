@@ -241,8 +241,8 @@ function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kat
     formularObjekt.fragenAnzahl = fragenAnzahl;
     formularObjekt.bootsTyp = bootsTyp;
 
-    var jsonObjekt = JSON.stringify(formularObjekt);
-    console.log(jsonObjekt);
+    var jsonObjekt = JSON.stringify(formularObjekt);        // umwandeln des JavaScript Objektes in ein JSON Objekt
+    console.log('JSON Objekt: ' + jsonObjekt);              // Ausgabe des JSON Objektes in der Konsole
 
     inHTMLwiedergeben(jsonObjekt);
 
@@ -251,9 +251,9 @@ function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kat
 
 function inHTMLwiedergeben(jsonObjekt) {
 
-    var formularEingaben = JSON.parse(jsonObjekt);
-    console.log(formularEingaben);
-    console.log(Object.getOwnPropertyNames(formularEingaben));
+    var formularEingaben = JSON.parse(jsonObjekt);          // umwandeln des JSON Objektes zurück in ein JavaScript Objekt
+    console.log(formularEingaben);                          // Ausgabe des JavaScript Objektes in der Konsole
+    console.log('Aufzählung der Objekteigenschaften: ' + Object.getOwnPropertyNames(formularEingaben));     // Ausgabe der Objekt-Eigenschaften in der Konsole
 
     var eingabeFormular = document.getElementById('eingabeFormular');
     var neuerDivKnoten = document.createElement('div');
