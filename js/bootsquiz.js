@@ -255,13 +255,19 @@ function inHTMLwiedergeben(jsonObjekt) {
     console.log(formularEingaben);
     console.log(Object.getOwnPropertyNames(formularEingaben));
 
-    var ausgabeBereich = document.getElementById('ausgabeDerFormularDaten');
+    var eingabeFormular = document.getElementById('eingabeFormular');
+    var neuerDivKnoten = document.createElement('div');
+    eingabeFormular.appendChild(neuerDivKnoten);                        // fügt dem Eingabeformular einen div-Knoten für die Ausgabe der Objektdaten hinzu
 
     for (var eigenschaft in formularEingaben) {             // iteriert durch das Objekt
 
-        ausgabeBereich.innerHTML += eigenschaft + ': ' + formularEingaben[eigenschaft] + '<br>';
+        if (formularEingaben.hasOwnProperty(eigenschaft)) {
+            neuerDivKnoten.innerHTML += eigenschaft + ': ' + formularEingaben[eigenschaft] + '<br>';
+        }
 
     }
+
+
 
 }
 
