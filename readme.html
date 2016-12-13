@@ -1,80 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>readme</title>
+    <!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
+    <title>Segelverein Steife Brise</title>
+
+    <meta name="author" content="Gruppe 5">
+    <meta name="keywords" content="Segeln, Segelverein, Steife Brise, Hamburg">
+    <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
+
+    <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
+    <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/readme.css" />
+
+    <script type="text/javascript" src="js/bootsquiz.js"></script>
 </head>
 <body>
-1) Erstellen Sie ein Formular, in welchem ein Nutzer Daten eingeben kann. (5 P)
 
-Das Formular soll folgende Elemente beinhalten
+<div id="site">
 
-2 Textfelder
-Drop-Down-Menü mit mind. 6 Optionen
-Radiobuttons mit mind. 3 Optionen
-1 Feld zur Eingabe von Zahlen.
-Eine Datalist mit mind. 3 Einträgen
-Beispiel für ein Formular für Rezepte:
-Rezeptname
-Autor
-Speiseart (Vorspeise, Hauptgericht, Dessert)
-Speise-Typ (süß, herzhaft, sauer, geschmacklos, scharf, herb, mild)
-Anzahl der Zutaten
-Auswahl von Restaurants, in denen das Rezept auf der Speisekarte steht mit Angabe der Telefonnummer
+    <header>
+        <!-- div-Container für das Logo | Logo ist gleichzeitig Link auf Startseite -->
+        <div id="Logo">
+            <a href="index.html">
+                <img src="pictures/querbild2.jpg" id="querbild">
+            </a>
+        </div>
 
+        <!-- Menüleiste - als unsorted list -->
+        <nav>
+            <ul>
+                <li><a href="index.html">Startseite</a></li>
+                <li><a href="preise.html">Preisrechner</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="impressum.html">Impressum</a></li>
+                <li><a href="readme.html">README</a></li>
+            </ul>
+        </nav>
+    </header>
 
-2. Implementieren Sie Vorgaben für die Benutzereingaben (4 P)
+    <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
+    <main>
 
-Textfeld 1 muss mindestens 5 Buchstaben lang sein
-Textfeld 2 ist Pflichtfeld
-Die Dropdown-Liste erlaubt mehrfach-Auswahl
-Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein
-In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden.
-Die eingegebene Zahl muss zwischen 1 und 8 liegen.
-Beispiel für das Rezepteformular:
+        <section class="EA3_Aufgabe">
+            <h3>1) Erstellen Sie ein Formular, in welchem ein Nutzer Daten eingeben kann. (5 P)</h3>
+            <p>Das Formular soll folgende Elemente beinhalten</p>
+                <ul>
+                    <li><a href="quiz.html">2 Textfelder</a></li>
+                        <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben):</p>
+                        <p>Gib deine E-Mail-Adresse ein (Pflichtfeld): Hier wurde als type nicht "email" genommen, da "text" gefordert war.</p>
 
-der Rezeptname soll mindestens 5 Buchstaben lang sein
-das Feld für den Autoren soll ausgefüllt sein
-Speisen können z.B. süß-sauer oder herzhaft-geschmacklos sein
-mindestens Speiseart oder Speisetyp soll angegeben werden
-Soweit möglich, verwenden Sie für die Bedingungen HTML-Attribute, andernfalls implementieren Sie Prüfungen mit JavaScript unter Aufgabe 3.
+                    <li><a href="quiz.html">Drop-Down-Menü mit mind. 6 Optionen</a></li>
+                        <p>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): 6 Schwierigkeitsstufen</p>
 
-3)  Nehmen Sie eine Formularvalidierung vor (20 P)
+                    <li><a href="quiz.html">Radiobuttons mit mind. 3 Optionen</a></li>
+                        <p>W&auml;hle eine Kategorie aus: mit Kategorien</p>
 
-Markieren Sie die Textfelder mit gelbem Hintergrund bei fehlerhafter Eingabe.
+                    <li><a href="quiz.html">1 Feld zur Eingabe von Zahlen</a></li>
+                        <p>W&auml;hle bis zu 8 Fragen:</p>
 
-Erstellen Sie eigene Fehlermeldungen für fehlerhafte Eingaben bei allen eigeneten Formularfeldern.
+                    <li><a href="quiz.html">Eine Datalist mit mind. 3 Einträgen</a></li>
+                        <p>W&auml;hle einen Bootstyp aus:</p>
+                </ul>
+        </section>
 
-Prüfen Sie per JavaScript, ob die unter b) genannten Bedingungen erfüllt wurden, bevor das Formular abgesendet wird.
-Benutzen Sie für die Aufgabe checkValidity(), setCustomValidity() und das validityState-Objekt.
+        <section class="EA3_Aufgabe">
+            <h3>2. Implementieren Sie Vorgaben für die Benutzereingaben (4 P)</h3>
+            <p>Soweit möglich, verwenden Sie für die Bedingungen HTML-Attribute, andernfalls implementieren Sie Prüfungen mit
+                JavaScript unter Aufgabe 3.</p>
+                <ul>
+                    <li><a href="quiz.html">Textfeld 1 muss mindestens 5 Buchstaben lang sein</a></li>
+                        <p>über Attribut: minlength="5", sowie über die Funktion check() geprüft</p>
+                    <li><a href="quiz.html">Textfeld 2 ist Pflichtfeld</a></li>
+                        <p>über Attribut: required, sowie über checkValidity()</p>
+                    <li><a href="quiz.html">Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein</a></li>
+                        <p>Über die Funktion check()</p>
+                    <li><a href="quiz.html"> In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden.</a></li>
+                        <p>Über die Funktion check()</p>
+                    <li><a href="quiz.html">Die eingegebene Zahl muss zwischen 1 und 8 liegen</a></li>
+                        <p>über Attribut: min="1" und max="8" und über die Funktion check()</p>
+                </ul>
+        </section>
 
+        <section class="EA3_Aufgabe">
+            <h3>3. Nehmen Sie eine Formularvalidierung vor (20 P)</h3>
 
-4) Geben Sie die Formulareingaben aus (15 P)
+            <p>Markieren Sie die Textfelder mit gelbem Hintergrund bei fehlerhafter Eingabe.</p>
+            <p>Erstellen Sie eigene Fehlermeldungen für fehlerhafte Eingaben bei allen eigeneten Formularfeldern.</p>
+            <p>Prüfen Sie per JavaScript, ob die unter b) genannten Bedingungen erfüllt wurden, bevor das Formular abgesendet wird.
+            Benutzen Sie für die Aufgabe checkValidity(), setCustomValidity() und das validityState-Objekt.</p>
+        </section>
 
-Speichern Sie die Formulardaten beim Absenden in ein JavaScript-Objekt.
+        <section class="EA3_Aufgabe">
+            <h3>4. Geben Sie die Formulareingaben aus (15 P)</h3>
 
-Serialisieren Sie das Objekt in JSON.
+            <p>Speichern Sie die Formulardaten beim Absenden in ein JavaScript-Objekt.</p>
 
-Geben Sie die Formulardaten auf der HTML-Seite aus, indem Sie das JSON-Objekt in ein JavaScript-Objekt zurückwandeln und die Key-Value-Paare unterhalb des Formulars ausgeben. Nehmen Sie entsprechende Änderungen am DOM vor.
+            <p>Serialisieren Sie das Objekt in JSON.</p>
 
-Geben Sie auch zur Überprüfung den Inhalt des JSON-Objekts aus.
+            <p>Geben Sie die Formulardaten auf der HTML-Seite aus, indem Sie das JSON-Objekt in ein JavaScript-Objekt zurückwandeln
+            und die Key-Value-Paare unterhalb des Formulars ausgeben. Nehmen Sie entsprechende Änderungen am DOM vor.</p>
 
+            <p>Geben Sie auch zur Überprüfung den Inhalt des JSON-Objekts aus.</p>
+        </section>
 
+        <section class="EA3_Aufgabe">
+            <h3>5. Erweitern Sie Ihr Semesterprojekt (unbepunktet, muss aber bestanden werden)</h3>
 
-5) Erweitern Sie Ihr Semesterprojekt (unbepunktet, muss aber bestanden werden)
+            <p>Nehmen Sie weitere Implementierungen für Ihr Semesterprojekt vor:</p>
 
-Nehmen Sie weitere Implementierungen für Ihr Semesterprojekt vor:
+            <p>Das Layout Ihrer Anwendung sollte (soweit noch nicht geschehen) im groben und ganzen fertig sein
+            (Feinschliff kann auch im Nachgang erfolgen)</p>
+            <p>Implementieren Sie mind. 5 Funktionalitäten in JavaScript</p>
+            <p>Dokumentieren Sie die Änderungen mit Hinweis, wo sie zu finden sind, ebenfalls in der o.g. Readme-HTML-Datei.</p>
+        </section>
 
-Das Layout Ihrer Anwendung sollte (soweit noch nicht geschehen) im groben und ganzen fertig sein
-(Feinschliff kann auch im Nachgang erfolgen)
-Implementieren Sie mind. 5 Funktionalitäten in JavaScript
-Dokumentieren Sie die Änderungen mit Hinweis, wo sie zu finden sind, ebenfalls in der o.g. Readme-HTML-Datei.
+        </main>
 
-Abgabe gesamt im Aufgabenbereich (siehe Hinweise oben): eine .zip-Datei.
-
-
-
-
+    <!-- footer Bereich f�r Impressum und Kontakt -->
+    <footer>
+        <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </footer>
 
 </body>
 </html>
