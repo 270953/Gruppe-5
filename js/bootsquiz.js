@@ -1,6 +1,6 @@
 var auswahl = [];//new Array();
 document.cookie = "ready=yes";
-
+// ä
 var anzahlFragen = 4;
 var nichtRichtig;
 
