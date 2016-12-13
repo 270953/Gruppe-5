@@ -1,6 +1,6 @@
 var auswahl = [];//new Array();
 document.cookie = "ready=yes";
-// ä
+
 var anzahlFragen = 4;
 var nichtRichtig;
 
@@ -22,7 +22,9 @@ var eingabe = ['','','',''];
  */
 function check(sObj) {
 
-  var zaehler_schwierigkeitSelect = 0;
+    inObjektUmwandeln('Robert', 'hans@wurst.de', 'schwer', 'See', 8, 'Katamaran');
+
+    var zaehler_schwierigkeitSelect = 0;
     var zaehler_kategorie = 0;
     var zaehler_schwierigkeit = 0;
 
@@ -76,6 +78,7 @@ function check(sObj) {
     if (document.getElementById("numberID").validity.rangeOverflow) {
         document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu gross";
     }
+
 
  /*
     var zaehlerSchSel = 0;
@@ -228,11 +231,39 @@ function zeigeErgebnisse(){
 
 
 
+function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kategorie, fragenAnzahl, bootsTyp) {
+
+    var formularObjekt = new Object();
+    formularObjekt.benutzerName = benutzerName;
+    formularObjekt.eMailAdresse = eMailAdresse;
+    formularObjekt.schwierigkeitsStufe = schwierigkeitsStufe;
+    formularObjekt.kategorie = kategorie;
+    formularObjekt.fragenAnzahl = fragenAnzahl;
+    formularObjekt.bootsTyp = bootsTyp;
+
+    var jsonObjekt = JSON.stringify(formularObjekt);
+    console.log(jsonObjekt);
+
+    inHTMLwiedergeben(jsonObjekt);
+
+}
 
 
+function inHTMLwiedergeben(jsonObjekt) {
 
+    var formularEingaben = JSON.parse(jsonObjekt);
+    console.log(formularEingaben);
+    console.log(Object.getOwnPropertyNames(formularEingaben));
 
+    var ausgabeBereich = document.getElementById('ausgabeDerFormularDaten');
 
+    for (var eigenschaft in formularEingaben) {             // iteriert durch das Objekt
+
+        ausgabeBereich.innerHTML += eigenschaft + ': ' + formularEingaben[eigenschaft] + '<br>';
+
+    }
+
+}
 
 
 
