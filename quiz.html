@@ -14,6 +14,7 @@
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/quiz_stylesheet.css" />
 
 	<script type="text/javascript" src="js/bootsquiz.js"></script>
 	
@@ -39,7 +40,7 @@
                                  <li><a href="quiz.html">Quiz</a></li>
 								 <li><a href="kontakt.html">Kontakt</a></li>
                                  <li><a href="impressum.html">Impressum</a></li>
-				                 <li><a href="readme.html">README</a></li>
+                                 <li><a href="readme.html">README</a></li>
                          </ul>
                  </nav>
          </header>
@@ -58,9 +59,11 @@
 
                     <!--2 Textfelder: EA3 Aufgabe 1
                         Textfeld 1 muss mindestens 5 Buchstaben lang sein: EA3 Aufgabe 2-->
-                    <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id=nameEingabeVorname" type="text"  minlength="5"></p>
+                    <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id="benutzernameID" type="text"  minlength="5"></p>
+                    <p class="fehlermeldung" id="fehlerMeldung1"></p>
                     <!--Textfeld 2 ist Pflichtfeld: EA3 Aufgabe 2-->
-                    <p>Gib deine E-Mail-Adresse ein (Pflichtfeld): <input id=nameEingabeNachname" type="text" required></p>
+                    <p>Gib deine E-Mail-Adresse ein (Pflichtfeld): <input id="emailID" type="text" required></p>
+                    <p class="fehlermeldung" id="fehlerMeldung2"></p>
 
                     <!--Drop-Down-Menü mit mind. 6 Optionen: EA3 Aufgabe 1
                         Die Dropdown-Liste erlaubt mehrfach-Auswahl: EA3 Aufgabe 2
@@ -76,6 +79,7 @@
                             <option name="schwierigkeit" value="experte">Experte</option>
                         </select> <br></p>
                     </div>
+                    <p class="fehlermeldung" id="fehlerMeldung3"></p>
 
                     <!--Radiobuttons mit mind. 3 Optionen: EA3 Aufgabe 1
                         Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
@@ -91,10 +95,12 @@
                             </div>
 
                     </div>
+                    <p class="fehlermeldung" id="fehlerMeldung4"></p>
 
                     <!-- 1 Feld zur Eingabe von Zahlen: EA3 Aufgabe 1
                         Die eingegebene Zahl muss zwischen 1 und 8 liegen: EA3 Aufgabe 2-->
-                    <p>W&auml;hle bis zu 8 Fragen: <input type="number" id="number" min="1" max="8" value=""></p>
+                    <p>W&auml;hle bis zu 8 Fragen: <input type="number" id="numberID" min="1" max="8" value="1"></p>
+                    <p class="fehlermeldung" id="fehlerMeldung5"></p>
 
 
                     <!-- Eine Datalist mit mind. 3 Einträgen: EA3 Aufgabe 1-->
@@ -108,6 +114,7 @@
                                 <option value="Ruderboot">
                             </datalist>
                     </div>
+                    <p class="fehlermeldung" id="fehlerMeldung6"></p>
 
 
                     <p><input type="submit" id="random" value="Neues Quiz erstellen" onclick="check(document.quizErstellen.schwierigkeit)"></p>

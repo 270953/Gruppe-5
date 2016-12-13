@@ -21,7 +21,8 @@ var eingabe = ['','','',''];
  */
 function check(sObj) {
 
-  var zaehler_schwierigkeitSelect = 0;
+
+    var zaehler_schwierigkeitSelect = 0;
     var zaehler_kategorie = 0;
     var zaehler_schwierigkeit = 0;
 
@@ -76,59 +77,7 @@ function check(sObj) {
         document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu gross";
     }
 
- /*
-    var zaehlerSchSel = 0;
-
-
-    var zaehlerKat = 0;
-    var zaehlerSch = 0;
-
-
-
-
-
-    if (document.getElementById("schwierigkeitID").value == "") {
-        zaehlerSch = 1;
-    }
-
-    for (var i = 0; i < sObj.options.length; i++)  {
-        if (sObj.options[i].selected) {
-            zaehlerSchSel++;
-        }
-    }
-    if (zaehlerSchSel > 2) {
-        window.alert("Bitte nicht mehr als zwei Schwierigkeiten angeben!");
-    }
-
-
-//Schleife
-    for (var j = 0; j < 4; j++) {
-
-        if (document.quizErstellen.kategorie[j].checked == true) {
-            zaehlerKat = 1;
-
-        }
-    }
-
-    if ((zaehlerSch == 1) && (zaehlerKat == 0)) {
-        window.alert("Bitte eine Kategorie oder eine Schwierigkeit angeben!");
-
-
-    }
-    */
-
 }
-
-
-
-function myFunction(){
-    var inpObj = document.getElementById("benutzername");
-    if(inpObj.checkValidity()== false){
-        document.getElementById("invisible_1").innerHTML = inpObj.validationMessage;
-    }
-}
-
-
 
 
 function korrektur(){
