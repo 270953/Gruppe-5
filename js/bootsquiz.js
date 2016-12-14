@@ -1,3 +1,20 @@
+window.onload = eventHandler;
+
+function eventHandler () {
+
+    var neuesQuizButton = document.getElementById('neuesQuiz');
+    neuesQuizButton.addEventListener('click', check, false);
+
+    var auswertenButton = document.getElementById('auswerten');
+    auswertenButton.addEventListener('click', korrektur, false);
+
+    var formularLoeschenButton = document.getElementById('formularLeeren');
+    formularLoeschenButton.addEventListener('click', function () {document.meinQuiz.reset()}, false)
+
+}
+
+
+
 var auswahl = [];//new Array();
 document.cookie = "ready=yes";
 
@@ -20,33 +37,37 @@ var eingabe = ['','','',''];
  In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden: EA3 Aufgabe 2
  Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2
  */
-function check(sObj) {
+function check() {
 
-    inObjektUmwandeln('Robert', 'hans@wurst.de', 'schwer', 'See', 8, 'Katamaran');
+    // inObjektUmwandeln('Robert', 'hans@wurst.de', 'schwer', 'See', 8, 'Katamaran');
+
+    var schwierigkeitsGrad = document.getElementById('schwierigkeit').options;
+    var auswahlSchwierigkeit = new Array ('');
 
     var zaehler_schwierigkeitSelect = 0;
     var zaehler_kategorie = 0;
     var zaehler_schwierigkeit = 0;
+    var i; // iterator
 
     //Prüft, ob EIngabe mind. 5 lang ist
-    if (document.getElementById("benutzernameID").lang < 5) {
+    /*if (document.getElementById("benutzernameID").lang < 5) {                     bei lang dürfte ein Fehler vorliegen
         document.getElementById("fehlerMeldung1").innerHTML =("Eingabe muss mind. 5 Zeichen haben.");
-    }
+    }*/
 
     //EA3 Aufgabe 3 checkValidity(), prüft, ob 2. Textfeld gecheckt ist, da verpflichtend
-    var inpObj_2 = document.getElementById("emailID");
+    /*var inpObj_2 = document.getElementById("emailID");
     if (inpObj_2.checkValidity() == false) {
         document.getElementById("fehlerMeldung2").innerHTML = "Bitte eine Angabe machen.";
-    }
+    }*/
 
 
     //prüft, ob dropdown nicht gecheckt ist
-    if (document.getElementById("schwierigkeitID").value == "") {
+    /*if (document.getElementById("schwierigkeitID").value == "") {
         zaehler_schwierigkeit = 1;
-    }
+    }*/
 
-    for (var i = 0; i < sObj.options.length; i++)  {
-        if (sObj.options[i].selected) {
+    for (i=0; i < schwierigkeitsGrad.length; i++)  {
+        if (schwierigkeitsGrad[i].selected) {
             zaehler_schwierigkeitSelect++;
         }
     }
@@ -54,9 +75,16 @@ function check(sObj) {
         window.alert("Bitte nicht mehr als zwei Schwierigkeiten angeben!");
     }
 
+    for (i=0; i < schwierigkeitsGrad.length; i++) {
 
+        if (schwierigkeitsGrad[i].selected) {
+            auswahlSchwierigkeit[i] = schwierigkeitsGrad[i].value;
+            console.log(schwierigkeitsGrad[i].value);
+        }
 
-    //prüft, ob Katgorie gecheckt ist
+    }
+
+    //prüft, ob Kategorie gecheckt ist
     for (var j = 0; j < 4; j++) {
 
         if (document.quizErstellen.kategorie[j].checked == true) {
@@ -95,8 +123,8 @@ function check(sObj) {
         zaehlerSch = 1;
     }
 
-    for (var i = 0; i < sObj.options.length; i++)  {
-        if (sObj.options[i].selected) {
+    for (var i = 0; i < schwierigkeitsGrad.length; i++)  {
+        if (schwierigkeitsGrad[i].selected) {
             zaehlerSchSel++;
         }
     }
@@ -231,9 +259,9 @@ function zeigeErgebnisse(){
 
 
 
-function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kategorie, fragenAnzahl, bootsTyp) {
+/*function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kategorie, fragenAnzahl, bootsTyp) {
 
-    var formularObjekt = new Object();
+    var formularObjekt = {};
     formularObjekt.benutzerName = benutzerName;
     formularObjekt.eMailAdresse = eMailAdresse;
     formularObjekt.schwierigkeitsStufe = schwierigkeitsStufe;
@@ -267,11 +295,9 @@ function inHTMLwiedergeben(jsonObjekt) {
 
     }
 
-
-
 }
 
-
+*/
 
 
 

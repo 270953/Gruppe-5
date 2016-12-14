@@ -58,23 +58,23 @@
 
                     <!--2 Textfelder: EA3 Aufgabe 1
                         Textfeld 1 muss mindestens 5 Buchstaben lang sein: EA3 Aufgabe 2-->
-                    <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id=nameEingabeVorname" type="text"  minlength="5"></p>
+                    <p><label for="nameEingabeVorname">Gib deinen Benutzernamen ein (mind. 5 Buchstaben): </label><input id="nameEingabeVorname" type="text"  minlength="5"></p>
                     <!--Textfeld 2 ist Pflichtfeld: EA3 Aufgabe 2-->
-                    <p>Gib deine E-Mail-Adresse ein (Pflichtfeld): <input id=nameEingabeNachname" type="email" required></p>
+                    <p><label for="nameEingabeNachname">Gib deine E-Mail-Adresse ein (Pflichtfeld): </label><input id="nameEingabeNachname" type="email" required></p>
 
                     <!--Drop-Down-Menü mit mind. 6 Optionen: EA3 Aufgabe 1
                         Die Dropdown-Liste erlaubt mehrfach-Auswahl: EA3 Aufgabe 2
                         In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden: EA3 Aufgabe 2
                         Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
-                    <div class="schwierigkeit">
-                        <p>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): <select id="schwierigkeitID"  multiple name="schwierigkeit">
+                    <div class="selectSchwierigkeit">
+                        <label for="schwierigkeit">W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): </label><select id="schwierigkeit" multiple="multiple">
                             <option name="schwierigkeit" value="sehrLeicht">Sehr Leicht</option>
                             <option name="schwierigkeit" value="leicht">Leicht</option>
                             <option name="schwierigkeit" value="normal">Normal</option>
                             <option name="schwierigkeit" value="schwer">Schwer</option>
                             <option name="schwierigkeit" value="sehrSchwer">Sehr Schwer</option>
                             <option name="schwierigkeit" value="experte">Experte</option>
-                        </select> <br></p>
+                        </select>
                     </div>
 
                     <!--Radiobuttons mit mind. 3 Optionen: EA3 Aufgabe 1
@@ -83,10 +83,10 @@
                             <p>W&auml;hle eine Kategorie aus</p>
                             <div class="kselections">
                                 <ul>
-                                    <li><input type="radio" name="kategorie" value="a">Binnengew&auml;sser</li>
-                                    <li><input type="radio" name="kategorie" value="b">Binnengew&auml;sser - Spezifisch</li>
-                                    <li><input type="radio" name="kategorie" value="c">Die See</li>
-                                    <li><input type="radio" name="kategorie" value="d">Die See - Spezifisch</li>
+                                    <li><input type="radio" name="kategorie" id="kategorie1" value="a"><label for="kategorie1">Binnengew&auml;sser</label></li>
+                                    <li><input type="radio" name="kategorie" id="kategorie2" value="b"><label for="kategorie2">Binnengew&auml;sser - Spezifisch</label></li>
+                                    <li><input type="radio" name="kategorie" id="kategorie3" value="c"><label for="kategorie3">Die See</label></li>
+                                    <li><input type="radio" name="kategorie" id="kategorie4" value="d"><label for="kategorie4">Die See - Spezifisch</label></li>
                                 </ul>
                             </div>
 
@@ -94,12 +94,12 @@
 
                     <!-- 1 Feld zur Eingabe von Zahlen: EA3 Aufgabe 1
                         Die eingegebene Zahl muss zwischen 1 und 8 liegen: EA3 Aufgabe 2-->
-                    <p>W&auml;hle bis zu 8 Fragen: <input type="number" id="number" min="1" max="8" value=""></p>
+                    <p><label for="number">W&auml;hle bis zu 8 Fragen: </label><input type="number" id="number" min="1" max="8" value=""></p>
 
 
                     <!-- Eine Datalist mit mind. 3 Einträgen: EA3 Aufgabe 1-->
                         <div class="bootsTypen">
-                            <p>W&auml;hle einen Bootstyp aus:  <input list="bootsTypen" name="boote"></p>
+                            <p><label for="boote">W&auml;hle einen Bootstyp aus:  </label><input list="bootsTypen" name="boote" id="boote"></p>
 
                             <datalist id="bootsTypen">
                                 <option value="Segelboot">
@@ -110,7 +110,7 @@
                     </div>
 
 
-                    <p><input type="submit" id="random" value="Neues Quiz erstellen" onclick="check(document.quizErstellen.schwierigkeit)"></p>
+                    <input type="submit" id="neuesQuiz" value="Neues Quiz erstellen">
                 </div>
             </form>
 
@@ -123,10 +123,10 @@
                         <h3>1. Frage: Was ist zu tun, wenn vor Antritt der Fahrt nicht feststeht, wer Fahrzeugf&uuml;hrer ist?</h3>
                         <div class="qselections">
                             <ul>
-                                <li><input type="radio" name="frage1" value="a">Der verantwortliche Fahrzeugf&uuml;hrer muss bestimmt werden.</li>
-                                <li><input type="radio" name="frage1" value="b">Der verantwortliche Fahrzeugf&uuml;hrer muss gew&auml;hlt werden.</li>
-                                <li><input type="radio" name="frage1" value="c">Ein Inhaber des Sportbootf&uuml;hrerscheins muss die Fahrzeugf&uuml;hrung &uuml;bernehmen.</li>
-                                <li><input type="radio" name="frage1" value="d">Ein Inhaber des Sportbootf&uuml;hrerscheins muss die Verantwortung &uuml;bernehmen.</li>
+                                <li><input type="radio" name="frage1" id="frage1a" value="a"><label for="frage1a">Der verantwortliche Fahrzeugf&uuml;hrer muss bestimmt werden.</label></li>
+                                <li><input type="radio" name="frage1" id="frage1b" value="b"><label for="frage1b">Der verantwortliche Fahrzeugf&uuml;hrer muss gew&auml;hlt werden.</label></li>
+                                <li><input type="radio" name="frage1" id="frage1c" value="c"><label for="frage1c">Ein Inhaber des Sportbootf&uuml;hrerscheins muss die Fahrzeugf&uuml;hrung &uuml;bernehmen.</label></li>
+                                <li><input type="radio" name="frage1" id="frage1d" value="d"><label for="frage1d">Ein Inhaber des Sportbootf&uuml;hrerscheins muss die Verantwortung &uuml;bernehmen.</label></li>
                             </ul>
                         </div>
 
@@ -139,10 +139,10 @@
                         <h3>2. Frage: In welchen F&auml;llen darf weder ein Sportboot gef&uuml;hrt noch dessen Kurs oder Geschwindigkeit selbstst&auml;ndig bestimmt werden?</h3>
                         <div class="qselections">
                             <ul>
-                                <li><input type="radio" name="frage2" value="a">Ab eine Blutalkoholkonzentration von 0,8 &permil; oder mehr.</li>
-                                <li><input type="radio" name="frage2" value="b">Ab eine Blutalkoholkonzentration von 0,5 &permil; oder mehr.</li>
-                                <li><input type="radio" name="frage2" value="c">Ab eine Blutalkoholkonzentration von 1,0 &permil; oder mehr.</li>
-                                <li><input type="radio" name="frage2" value="d">Ab eine Blutalkoholkonzentration von 0,3 &permil; oder mehr.</li>
+                                <li><input type="radio" name="frage2" id="frage2a" value="a"><label for="frage2a">Ab eine Blutalkoholkonzentration von 0,8 &permil; oder mehr.</label></li>
+                                <li><input type="radio" name="frage2" id="frage2b" value="b"><label for="frage2b">Ab eine Blutalkoholkonzentration von 0,5 &permil; oder mehr.</label></li>
+                                <li><input type="radio" name="frage2" id="frage2c" value="c"><label for="frage2c">Ab eine Blutalkoholkonzentration von 1,0 &permil; oder mehr.</label></li>
+                                <li><input type="radio" name="frage2" id="frage2d" value="d"><label for="frage2d">Ab eine Blutalkoholkonzentration von 0,3 &permil; oder mehr.</label></li>
                             </ul>
                         </div>
 
@@ -155,10 +155,10 @@
                         <h3>3. Frage: Wann ist ein Fahrzeug in Fahrt?</h3>
                         <div class="qselections">
                             <ul>
-                                <li><input type="radio" name="frage3" value="a">Wenn es weder vor Anker liegt noch an Land festgemacht ist noch Fahrt &uuml;ber Grund macht.</li>
-                                <li><input type="radio" name="frage3" value="b">Wenn es weder auf Grund sitzt noch vor Anker liegt noch man&ouml;vrierbehindert oder man&ouml;vrierunf&auml;hig ist.</li>
-                                <li><input type="radio" name="frage3" value="c">Wenn es weder vor Anker liegt noch an Land festgemacht ist noch auf Grund sitzt.</li>
-                                <li><input type="radio" name="frage3" value="d">Wenn es weder an Land festgemacht ist noch vor Anker liegt noch Fahrt durchs Wasser macht.</li>
+                                <li><input type="radio" name="frage3" id="frage3a" value="a"><label for="frage3a">Wenn es weder vor Anker liegt noch an Land festgemacht ist noch Fahrt &uuml;ber Grund macht.</label></li>
+                                <li><input type="radio" name="frage3" id="frage3b" value="b"><label for="frage3b">Wenn es weder auf Grund sitzt noch vor Anker liegt noch man&ouml;vrierbehindert oder man&ouml;vrierunf&auml;hig ist.</label></li>
+                                <li><input type="radio" name="frage3" id="frage3c" value="c"><label for="frage3c">Wenn es weder vor Anker liegt noch an Land festgemacht ist noch auf Grund sitzt.</label></li>
+                                <li><input type="radio" name="frage3" id="frage3d" value="d"><label for="frage3d">Wenn es weder an Land festgemacht ist noch vor Anker liegt noch Fahrt durchs Wasser macht.</label></li>
                             </ul>
                         </div>
                     </div>
@@ -171,10 +171,10 @@
                         <h3>4. Frage: Welche Anforderungen muss der Ruderg&auml;nger eines Sportbootes mit Antriebsmaschine grunds&auml;tzlich auf den Binnenschifffahrtsstra&szlig;en erf&uuml;llen?</h3>
                         <div class="qselections">
                             <ul>
-                                <li><input type="checkbox" name="frage4" value="a">Er muss Inhaber des Sportbootf&uuml;hrerscheins-Binnen sein.</li>
-                                <li><input type="checkbox" name="frage4" value="b">Er muss mindestens 18 Jahre alt sein</li>
-                                <li><input type="checkbox" name="frage4" value="c">Er muss mindestens 16 Jahre alt sein</li>
-                                <li><input type="checkbox" name="frage4" value="d">Er muss k&ouml;rperlich, geistig und fachlich geeignet sein</li>
+                                <li><input type="checkbox" name="frage4" id="frage4a" value="a"><label for="frage4a">Er muss Inhaber des Sportbootf&uuml;hrerscheins-Binnen sein.</label></li>
+                                <li><input type="checkbox" name="frage4" id="frage4b" value="b"><label for="frage4b">Er muss mindestens 18 Jahre alt sein.</label></li>
+                                <li><input type="checkbox" name="frage4" id="frage4c" value="c"><label for="frage4c">Er muss mindestens 16 Jahre alt sein.</label></li>
+                                <li><input type="checkbox" name="frage4" id="frage4d" value="d"><label for="frage4d">Er muss k&ouml;rperlich, geistig und fachlich geeignet sein.</label></li>
                             </ul>
                         </div>
 
@@ -183,8 +183,8 @@
 
                 <div class="quizButton2">
                     <!--<input type="button" value="Ergebnis" name="B1" onClick="korrektur()"> -->
-                    <input type="button" value="Ergebnis" name="B1" onClick="korrektur()">
-                    <input type="button" value="Eingabe l&ouml;schen" name="B2" onClick="document.meinQuiz.reset()">
+                    <input type="button" value="Ergebnis" id="auswerten">
+                    <input type="button" value="Eingabe l&ouml;schen" id="formularLeeren">
                 </div>
 
             </form>
