@@ -29,7 +29,6 @@ function jsonEinlesen () {
     };
 
     anfrage.send();
-
 }
 
 
