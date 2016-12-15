@@ -1,16 +1,25 @@
+window.onload = eventHandler;
+
+function eventHandler () {
+
+    var neuesQuizButton = document.getElementById('neuesQuiz');
+    neuesQuizButton.addEventListener('click', check, false);
+
+    var auswertenButton = document.getElementById('auswerten');
+    auswertenButton.addEventListener('click', korrektur, false);
+
+    var formularLoeschenButton = document.getElementById('formularLeeren');
+    formularLoeschenButton.addEventListener('click', function () {document.meinQuiz.reset()}, false)
+
+}
+
+
+
 var auswahl = [];//new Array();
 document.cookie = "ready=yes";
 
-var anzahlFragen = 4;
-
-//L�sungen
-var loesung=[];//new Array();
-loesung[1] = 'a'; //Antwort radio
-loesung[2] = 'b'; //Antwort radio
-loesung[3] = 'c'; //Antwort radio
-loesung[4] = 'cd';  //Antwort checkbox
-//loesung[5] = 'a';  //Antwort Bilderr�tsel
 var eingabe = ['','','',''];
+var loesung=[];//new Array();
 
 
 /*
@@ -19,14 +28,22 @@ var eingabe = ['','','',''];
  In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden: EA3 Aufgabe 2
  Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2
  */
-function check(sObj) {
 
-  var zaehler_schwierigkeitSelect = 0;
+function check() {
+
+    // inObjektUmwandeln('Robert', 'hans@wurst.de', 'schwer', 'See', 8, 'Katamaran');
+
+    var schwierigkeitsGrad = document.getElementById('schwierigkeitID').options;
+    var auswahlSchwierigkeit = new Array ('');
+
+
+    var zaehler_schwierigkeitSelect = 0;
     var zaehler_kategorie = 0;
     var zaehler_schwierigkeit = 0;
+    var i; // iterator
 
     //Prüft, ob EIngabe mind. 5 lang ist
-    if (document.getElementById("benutzernameID").lang < 5) {
+    if (document.getElementById("benutzernameID").lang < 5) {                    // bei lang dürfte ein Fehler vorliegen
         document.getElementById("fehlerMeldung1").innerHTML =("Eingabe muss mind. 5 Zeichen haben.");
     }
 
@@ -36,24 +53,32 @@ function check(sObj) {
         document.getElementById("fehlerMeldung2").innerHTML = "Bitte eine Angabe machen.";
     }
 
-
     //prüft, ob dropdown nicht gecheckt ist
     if (document.getElementById("schwierigkeitID").value == "") {
         zaehler_schwierigkeit = 1;
     }
 
-    for (var i = 0; i < sObj.options.length; i++)  {
-        if (sObj.options[i].selected) {
+    for (i=0; i < schwierigkeitsGrad.length; i++)  {
+        if (schwierigkeitsGrad[i].selected) {
             zaehler_schwierigkeitSelect++;
         }
     }
+  
     if (zaehler_schwierigkeitSelect > 2) {
         window.alert("Bitte nicht mehr als zwei Schwierigkeiten angeben!");
     }
 
+    for (i=0; i < schwierigkeitsGrad.length; i++) {
 
+        if (schwierigkeitsGrad[i].selected) {
+            auswahlSchwierigkeit[i] = schwierigkeitsGrad[i].value;
+            console.log(schwierigkeitsGrad[i].value);
+        }
 
-    //prüft, ob Katgorie gecheckt ist
+    } 
+
+  
+    //prüft, ob Kategorie gecheckt ist
     for (var j = 0; j < 4; j++) {
 
         if (document.quizErstellen.kategorie[j].checked == true) {
@@ -61,6 +86,7 @@ function check(sObj) {
 
         }
     }
+  
     //Vergleicht, ob Kategorie und dropdown NICHT gecheckt sind, da beim logischen oder beider falsch sein müssen
     if ((zaehler_schwierigkeit == 1) && (zaehler_kategorie == 0)) {
         document.getElementById("fehlerMeldung3").innerHTML =("Bitte eine Kategorie oder eine Schwierigkeit angeben!");
@@ -76,240 +102,119 @@ function check(sObj) {
         document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu gross";
     }
 
- /*
-    var zaehlerSchSel = 0;
+}
 
 
-    var zaehlerKat = 0;
-    var zaehlerSch = 0;
+var jsonDaten;
+
+function jsonEinlesen () {
 
 
+    var anfrage = new XMLHttpRequest();
+    anfrage.open('GET', 'js/quizBinnenwasser.json');
+    anfrage.onload = function() {
 
-
-
-    if (document.getElementById("schwierigkeitID").value == "") {
-        zaehlerSch = 1;
-    }
-
-    for (var i = 0; i < sObj.options.length; i++)  {
-        if (sObj.options[i].selected) {
-            zaehlerSchSel++;
-        }
-    }
-    if (zaehlerSchSel > 2) {
-        window.alert("Bitte nicht mehr als zwei Schwierigkeiten angeben!");
-    }
-
-
-//Schleife
-    for (var j = 0; j < 4; j++) {
-
-        if (document.quizErstellen.kategorie[j].checked == true) {
-            zaehlerKat = 1;
-
-        }
-    }
-
-    if ((zaehlerSch == 1) && (zaehlerKat == 0)) {
-        window.alert("Bitte eine Kategorie oder eine Schwierigkeit angeben!");
-
+    jsonDaten = JSON.parse(anfrage.responseText);
 
     }
-    */
+
+    anfrage.send();
 
 }
 
 
+var track;
+track = [];
 
-function myFunction(){
-    var inpObj = document.getElementById("benutzername");
-    if(inpObj.checkValidity()== false){
-        document.getElementById("invisible_1").innerHTML = inpObj.validationMessage;
+function quizerstellen(){
+
+    zahlFragen = 0;
+
+    //Wert aus Eingabe von 1-8 (quiz.html)
+    zahlFragen = document.getElementById("numberID").value;
+
+    var str = '<h4>Beantworte alle Fragen</h4>';
+
+//Fragen generieren
+    for(var i = 0 ; i < zahlFragen ; i++){
+        random = Math.floor(Math.random() * zahlFragen);
+        str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';
+        str += '<form><table>' +
+            '<tr><td id="frage1"><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
+            '<tr><td id="frage2"><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
+            '<tr><td id="frage3"><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
+            '<tr><td id="frage4"><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
+            '</table></form><br>';
+        track[i] = random;
     }
+
+    document.getElementById('hierEntstehtQuizID').innerHTML = str;
+
 }
-
-
 
 
 function korrektur(){
-    nichtRichtig = null;
-    //1. Schleife
-    for (var q=1 ; q <= anzahlFragen ; q++){
-        //Argument übergeben per name
-        aktuelleFrage = eval("document.meinQuiz.frage"+q);
-        //2. Schleife
-        for (var c=0 ; c < aktuelleFrage.length ; c++){
-            if (aktuelleFrage[c].checked == true) {
-                eingabe[q-1] += aktuelleFrage[c].value;
-                //Wert der Frage wird auswahl zugeordnet
-                auswahl[q] = aktuelleFrage[c].value;
-            }
+    var sum=0;
+    for(var j = 0 ; j < zahlFragen ; j++){
+        for(var k = 0 ; k<4 ; k++){
 
-        }
+          window.alert(document.getElementsByName('radio'+[j]).checked);
 
-        if (loesung[q] != eingabe[q-1]){
-            if (nichtRichtig == null)
-                nichtRichtig = q;
-            else
-                nichtRichtig += "/"+q;
-        }
+          if(document.getElementsByName('radio'+[j+1]).checked == true) {window.alert("1) " + jsonDaten[this.track[j]].Antworten[k]);}
+
+          if(jsonDaten[track[j]].Antworten[k].checked == jsonDaten[track[j]].richtig[0]){
+                console.log('Works'+j);
+                sum++;
+          }
+       }
     }
 
-    if (nichtRichtig == null){
-        nichtRichtig = "a/b";
-    }
-    document.cookie = 'q=' + nichtRichtig;
-    if (document.cookie == ''){
-        alert("Cookies werden nicht vom Browser unterst&uuml;tzt.");
-    }
-    else{
-        window.location = "bootsquizAuswertung.html";
-    }
-}
-
-
-//auswertung
-function auswerten() {
-
-
-    for (var e = 0; e <= 2; e++)
-        document.result[e].value = "";
-
-    ergebnisse = document.cookie.split(";");
-    for (var n = 0; n <= ergebnisse.length - 1; n++) {
-        if (ergebnisse[n].charAt(1) == 'q') {
-            parse = n;
-        }
-    }
-
-    nichtRichtig = ergebnisse[parse].split("=");
-    nichtRichtig = nichtRichtig[1].split("/");
-    if (nichtRichtig[nichtRichtig.length - 1] == 'b') {
-        nichtRichtig = "";
-    }
-
-    document.result[0].value = anzahlFragen - nichtRichtig.length + " von " + anzahlFragen;
-    document.result[2].value = (anzahlFragen - nichtRichtig.length) / anzahlFragen * 100 + "%";
-
-    for (t = 0; t < nichtRichtig.length; t++) {
-        document.result[1].value += nichtRichtig[t] + ", ";
-    }
-
-}
-
-//aus bootsquizAuswertung
-function zeigeErgebnisse(){
-
-    text = '';
-
-    for (var i=1 ; i <= anzahlFragen ; i++){
-        for (temp=0 ; temp < nichtRichtig.length ; temp++){
-            if (i == nichtRichtig[temp]){
-                falsch = 1;
-            }
-        }
-        if (falsch == 1){
-            text += ("Richtig w&auml;re: " + i + "=" + loesung[i] + "\n");
-            falsch = 0;
-        }
-        else{
-            text += ("Fragen " + i + "=" + loesung[i] + "\n");
-        }
-    }
-
-
-    window.alert(text);
+    document.getElementById('ErgebnisID').innerHTML = 'Du hast ' + ((sum/zahlFragen) * 100) + '% richtig.';
 }
 
 
 
+/*function inObjektUmwandeln (benutzerName, eMailAdresse, schwierigkeitsStufe, kategorie, fragenAnzahl, bootsTyp) {
+
+    var formularObjekt = {};
+    formularObjekt.benutzerName = benutzerName;
+    formularObjekt.eMailAdresse = eMailAdresse;
+    formularObjekt.schwierigkeitsStufe = schwierigkeitsStufe;
+    formularObjekt.kategorie = kategorie;
+    formularObjekt.fragenAnzahl = fragenAnzahl;
+    formularObjekt.bootsTyp = bootsTyp;
 
 
+    var jsonObjekt = JSON.stringify(formularObjekt);        // umwandeln des JavaScript Objektes in ein JSON Objekt
+    console.log('JSON Objekt: ' + jsonObjekt);              // Ausgabe des JSON Objektes in der Konsole
+
+    inHTMLwiedergeben(jsonObjekt);
+
+}
 
 
+function inHTMLwiedergeben(jsonObjekt) {
+
+    var formularEingaben = JSON.parse(jsonObjekt);          // umwandeln des JSON Objektes zurück in ein JavaScript Objekt
+    console.log(formularEingaben);                          // Ausgabe des JavaScript Objektes in der Konsole
+    console.log('Aufzählung der Objekteigenschaften: ' + Object.getOwnPropertyNames(formularEingaben));     // Ausgabe der Objekt-Eigenschaften in der Konsole
+
+    var eingabeFormular = document.getElementById('eingabeFormular');
+    var neuerDivKnoten = document.createElement('div');
+    eingabeFormular.appendChild(neuerDivKnoten);                        // fügt dem Eingabeformular einen div-Knoten für die Ausgabe der Objektdaten hinzu
+
+    for (var eigenschaft in formularEingaben) {             // iteriert durch das Objekt
+
+        if (formularEingaben.hasOwnProperty(eigenschaft)) {
+            neuerDivKnoten.innerHTML += eigenschaft + ': ' + formularEingaben[eigenschaft] + '<br>';
+        }
+
+    }
+
+}
+
+*/
 
 
-
-
-
-
-
-
-
-
-/*
- function jsonZuHtml(){
-
- spielerZahl=0;
- var text = '{"Benutzername" : "Max Mustermann","E-Mail" : "max@mustermann.net","Schwierigkeit" : "Sehr Leicht", "Kategorie" : "Binnengew&auml;sser", "Anzahl-Fragen" : "1", "Boots-Typ" : "Segelboot" }';
-
- var obj = JSON.parse(text);
-
- document.cookie = obj;
- if (document.cookie == ''){
- alert("Cookies werden nicht vom Browser unterst&uuml;tzt.");
- }
- else{
- document.daten[0].value = =
- obj.Benutzername + "<br>" +
- obj.E-Mail + "<br>" +
- obj.Schwierigkeit + "<br>" +
- obj.Kategorie + "<br>" +
- obj.Anzahl-Fragen + "<br>" +
- obj.Boots-Typ;
- spielZahl++;
- }
-
-
- }
- */
-
-//indexDB
-/*
- function datenSpeichern(){
- //mit default-Tupel
- const dbSpieler = [
- {name: "Max", idName: 0, bearbeitet : 6, richtig : 5, anzahlSpiele : 2, }
- ];
-
- const dbName = "spiel_Ergebnisse";
- var request = indexedDB.open(dbName, null);
-
- request.onerror = function(event){
- alert("Why!?");
- };
-
- request.onupgradeneeded = function(event){
- var db. event.target.result;
- };
-
- var objectStore = db.createObjectStore("Spieler", {keyPath: "idName"});
-
- objectStore.createIndex("name", "name", {unique: false});
-
-
- for (var i in dbSpieler){
- objectStore.add(dbSpieler[i]);
- }
-
- var transaction = db.transaction(["Spieler"], "readwrite");
-
- transaction.oncomplete = function(event){
- alert("Fertig!");
- };
-
- transaction.onerror = function(event){
-
- };
-
- var objectStore = transaction.objectStore.add(dbSpieler[i]);
- request.onsuccess = function(event){
-
- };
-
-
-
-
- }
- */
+window.onload=jsonEinlesen;
 
