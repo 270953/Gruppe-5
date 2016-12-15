@@ -1,4 +1,8 @@
 window.onload = eventHandler;
+window.onload = jsonEinlesen;
+
+document.cookie = "ready=yes";
+var zahlFragen = 0;
 
 function eventHandler () {
 
@@ -12,15 +16,6 @@ function eventHandler () {
     formularLoeschenButton.addEventListener('click', function () {document.meinQuiz.reset()}, false)
 
 }
-
-
-
-var auswahl = [];//new Array();
-document.cookie = "ready=yes";
-
-var eingabe = ['','','',''];
-var loesung=[];//new Array();
-
 
 /*
  Drop-Down-Menü mit mind. 6 Optionen: EA3 Aufgabe 1
@@ -102,6 +97,8 @@ function check() {
         document.getElementById("fehlerMeldung5").innerHTML = "Anzahl zu gross";
     }
 
+    quizErstellen();
+
 }
 
 
@@ -116,7 +113,7 @@ function jsonEinlesen () {
 
     jsonDaten = JSON.parse(anfrage.responseText);
 
-    }
+    };
 
     anfrage.send();
 
@@ -126,9 +123,7 @@ function jsonEinlesen () {
 var track;
 track = [];
 
-function quizerstellen(){
-
-    zahlFragen = 0;
+function quizErstellen(){
 
     //Wert aus Eingabe von 1-8 (quiz.html)
     zahlFragen = document.getElementById("numberID").value;
@@ -137,8 +132,10 @@ function quizerstellen(){
 
 //Fragen generieren
     for(var i = 0 ; i < zahlFragen ; i++){
-        random = Math.floor(Math.random() * zahlFragen);
+        var random = Math.floor(Math.random() * zahlFragen);
+        //noinspection JSUnresolvedVariable
         str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';
+        //noinspection JSUnresolvedVariable
         str += '<form><table>' +
             '<tr><td id="frage1"><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
             '<tr><td id="frage2"><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
@@ -160,9 +157,11 @@ function korrektur(){
 
           window.alert(document.getElementsByName('radio'+[j]).checked);
 
-          if(document.getElementsByName('radio'+[j+1]).checked == true) {window.alert("1) " + jsonDaten[this.track[j]].Antworten[k]);}
+          if(document.getElementsByName('radio'+[j+1]).checked == true) {//noinspection JSUnresolvedVariable
+              window.alert("1) " + jsonDaten[this.track[j]].Antworten[k]);}
 
-          if(jsonDaten[track[j]].Antworten[k].checked == jsonDaten[track[j]].richtig[0]){
+          //noinspection JSUnresolvedVariable
+            if(jsonDaten[track[j]].Antworten[k].checked == jsonDaten[track[j]].richtig[0]){
                 console.log('Works'+j);
                 sum++;
           }
@@ -215,6 +214,4 @@ function inHTMLwiedergeben(jsonObjekt) {
 
 */
 
-
-window.onload=jsonEinlesen;
 

@@ -26,7 +26,7 @@ function jsonEinlesen () {
         jsonDaten = JSON.parse(anfrage.responseText);
         listeLaden();
         anzahlPersonen();
-    };
+    }
 
     anfrage.send();
 }
