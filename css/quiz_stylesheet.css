@@ -36,4 +36,14 @@
 	padding-top: 25px;
 }
 
+.kategoryHeader{
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.fehlermeldung{
+	padding-left: 50px;
+	font: 14px sans-serif;
+	color: red;
+}
 
