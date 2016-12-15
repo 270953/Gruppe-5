@@ -50,7 +50,7 @@
             <!-- Ueberschrift -->
             <h1>Fit f&uuml;r deinen Segelschein</h1>
 
-            <form class="f1" method="POST" name="quizErstellen">
+            <form id="eingabeFormular" class="f1" method="POST" name="quizErstellen">
                 <div class="benutzerInfo">
                     <!-- Implementierung von EA3 Aufgabe 1 und 2
                     1) Erstellen Sie ein Formular, in welchem ein Nutzer Daten eingeben kann. (5 P)
@@ -59,25 +59,26 @@
 
                     <!--2 Textfelder: EA3 Aufgabe 1
                         Textfeld 1 muss mindestens 5 Buchstaben lang sein: EA3 Aufgabe 2-->
+
                     <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id="benutzernameID" type="text"  minlength="5"></p>
                     <p class="fehlermeldung" id="fehlerMeldung1"></p>
                     <!--Textfeld 2 ist Pflichtfeld: EA3 Aufgabe 2-->
-                    <p>Gib deine E-Mail-Adresse ein (Pflichtfeld): <input id="emailID" type="text" required></p>
+                    <p>Gib deinen Vornamen ein (Pflichtfeld): <input id="vornameID" type="text" required></p>
                     <p class="fehlermeldung" id="fehlerMeldung2"></p>
 
                     <!--Drop-Down-Menü mit mind. 6 Optionen: EA3 Aufgabe 1
                         Die Dropdown-Liste erlaubt mehrfach-Auswahl: EA3 Aufgabe 2
                         In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden: EA3 Aufgabe 2
                         Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
-                    <div class="schwierigkeit">
-                        <p>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): <select id="schwierigkeitID"  multiple name="schwierigkeit">
+                    <div class="selectSchwierigkeit">
+                        <label for="schwierigkeit">W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): </label><select id="schwierigkeitID" multiple="multiple">
                             <option name="schwierigkeit" value="sehrLeicht">Sehr Leicht</option>
                             <option name="schwierigkeit" value="leicht">Leicht</option>
                             <option name="schwierigkeit" value="normal">Normal</option>
                             <option name="schwierigkeit" value="schwer">Schwer</option>
                             <option name="schwierigkeit" value="sehrSchwer">Sehr Schwer</option>
                             <option name="schwierigkeit" value="experte">Experte</option>
-                        </select> <br></p>
+                        </select>
                     </div>
                     <p class="fehlermeldung" id="fehlerMeldung3"></p>
 
@@ -87,10 +88,10 @@
                             <p>W&auml;hle eine Kategorie aus</p>
                             <div class="kselections">
                                 <ul>
-                                    <li><input type="radio" name="kategorie" value="a">Binnengew&auml;sser</li>
-                                    <li><input type="radio" name="kategorie" value="b">Binnengew&auml;sser - Spezifisch</li>
-                                    <li><input type="radio" name="kategorie" value="c">Die See</li>
-                                    <li><input type="radio" name="kategorie" value="d">Die See - Spezifisch</li>
+                                    <li><input type="radio" name="kategorie" id="kategorie1" value="a"><label for="kategorie1">Binnengew&auml;sser</label></li>
+                                    <li><input type="radio" name="kategorie" id="kategorie2" value="b"><label for="kategorie2">Binnengew&auml;sser - Spezifisch</label></li>
+                                    <li><input type="radio" name="kategorie" id="kategorie3" value="c"><label for="kategorie3">Die See</label></li>
+                                    <li><input type="radio" name="kategorie" id="kategorie4" value="d"><label for="kategorie4">Die See - Spezifisch</label></li>
                                 </ul>
                             </div>
 
@@ -99,13 +100,15 @@
 
                     <!-- 1 Feld zur Eingabe von Zahlen: EA3 Aufgabe 1
                         Die eingegebene Zahl muss zwischen 1 und 8 liegen: EA3 Aufgabe 2-->
-                    <p>W&auml;hle bis zu 8 Fragen: <input type="number" id="numberID" min="1" max="8" value="1"></p>
+
+                    <p><label for="number">W&auml;hle bis zu 8 Fragen: </label><input type="number" id="numberID" min="1" max="8" value="1"></p>
                     <p class="fehlermeldung" id="fehlerMeldung5"></p>
 
 
+
                     <!-- Eine Datalist mit mind. 3 Einträgen: EA3 Aufgabe 1-->
-                        <div class="bootsTypen">
-                            <p>W&auml;hle einen Bootstyp aus:  <input list="bootsTypen" name="boote"></p>
+                    <div class="bootsTypen">
+                            <p><label for="boote">W&auml;hle einen Bootstyp aus:  </label><input list="bootsTypen" name="boote" id="boote"></p>
 
                             <datalist id="bootsTypen">
                                 <option value="Segelboot">
@@ -117,8 +120,8 @@
                     <p class="fehlermeldung" id="fehlerMeldung6"></p>
 
 
-                    <p><input type="submit" id="random" value="Eingabe prüfen" onclick="check(document.quizErstellen.schwierigkeit)"></p>
-                    <p><input type="submit" id="random2" value="Neues Quiz erstellen" onclick="quizerstellen()"></p>
+                    <input type="submit" id="neuesQuiz" value="Neues Quiz erstellen">
+
                 </div>
             </form>
 
@@ -126,17 +129,11 @@
 
             <form class="f2" method="POST" name="meinQuiz">
                 <div class="hierEntstehtQuiz" id="hierEntstehtQuizID">
-
+       
+                    <input type="button" value="Ergebnis" id="auswerten">
+                    <input type="button" value="Eingabe l&ouml;schen" id="formularLeeren">
+                  
                 </div>
-
-
-                <input type="submit" value="Ergebnis" name="B1" onClick="korrektur()">
-
-                <input type="button" value="Eingabe l&ouml;schen" name="B2" onClick="document.meinQuiz.reset()">
-
-
-
-
 
                 <div class="Ergebnis" id="ErgebnisID">
 

@@ -75,6 +75,7 @@ function changeText() {
 
     var ausgabeText = document.getElementById('mietdauerText');
     var bootsKlasse = ermittleBootsklasse();
+    //noinspection JSUnresolvedVariable
     var abrechnungsZeitraum = jsonDaten[bootsKlasse[0]].abrechnungsZeitraum;
 
     if (abrechnungsZeitraum == 'pro Tag') {
@@ -103,6 +104,7 @@ function anzahlPersonen() {
 
     for (var zaehlerArray=0; zaehlerArray<jsonDaten.length; zaehlerArray++) {
 
+        //noinspection JSUnresolvedVariable
         if (jsonDaten[zaehlerArray].maxPersonen >= personenZahl) {
 
             var neuesElement = document.createElement('option');
@@ -131,6 +133,7 @@ function tabelleEinfaerben(personenZahl) {
 
     for (var zaehlerArray = 0; zaehlerArray < jsonDaten.length; zaehlerArray++) {
 
+        //noinspection JSUnresolvedVariable
         if (personenZahl <= jsonDaten[zaehlerArray].maxPersonen && personenZahl != 0) {
 
             if (zaehlerArray % 2 == 0) {
@@ -196,9 +199,11 @@ function ermittleSaisonPreis(selectedBoot) {
 
     var rueckgabe;
     if (document.getElementById('saison').value == 'Hauptsaison') {
+        //noinspection JSUnresolvedVariable
         rueckgabe = jsonDaten[selectedBoot[0]].Hauptsaison;
     }
     else {
+        //noinspection JSUnresolvedVariable
         rueckgabe = jsonDaten[selectedBoot[0]].Nebensaison;
     }
     return(rueckgabe);
@@ -209,6 +214,7 @@ function ermittleRabatt(selectedBoot) {
 
     var rueckgabe;
     if (document.getElementById('rabatt').value == 'ja') {
+        //noinspection JSUnresolvedVariable
         rueckgabe = jsonDaten[selectedBoot[0]].rabatt;
     }
     else {
