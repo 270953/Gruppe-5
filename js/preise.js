@@ -1,4 +1,7 @@
+window.onload = eventHandler;
+
 var jsonDaten;
+
 
 function eventHandler() {
 
@@ -8,11 +11,13 @@ function eventHandler() {
     buttonPreis.addEventListener('click', berechnePreis, false);
 
     var bootsWahl = document.getElementById('bootsKlasse');
-    bootsWahl.addEventListener('change', changeText, false);
+    bootsWahl.addEventListener('change', changeMietdauerText, false);
 
     var personenZahl = document.getElementById('personen');
     personenZahl.addEventListener('change', anzahlPersonen, false);
 
+    var mietdauerAendern = document.getElementById('mietdauer');
+    mietdauerAendern.addEventListener('change', eingabeMietdauerPruefen, false);
 
 }
 
@@ -26,7 +31,7 @@ function jsonEinlesen () {
         jsonDaten = JSON.parse(anfrage.responseText);
         listeLaden();
         anzahlPersonen();
-    }
+    };
 
     anfrage.send();
 }
@@ -71,59 +76,98 @@ function listeLaden () {
 }
 
 
-function changeText() {
+function changeMietdauerText() {
 
+    var mietdauer = document.getElementById('mietdauer');
     var ausgabeText = document.getElementById('mietdauerText');
     var bootsKlasse = ermittleBootsklasse();
     //noinspection JSUnresolvedVariable
     var abrechnungsZeitraum = jsonDaten[bootsKlasse[0]].abrechnungsZeitraum;
 
     if (abrechnungsZeitraum == 'pro Tag') {
-        ausgabeText.innerHTML = 'Mietdauer in Tagen: ';
+        ausgabeText.innerHTML = 'Mietdauer in Tagen (max. 30 Tage):';
+        mietdauer.setAttribute('max', '30');
     }
     else {
-        ausgabeText.innerHTML = 'Mietdauer in Stunden: ';
+        ausgabeText.innerHTML = 'Mietdauer in Stunden (max. 10 Stunden):';
+        mietdauer.setAttribute('max', '10');
     }
+
 }
+
+
+function eingabeMietdauerPruefen() {
+
+    var mietdauer = document.getElementById('mietdauer');
+
+    if (mietdauer.checkValidity() == false) {
+
+        mietdauer.value = 1;
+        window.alert('Bitte geben Sie eine ganze Zahl von 1 bis zur maximalen Mietdauer an.');
+    }
+
+}
+
 
 function anzahlPersonen() {
 
-    var personenZahl = document.getElementById('personen').value;
-    var bootsKlasse = document.getElementById('bootsKlasse');
+    var personenZahl = document.getElementById('personen');
 
-    if (personenZahl != '') {
-        tabelleEinfaerben(personenZahl);
-    }
-    if (personenZahl == '') {
-        personenZahl = 1;
-    }
+    if (personenZahl.checkValidity() == true) {
 
-    while (bootsKlasse.childElementCount > 0) {
-        bootsKlasse.removeChild(bootsKlasse.lastChild);
-    }
+        personenZahl = personenZahl.value;
 
-    for (var zaehlerArray=0; zaehlerArray<jsonDaten.length; zaehlerArray++) {
+        var bootsKlasse = document.getElementById('bootsKlasse');
+        var bootsKlasseAktuell = bootsKlasse.value;
 
-        //noinspection JSUnresolvedVariable
-        if (jsonDaten[zaehlerArray].maxPersonen >= personenZahl) {
+        if (personenZahl != '') {
+            tabelleEinfaerben(personenZahl);
+        }
+        else {
+            personenZahl = 1;
+        }
 
-            var neuesElement = document.createElement('option');
-            var neuesAttribut = document.createAttribute('value');
+        while (bootsKlasse.childElementCount > 0) {
+            bootsKlasse.removeChild(bootsKlasse.lastChild);
+        }
 
-            if (jsonDaten[zaehlerArray].hasOwnProperty('name')) {
-                var text = jsonDaten[zaehlerArray].name;
-                var neuerTextKnoten = document.createTextNode(text);
-                neuesAttribut.value = text;
+        for (var zaehlerArray = 0; zaehlerArray < jsonDaten.length; zaehlerArray++) {
+
+            //noinspection JSUnresolvedVariable
+            if (jsonDaten[zaehlerArray].maxPersonen >= personenZahl) {
+
+                var neuesElement = document.createElement('option');
+                var neuesAttribut = document.createAttribute('value');
+
+                if (jsonDaten[zaehlerArray].hasOwnProperty('name')) {
+                    var text = jsonDaten[zaehlerArray].name;
+                    var neuerTextKnoten = document.createTextNode(text);
+                    neuesAttribut.value = text;
+                }
+
+                neuesElement.setAttributeNode(neuesAttribut);
+                neuesElement.appendChild(neuerTextKnoten);
+                bootsKlasse.appendChild(neuesElement);
+
             }
-
-            neuesElement.setAttributeNode(neuesAttribut);
-            neuesElement.appendChild(neuerTextKnoten);
-            bootsKlasse.appendChild(neuesElement);
 
         }
 
+        if (bootsKlasseAktuell == ''){
+            bootsKlasse.value = 'Windjammer';
+        }
+        else {
+            bootsKlasse.value = bootsKlasseAktuell;
+        }
     }
 
+    else {
+
+        personenZahl.value = 1;
+        window.alert('Bitte geben Sie eine ganze Zahl von 0 bis 24.');
+        console.log(personenZahl.validationMessage);
+
+    }
 }
 
 
@@ -158,16 +202,26 @@ function tabelleEinfaerben(personenZahl) {
 
 function berechnePreis() {
 
-    var selectedBoot = ermittleBootsklasse();
-    var saisonPreis = ermittleSaisonPreis(selectedBoot);
-    var rabatt = ermittleRabatt(selectedBoot);
-    var mietdauer = document.getElementById('mietdauer').value;
+    var mietdauer = document.getElementById('mietdauer');
 
-    var endPreis = saisonPreis*mietdauer*rabatt;
+    if (mietdauer.checkValidity() == false) {
 
-    var ausgabeFeld = document.getElementById('ergebnis');
+        mietdauer.value = 1;
+        window.alert('Bitte geben Sie eine ganze Zahl von 1 bis zur maximalen Mietdauer an.');
+    }
 
-    ausgabeFeld.innerHTML = 'Der Preis beträgt für diesen Zeitraum ' + endPreis.toFixed(2) + ' Euro.';
+    else {
+
+        var selectedBoot = ermittleBootsklasse();
+        var saisonPreis = ermittleSaisonPreis(selectedBoot);
+        var rabatt = ermittleRabatt(selectedBoot);
+
+        var endPreis = saisonPreis * mietdauer * rabatt;
+
+        var ausgabeFeld = document.getElementById('ergebnis');
+
+        ausgabeFeld.innerHTML = 'Der Preis beträgt für diesen Zeitraum ' + endPreis.toFixed(2) + ' Euro.';
+    }
 
 }
 
@@ -224,6 +278,3 @@ function ermittleRabatt(selectedBoot) {
     rueckgabe = (100-rueckgabe)*0.01;
     return(rueckgabe);
 }
-
-
-window.onload = eventHandler;
