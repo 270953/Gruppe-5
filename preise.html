@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 	<link rel="stylesheet" type="text/css" href="css/preistabelle.css" />
+    <link rel="stylesheet" type="text/css" href="css/formular.css" />
 </head>
 
 <!-- sichtbarer Inhalt der Seite-->
@@ -37,7 +38,8 @@
 				<li><a href="quiz.html">Quiz</a></li>
 				<li><a href="kontakt.html">Kontakt</a></li>
 				<li><a href="impressum.html">Impressum</a></li>
-			</ul>
+                <li><a href="readme.html">README</a></li>
+            </ul>
 		</nav>
 
          <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
@@ -47,7 +49,7 @@
 
                          <h1>Preistabelle</h1>
 
-                                 <!-- Preistabelle am besten aus Json einlesen -->
+                                 <!-- Preistabelle: Daten werden aus Json eingelesen -->
                                  <table id="preise">
                                      <tr>
                                          <th>Bootsklasse</th>
@@ -72,7 +74,7 @@
 
                          <div>
                              Personenanzahl:
-                             <input type="number" class="eingabeFeld" id="personen" min="0" max="24" step="1" placeholder="1">
+                             <input type="number" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0" title="Personenanzahl">
                          </div>
 
                          <div>
@@ -101,8 +103,8 @@
                          </div>
 
                          <div>
-                             <span id='mietdauerText'>Mietdauer in Tagen: </span>
-                             <input type="number" class="eingabeFeld" id="mietdauer" min="1" max="30" placeholder="0">
+                             <span id='mietdauerText'>Mietdauer in Tagen (max. 30): </span>
+                             <input type="number" title="Mietdauer" class="eingabeFeld" id="mietdauer" min="1" max="30" step="1" value="1">
                          </div>
 
                          <div>

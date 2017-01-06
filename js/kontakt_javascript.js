@@ -3,78 +3,103 @@
 //easier to adapt this code
 
 var cssFalseInputClass = "falseInput";
-var formNameChildNode = "Nachname";
-var formFirstNameChildNode = "Vorname";
-var formEMAILChildNode = "E-Mail";
-var formMessageChildNode = "Nachricht";
+
+var formElementsText;
+var formEmail;
+var formTextArea;
 
 
-function checkUserData(givenElement)
+function getForms()
 {
-	//if nothing goes wrong, this boolean will be true at the end
-	var returnStatement = true;
-
-	//if its the name field
-	if (givenElement.innerHTML.includes(formFirstNameChildNode) || givenElement.innerHTML.includes(formNameChildNode))
-	{		
-		regexNames = new RegExp('^[a-zA-Z]+$');//must only contain letters
-
-		//the 4th element, because the elements are :(Textnode, </br>, textnode(empty), input element, textnode )
-		if(!givenElement.childNodes[3].value.match(regexNames) || givenElement.childNodes[3].value.length < 3)
-		{
-			givenElement.childNodes[3].setAttribute("class", cssFalseInputClass);
-			
-			returnStatement = false;//wrong input
-		}
-	}
-	else if (givenElement.innerHTML.includes(formEMAILChildNode)) // if its the e-mail field
-	{
-		regexMail = new RegExp('^[^ ]*@[^ ]*$');//must match a mail domain
-		
-		if(!givenElement.childNodes[3].value.match(regexMail) || givenElement.childNodes[3].value.length < 5)
-		{
-			givenElement.childNodes[3].setAttribute("class", cssFalseInputClass);
-			
-			returnStatement = false;//wrong input
-		}
-	}
-	else if (givenElement.innerHTML.includes(formMessageChildNode))
-	{
-		regexMessage = new RegExp('[a-zA-Z]');
-		
-		if (givenElement.childNodes[3].value.length < 15 || !givenElement.childNodes[3].value.match(regexMessage))
-		{
-			givenElement.childNodes[3].setAttribute("class", cssFalseInputClass);
-			
-			returnStatement = false;//wrong input
-		}
-	}
+	console.log("beginne die formulare zu laden");
 	
-	//if the last input was false, but now correct
-	if (returnStatement && givenElement.childNodes[3].getAttribute("class") == cssFalseInputClass)
-	{
-		//remove the css style of the input field 
-		givenElement.childNodes[3].removeAttribute("class", cssFalseInputClass);
-	}
-	
-	return returnStatement; // if everything went correctly return true to the form
-}
-
-
-function clickSubmit()
-{	
-	var returnStatement = true;
-
 	//get the elemts from the html
-	formElements = this.document.querySelectorAll("body main form p");
-	formTextArea = this.document.querySelector("form p textarea");
+	formElementsText = document.querySelectorAll("form p input[type='text']");
+	formEmail = document.querySelector("form p input[type='email']");
+	formTextArea = document.querySelector("form p textarea");
 	
-	for(var i = 0; i < formElements.length; i++)
-	{		
-		if(!checkUserData(formElements[i])) //if at least one input field fails
-			returnStatement = false;// wrong input
+	buttonAbschicken = document.getElementById("abschicken");
+	
+	//log zum überprüfen
+	console.log("documente geladen : \n"
+	 + formElementsText + " : " + formElementsText.length + "\n" 
+	 + formEmail + "\n" 
+	 + buttonAbschicken);
+	 
+	//eventlistener beim kilicken zum überprüfen der formulare
+	buttonAbschicken.addEventListener("click", check); 
+}
+
+
+//überprüfe die formulare
+function check()
+{
+	console.log("check beginnt");
+	
+	//customvaliditystrings werden zu beginn zurrückgesetzt
+	formElementsValidityArrayString = [];
+	formEmailValidityString = "";
+	formTextAreaValidityString = "";
+	
+	regexLetters = new RegExp('^[a-zA-Z\x7f-\xff]+$');//must only contain letters
+	regexMail = new RegExp('^[^ ]*@[^ ]*$');//must match a mail domain
+	
+	//entferne gelben hintergrund falls vorher vorhanden
+	formEmail.removeAttribute("class", cssFalseInputClass);
+	formTextArea.removeAttribute("class", cssFalseInputClass);
+	
+	
+	//für alle text elemente
+	for (var i = 0; i < formElementsText.length; i++)
+	{
+		formElementsText[i].removeAttribute("class", cssFalseInputClass);
+				
+		formElementsValidityArrayString[i] = "";
+		
+		if(formElementsText[i].value.match(regexLetters))
+		{
+			if(formElementsText[i].value.length < 3)
+			{
+				formElementsValidityArrayString[i] = "Sie muessen mindestens 3 Buchstaben eingeben!";
+				//gelber hintergrund
+				formElementsText[i].setAttribute("class", cssFalseInputClass);
+			}
+		}
+		else
+		{
+			formElementsValidityArrayString[i] = "Es duerfen nur Buchstaben eingegeben werden!";
+			formElementsText[i].setAttribute("class", cssFalseInputClass);
+		}
+		
+		//setzte eigene fehlermeldung
+		formElementsText[i].setCustomValidity(formElementsValidityArrayString[i]);
+		
+		console.log("Text " + i + " Check " + formElementsText[i].checkValidity());
 	}
 	
-	return returnStatement;
+	if (formEmail.value.length < 3)
+	{
+		formEmailValidityString = "Ihre E-Mail ist zu kurz!";
+		formEmail.setAttribute("class", cssFalseInputClass);
+	}
+	
+
+	formEmail.setCustomValidity(formEmailValidityString);
+	
+	if (formTextArea.value.length < 15)
+	{
+		formTextAreaValidityString = "Der Text ist zu kurz!";
+		formTextArea.setAttribute("class", cssFalseInputClass);
+	}
+	
+	formTextArea.setCustomValidity(formTextAreaValidityString);
+	
+		
+	console.log("Email Check " + formEmail.checkValidity());
+	console.log("Nachricht Check " + formTextArea.checkValidity());
 }
+
+
+
+window.onload = getForms;
 
