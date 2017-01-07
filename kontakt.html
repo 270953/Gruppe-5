@@ -15,6 +15,7 @@
 		
 		<script type="text/javascript" src="js/kontakt_javascript.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/kontakt.css">
+		<link rel="stylesheet" type="text/css" href="css/formular.css">
 		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">			
 </head>
 
@@ -36,7 +37,8 @@
                                  <li><a href="quiz.html">Quiz</a></li>
 								 <li><a href="kontakt.html">Kontakt</a></li>
                                  <li><a href="impressum.html">Impressum</a></li>
-                         </ul>
+							 	 <li><a href="readme.html">README</a></li>
+						 </ul>
                  </nav>
          </header>
 
@@ -50,36 +52,31 @@
 				<p>
 					Vorname 
 					</br>
-					<input type="text" name="vorname" size="25" maxlength="25" />
+					<input type="text" name="vorname" minLength="2" maxLength="25" required/>
 				</p>
 				
 				<p>
 					Nachname 
 					</br>
-					<input type="text" name="nachname" size="25" maxlength="25" />
+					<input type="text" name="nachname" minLength="3" maxLength="25" required/>
 				</p>
 				
 				<p>
 					Ihre E-Mail Adresse 
 					</br>
-					<input type="email" name="email" size="25" maxlength="25" />
+					<input type="email" name="email" minLength="3" maxLength="25" required/>
 				</p>	
 
 				<p>
 					Ihre Nachricht 
 					</br>
-					<textarea rows="5" cols="50"></textarea>
+					<textarea rows="5" cols="50" minLength="15" required></textarea>
 				</p>
 				
 				
-				<button onclick="return clickSubmit()">
-					Abschicken
-				</button>
+				<input type="submit" value="Abschicken" id="abschicken"/>
 				
-								
-				<button id="reset">
-					Zur&uuml;cksetzen
-				</button>
+				<input type="reset" value="Zur&uuml;cksetzen"/>
 				
 			  </form>
 			 
