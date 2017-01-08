@@ -53,10 +53,10 @@ function datenbankOeffnen() {
 // Funktion, um Daten in die Datenbank zu schreiben
 function datenSpeichern(eingabeDaten, herkunft) {
 
-    if (herkunft == 'quiz') {
+    if (herkunft == 'preis') {
         objectStore = datenbank.transaction(['letzteBerechnungen'], 'readwrite').objectStore('letzteBerechnungen');
     }
-    else if (herkunft == 'preis') {
+    else if (herkunft == 'quiz') {
         objectStore = datenbank.transaction(['quizErgebnisse'], 'readwrite').objectStore('quizErgebnisse');
     }
 
@@ -72,10 +72,10 @@ function datenLesen(herkunft) {
 
     ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse:<br>'; //löscht den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
 
-    if (herkunft == 'quiz') {
+    if (herkunft == 'preis') {
         objectStore = datenbank.transaction(['letzteBerechnungen'], 'readwrite').objectStore('letzteBerechnungen');
     }
-    else if (herkunft == 'preis') {
+    else if (herkunft == 'quiz') {
         objectStore = datenbank.transaction(['quizErgebnisse'], 'readwrite').objectStore('quizErgebnisse');
     }
 
