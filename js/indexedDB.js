@@ -54,9 +54,11 @@ function datenbankOeffnen() {
 function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum einen die Daten, die gespeichert werden sollen, übergeben. zum anderen aber auch eine Prüfvariable
 
     if (herkunft == 'preis') {                              // ist die Prüfvariable = 'preis', wird eine Transaction für den Objectstore 'letztePreisBerechnungen' geöffnet
+        //noinspection JSUnresolvedFunction
         objectStore = datenbank.transaction(['letztePreisBerechnungen'], 'readwrite').objectStore('letztePreisBerechnungen');
     }
     else if (herkunft == 'quiz') {                          // ist die Prüfvariable = 'quiz', wird eine Transaction für den Objectstore 'quizErgebnisse' geöffnet
+        //noinspection JSUnresolvedFunction
         objectStore = datenbank.transaction(['quizErgebnisse'], 'readwrite').objectStore('quizErgebnisse');
     }
 
@@ -73,12 +75,15 @@ function datenLesen(herkunft) {
     ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse:<br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
 
     if (herkunft == 'preis') {                              // ist die Prüfvariable = 'preis', wird eine Transaction für den Objectstore 'letztePreisBerechnungen' geöffnet
-        objectStore = datenbank.transaction(['letztePreisBerechnungen'], 'readwrite').objectStore('letztePreisBerechnungen');
+        //noinspection JSUnresolvedFunction
+        objectStore = datenbank.transaction(['letztePreisBerechnungen'], 'readonly').objectStore('letztePreisBerechnungen');
     }
     else if (herkunft == 'quiz') {                          // ist die Prüfvariable = 'quiz', wird eine Transaction für den Objectstore 'quizErgebnisse' geöffnet
-        objectStore = datenbank.transaction(['quizErgebnisse'], 'readwrite').objectStore('quizErgebnisse');
+        //noinspection JSUnresolvedFunction
+        objectStore = datenbank.transaction(['quizErgebnisse'], 'readonly').objectStore('quizErgebnisse');
     }
 
+    //noinspection JSUnresolvedFunction
     var abfrageBegrenzung = IDBKeyRange.upperBound(10);     // damit wird eine Obergrenze festgelegt, die bezweckt, dass nur die ersten zehn Einträge des Objectstores ausgelesen werden
 
     //noinspection JSUnresolvedFunction
