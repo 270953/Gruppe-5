@@ -5,6 +5,9 @@ var jsonDaten;      // Objekt, in das später die Daten aus der JSON Datei gesch
 
 function eventHandler() {
 
+    // Datenbank wird geöffnet oder angelegt; Funktion befindet sich in indexedDB.js
+    datenbankOeffnen();
+
     jsonEinlesen();
 
     var buttonPreis = document.getElementById('berechnePreis');
@@ -18,6 +21,11 @@ function eventHandler() {
 
     var mietdauerAendern = document.getElementById('mietdauer');
     mietdauerAendern.addEventListener('change', eingabeMietdauerPruefen, false);
+
+    var letzteBerechnungen = document.getElementById('letzteBerechnungen');
+    letzteBerechnungen.addEventListener('click', function () {
+        datenLesen('preis');
+    }, false);
 
 }
 
@@ -239,21 +247,47 @@ function berechnePreis() {              // wird beim Click auf den Button 'Preis
 
     else {                                          // nur wenn die Mietdauer einen gültigen Wert enthält, wird in die Berechnung des Preises eingestiegen
 
+        var bootsKlasse = ermittleBootsklasse();
         mietdauer = mietdauer.value;
-
-        var selectedBoot = ermittleBootsklasse();
-        console.log(selectedBoot);
-
-        var saisonPreis = ermittleSaisonPreis(selectedBoot);
-        console.log(saisonPreis);
-
-        var rabatt = ermittleRabatt(selectedBoot);
-        console.log(rabatt);
-
-        var endPreis = saisonPreis * mietdauer * rabatt;        // die Berechnung des Preises ist selbsterklärend
-        console.log(endPreis);
+        var saisonPreis = ermittleSaisonPreis(bootsKlasse);
+        var rabatt = ermittleRabatt(bootsKlasse);
+        var endPreis = saisonPreis * mietdauer * rabatt;    // die Berechnung des Preises ist selbsterklärend
 
         ausgabeFeld.innerHTML = 'Der Preis beträgt für diesen Zeitraum ' + endPreis.toFixed(2) + ' Euro.';
+
+        var eingabeDaten = {};
+
+        eingabeDaten.Bootsklasse = jsonDaten[bootsKlasse[0]].name;
+        eingabeDaten.Saison = document.getElementById('saison').value;
+        eingabeDaten.Rabatt = document.getElementById('rabatt').value;
+
+        //noinspection JSUnresolvedVariable
+        var abrechnungsZeitraum = jsonDaten[bootsKlasse[0]].abrechnungsZeitraum;        // holt sich aus den JSON Daten den Abrechnungszeitraum für das ausgewählte Boot
+
+        if (abrechnungsZeitraum == 'pro Tag') {             // je nach Abrechnungszeitraum der gerade gewählten Bootsklasse werden bei der Mietdauer der Text vor dem Input-Feld und das max-Attribut angepasst
+            if (mietdauer > 1) {
+                mietdauer += ' Tage';
+            }
+            else {
+                mietdauer += ' Tag';
+            }
+        }
+        else {
+            if (mietdauer > 1) {
+                mietdauer += ' Stunden';
+            }
+            else {
+                mietdauer += ' Stunde';
+            }
+        }
+
+        eingabeDaten.Mietdauer = mietdauer;
+        eingabeDaten.Preis = '<b>' + endPreis.toFixed(2) + ' Euro</b>';
+
+        var datum = new Date();
+        eingabeDaten.Berechnungsdatum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
+
+        datenSpeichern(eingabeDaten, 'preis');
     }
 
 }

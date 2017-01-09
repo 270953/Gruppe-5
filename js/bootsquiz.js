@@ -391,8 +391,8 @@ function inObjektUmwandeln (benutzerName, vorname, schwierigkeitsStufe, kategori
              else {
                  neuerDivKnoten.innerHTML += eigenschaft + ': ' + formularEingaben[eigenschaft] + '<br>';
              }
+        }
      }
- }
  }
 
 
