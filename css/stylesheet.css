@@ -1,86 +1,110 @@
+/*Die "Hintergrundfarbe"*/
 html
 {
 	background-color: white;	
-	
 	height: 100%;
 }
 
+/*Der Body soll sich vom Hintergrund abheben*/
 body
 {
 	margin : 0px 10%;
 	background-color: #D0D7F2;
-	
 	font: 15px sans-serif;
 }
 
-
 ul
 {	
-	padding: 0px; /* set auto padding to 0 */
+	padding: 0px; /*Setze das Vordefinierte Padding von ul auf 0px*/
 	list-style-type: none;	
 }
 
+/*Die Darstellun des großen Bildes am Seitenanfang*/
 header img
 {
 	width: 100%;
 	float: left;
 }
 
+article *
+{
+	margin-left : 4%;
+}
+
+/*Alle weiter verschachtelten Elemente sollen kein margin left haben*/
+article * *
+{
+	margin-left : 0px;
+}
+
+article img 
+{
+	border-radius : 15px;/*CSS3 rounded borders property*/
+}
+
+
 nav 
 {
 	background-color: white;
-	color: black;
+	width : 100%;
 }
 
+/*Um die Navigationsleiste auf die gesammte Breite zu strecken, 
+wird die Liste als Tabelle "behandelt"*/
 nav ul 
 {
-	padding: 0px;
-	margin: 0px;
+	list-style: none;
+	margin:0;
+	padding:0;
+	display: table;
 	width: 100%;
 }
 
-nav li
+/*Hier werden die Listenelemnte/Menüpunkte geformt*/
+nav li 
 {
+	text-align: center;
+	display: table-cell;
 	line-height: 40px;
-	display: inline;
-	padding: 14px 52px 12px 52px;
-	list-style-type: none;
+	padding: 14px 4% 12px 4%;
+	margin : 0px;
 }
 
+/*Beim anvisieren mit der Maus, soll der Menüpunkt einen grauen Hintergrund bekommen*/
 nav li:hover 
 {
-	height: 40px;
-	width: 100%;
 	background-color: #e6e6e6;
 }
 
+/*Hier wird der Text der Menüpunkte dargestellt*/
 nav a 
 {
 	color: black;
+    text-decoration: none;
 	font-size: x-large;
-	text-decoration: none;
 }
 
-
-a.visited 
+/*Das active Element der jeweiligen Seite wird bläulich dargestellt*/
+#activeNav
 {
-	color: black;
-	text-decoration: none;
+	background-color: #78C9FF;
 }
 
+/*Alle h1 Überschriften...*/
 h1
 {
 	background-color: #479bf5;
 	font-size: x-large;
 	color: white;
-	padding-left: 25px; /*same as form padding-left!*/
+	padding-left: 25px;
+	
+	margin-left : 0px;/*Setze den Margin des "articles *" zurück*/
 }
 
+/*Die Darstellun des Footers*/
 footer
 {
 	width: 100%;
-	
-	
 	background-color: #479bf5;	
 }
 
