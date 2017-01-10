@@ -34,7 +34,7 @@ function eventHandler() {
 function jsonEinlesen () {
 
     var anfrage = new XMLHttpRequest();
-    anfrage.open('GET', 'js/preise.json');
+    anfrage.open('GET', 'json/preise.json');
     anfrage.onload = function() {
 
         jsonDaten = JSON.parse(anfrage.responseText);       // die JSON Daten werden gleich in ein JavaScript Objekt umgewandelt und in jsonDaten gespeichert
