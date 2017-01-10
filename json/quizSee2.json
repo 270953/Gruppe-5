@@ -1,0 +1,81 @@
+[
+  {
+    "Frage": "Welche besonderen Ma&szlig;nahmen sind bei verminderter Sicht zu treffen? (See mittel)",
+    "Antworten": ["Es muss mit sicherer, den verminderten Sichtverh&auml;ltnissen angepasster Geschwindigkeit gefahren werden, es m&uuml;ssen Schallsignale gegeben werden, es m&uuml;ssen Positionslichter eingeschaltet werden und es muss geh&ouml;rig Ausguck gegangen werden.",
+      "Es muss mit sicherer, den verminderten Sichtverh&auml;ltnissen angepasster Geschwindigkeit gefahren werden, es m&uuml;ssen Schallsignale gegeben werden, das Radarger&auml;t muss eingeschaltet werden und es muss Ausguck gegangen werden.",
+      "Es muss mit verminderter Geschwindigkeit gefahren werden, es m&uuml;ssen Schallsignale gegeben werden, es m&uuml;ssen Positionslichter eingeschaltet werden und es muss das AIS (Automatic Identifikation System) eingeschaltet werden.",
+      "Es muss mit sicherer, den verminderten Sichtverh&auml;ltnissen angepasster Geschwindigkeit gefahren werden, es m&uuml;ssen Schallsignale gegeben werden, es m&uuml;ssen Positionslichter eingeschaltet werden und es muss der Radarreflektor eingesetzt werden."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Welche Vorschriften regeln die Ausr&uuml;stung, Anordnung und Anbringung der Positionslaternen, Sichtzeichen und Schallsignalanlagen auf Fahrzeugen? (See mittel)",
+    "Antworten": ["Die Kollisionsverh&uuml;tungsregeln (KVR), die Seeschifffahrtsstra&szlig;en-Ordnung (SeeSchStrO) und die Schiffssicherheitsverordnung.",
+      "Die Kollisionsverh&uuml;tungsregeln (KVR), die Seeschifffahrtsstra&szlig;en-Ordnung (SeeSchStrO) und die Verordnung zur Sicherung der Seefahrt.",
+      "Die Kollisionsverh&uuml;tungsregeln (KVR), die Seeschifffahrtsstra&szlig;en-Ordnung (SeeSchStrO) und die Sportbootf&uuml;hrerscheinverordnung-See.",
+      "Die Kollisionsverh&uuml;tungsregeln (KVR), die Seeschifffahrtsstra&szlig;en- Ordnung (SeeSchStrO) und die Schifffahrtsordnung Emsm&uuml;ndung (Ems- SchO)."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Welches Fahrzeug f&uuml;hrt diese Lichter? (See mittel) <br> <img src='pictures/See/See1.jpg'>",
+    "Antworten": ["Ein fischender Trawler (Fischereifahrzeug) mit Fahrt durch das Wasser von 50 und mehr Meter L&auml;nge.",
+      "Ein man&ouml;vrierbehindertes Fahrzeug mit Fahrt durch das Wasser.",
+      "Ein man&ouml;vrierunf&auml;higes Fahrzeug mit Fahrt durch das Wasser.",
+      "Ein man&ouml;vrierbehindertes Fahrzeug mit Fahrt durch das Wasser von 50 und mehr Meter L&auml;nge."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Welches Fahrzeug f&uuml;hrt diese Signalk&ouml;rper? (See mittel) <br> <img src='pictures/See//See2.jpg'>",
+    "Antworten": ["Ein man&ouml;vrierbehindertes Fahrzeug.",
+      "Ein man&ouml;vrierunf&auml;higes Fahrzeug in Fahrt.",
+      "Ein Grundsitzer von weniger als 50 m L&auml;nge.",
+      "Ein fischendes Fahrzeug in Fahrt oder vor Anker."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Welches Fahrzeug gibt bei verminderter Sicht - im Anschluss an das Signal: lang, kurz, kurz (— • •) - vier aufeinander folgende T&ouml;ne mit der Pfeife, und zwar: lang, kurz, kurz, kurz (— • • •)? (See mittel)",
+    "Antworten": ["Ein man&ouml;vrierunf&auml;higes Fahrzeug von weniger als 100 m L&auml;nge",
+      "Ein Maschinenfahrzeug in Fahrt, das seine Maschine gestoppt hat und keine Fahrt durchs Wasser macht",
+      "Ein Fahrzeug mit gef&auml;hrlicher Ladung vor Anker von weniger als 100 m L&auml;nge.",
+      "Ein geschlepptes Fahrzeug oder das letzte bemannte Fahrzeug eines Schleppverbandes in Fahrt."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Was f&uuml;r ein Schallsignal muss ein Segelfahrzeug in Fahrt von 12 und mehr Meter L&auml;nge bei verminderter Sicht geben? (See mittel)",
+    "Antworten": ["Mindestens alle zwei Minuten ein kr&auml;ftiges Schallsignal, das mit den vorgeschriebenen nicht verwechselt werden kann.",
+      "Mit der Pfeife kurz, lang, kurz (• — •).",
+      "Mindestens alle zwei Minuten drei aufeinander folgende T&ouml;ne mit der Pfeife, und zwar lang, lang, kurz (— — •).",
+      "Mindestens alle zwei Minuten drei aufeinander folgende T&ouml;ne mit der Pfeife, und zwar lang, kurz, kurz (— • •)."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Zwei in Sicht befindliche Segelfahrzeuge n&auml;hern sich im freien Seeraum oder au&szlig;erhalb des Fahrwassers so, dass die M&ouml;glichkeit der Gefahr eines Zusammensto&szlig;es besteht. Welches Fahrzeug muss dem anderen ausweichen, wenn sie den Wind von derselben Seite haben? (See mittel)",
+    "Antworten": ["Dasjenige Fahrzeug, das den Wind von Steuerbord hat.",
+      "Das leew&auml;rtige Fahrzeug dem luvw&auml;rtigen Fahrzeug.",
+      "Das luvw&auml;rtige Fahrzeug dem leew&auml;rtigen Fahrzeug.",
+      "Dasjenige Fahrzeug, das den Wind von Backbord hat."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Wie m&uuml;ssen sich zwei in Sicht befindliche Maschinenfahrzeuge verhalten, die sich einander auf entgegengesetzten oder fast entgegengesetzten Kursen n&auml;hern, um die M&ouml;glichkeit der Gefahr eines Zusammensto&szlig;es zu vermeiden? (See mittel)",
+    "Antworten": ["Es muss das luvw&auml;rtige Fahrzeug dem leew&auml;rtigen Fahrzeug ausweichen.",
+      "Es muss das leew&auml;rtige Fahrzeug dem luvw&auml;rtigen Fahrzeug ausweichen.",
+      "Jedes Fahrzeug muss seinen Kurs nach Steuerbord &auml;ndern.",
+      "Jedes Fahrzeug muss seinen Kurs nach Backbord &auml;ndern."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Wie hat sich ein Maschinenfahrzeug im freien Seeraum oder au&szlig;erhalb des Fahrwassers gegen&uuml;ber einem in Sicht befindlichen fischenden Fahrzeug zu verhalten, wenn die M&ouml;glichkeit der Gefahr eines Zusammensto&szlig;es besteht? (See mittel)",
+    "Antworten": ["Das Maschinenfahrzeug muss ausweichen.",
+      "Das Maschinenfahrzeug muss seinen Kurs nach Steuerbord &auml;ndern.",
+      "Das Maschinenfahrzeug muss vorsichtig man&ouml;vrieren, bis die Gefahr vor&uuml;ber ist.",
+      "Das Maschinenfahrzeug muss Kurs und Geschwindigkeit beibehalten."],
+    "richtig": ["0"]
+  },{
+  "Frage": "Welche Bedeutung hat das Feuer einer Leuchttonne mit folgender Kennung? (See mittel) <br> <img src='pictures/See/See7.jpg'>",
+  "Antworten": ["Kennzeichnung einer allgemeinen Gefahrenstelle, Nordquadrant. Sie ist n&ouml;rdlich zu passieren.",
+    "Kennzeichnung einer allgemeinen Gefahrenstelle, Ostquadrant. Sie ist &ouml;stlich zu passieren.",
+    "Kennzeichnung einer allgemeinen Gefahrenstelle, Westquadrant. Sie ist westlich zu passieren.",
+    "Kennzeichnung einer allgemeinen Gefahrenstelle, S&uuml;dquadrant. Sie ist s&uuml;dlich zu passieren."],
+  "richtig": ["2"]
+}
+]

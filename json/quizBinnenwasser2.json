@@ -1,0 +1,84 @@
+[
+
+  {
+    "Frage": "Was bedeuten diese Tafelzeichen an Br&uuml;cken? (Binnenwasser mittel) <br> <img src='pictures/Binnenwasser/binnenwasserfrage2.jpg'>",
+    "Antworten": ["Empfohlene Durchfahrt ohne Gegenverkehr.",
+      "Durchfahrt nur au&szlig;erhalb der beiden Tafeln erlaubt.",
+      "Empfohlene Durchfahrt mit Gegenverkehr.",
+      "Empfohlene Durchfahrt in beide Richtungen."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Welche Bedeutung hat folgendes Schallsignal: (• — • — • — • — • —)? (Binnenwasser mittel)",
+    "Antworten": ["Bleib-weg-Signal, Gefahrenbereich sofort verlassen.",
+      "Man&ouml;vrierbehinderter Schleppverband &uuml;ber 200 m L&auml;nge.",
+      "Ankerlieger &uuml;ber 100 m L&auml;nge.",
+      "Allgemeines Gefahr- und Warnsignal."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Welche Bedeutung hat folgendes Tafelzeichen? (Binnenwasser mittel) <br> <img src='pictures/Binnenwasser/binnenwasserfrage.jpg'>",
+    "Antworten": ["Begegnungsverbot.",
+      "&uuml;berholverbot f&uuml;r Fahrzeuge unter 20 m L&auml;nge.",
+      "Begegnungsverbot f&uuml;r Fahrzeuge &uuml;ber 20 m L&auml;nge.",
+      "&uuml;berholverbot."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Wie kann mitgeholfen werden, die Lebensm&ouml;glichkeiten der Pflanzen- und Tierwelt in Gew&auml;ssern und Feuchtgebieten zu bewahren und zu f&ouml;rdern? (Binnenwasser mittel)",
+    "Antworten": ["Durch vorausschauendes Fahren und Ausweichen entsprechend der Verkehrsvorschriften.",
+      "Durch umweltbewusstes Verhalten und Beachtung der ?Zehn goldenen Regeln f&uuml;r das Verhalten von Wassersportlern in der Natur.",
+      "Durch umweltbewusstes Verhalten und Beachtung der ?Zehn Grundregeln f&uuml;r den Wassersport?.",
+      "Durch umsichtiges Verhalten und Beachtung der Verkehrsvorschriften."],
+    "richtig": ["1"]
+  },
+  {
+    "Frage": "Weshalb ist die Kenntnis der Propellerdrehrichtung von Bedeutung? (Binnenwasser mittel)",
+    "Antworten": ["Sie hilft beim Man&ouml;vrieren.",
+      "Sie hilft beim Begegnen.",
+      "Sie hilft beim &uuml;berholen.",
+      "Sie hilft beim Kurshalten."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Welche Vorkehrungen sind f&uuml;r das l&auml;ngere Verlassen des Fahrzeugs zu treffen?  (Binnenwasser mittel)",
+    "Antworten": ["Alle Seeventile schlie&szlig;en und den Hauptschalter des Bordnetzes ausschalten.",
+      "Kraftstoff- und Wassertank auff&uuml;llen und das Bordnetz aufladen.",
+      "Fahrzeug seefest hinterlassen und den Hafenmeister verst&auml;ndigen.",
+      "Tagestank schlie&szlig;en und Kraftstofffilter entw&auml;ssern."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Warum sind die Fl&uuml;ssiggase Propan und Butan an Bord besonders gef&auml;hrlich?  (Binnenwasser mittel)",
+    "Antworten": ["Beide Gase sind schwerer als Wasser und bilden mit Wasser ein explosives Gemisch.",
+      "Beide Gase sind leichter als Luft und bilden mit Luft ein explosives Gemisch.",
+      "Beide Gase sind schwerer als Luft und bilden mit Wasser ein explosives Gemisch.",
+      "Beide Gase sind schwerer als Luft und bilden mit Luft ein explosives Gemisch."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Unter welchen Umst&auml;nden darf von den geltenden Bestimmungen &uuml;ber das Verhalten im Verkehr auf den Binnenschifffahrtsstra&szlig;en abgewichen werden? (Binnenwasser mittel)",
+    "Antworten": ["Bei mittelbar drohender Gefahr f&uuml;r sich oder andere.",
+      "Bei unmittelbar bevorstehendem &uuml;berholvorgang.",
+      "Bei unmittelbar drohender Gefahr f&uuml;r sich oder andere.",
+      "Bei unmittelbar bevorstehender Begegnung."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Wo findet man die allgemeinen Verkehrsregeln f&uuml;r die Binnenschifffahrtsstra&szlig;en und den Rhein? (Binnenwasser mittel)",
+    "Antworten": ["Binnenschiffsuntersuchungs-Ordnung, Rheinschifffahrtspolizeiverordnung.",
+      "Binnenschifffahrtsstra&szlig;en-Ordnung, Rheinschifffahrtspolizeiverordnung.",
+      "Moselschifffahrtspolizeiverordnung, Donauschifffahrtspolizeiverordnung.",
+      "Wassermotorr&auml;derverordnung, Wasserskiverordnung."],
+    "richtig": ["1"]
+  },
+  {
+    "Frage": "Wo findet man Regeln f&uuml;r den Verkehr von Wassermotorr&auml;dern und f&uuml;r das Wasserskilaufen? (Binnenwasser mittel)",
+    "Antworten": ["Moselschifffahrtspolizeiverordnung, Donauschifffahrtspolizeiverordnung.",
+      "Moselschifffahrtspolizeiverordnung, Binnenschiffsuntersuchungs-Ordnung.",
+      "Wassermotorr&auml;derverordnung, Wasserskiverordnung.",
+      "Binnenschifffahrtsstra&szlig;en-Ordnung, Rheinschifffahrtspolizeiverordnung."],
+    "richtig": ["2"]
+  }
+
+  ]
