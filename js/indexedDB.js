@@ -121,7 +121,7 @@ function setzeAbfragebegrenzung(zaehler) {
     if (zaehler && zaehler > 5) {
         //noinspection JSUnresolvedFunction
         console.log('Der ObjectStore hat mehr als fünf Einträge');
-        //noinspection JSUnresolvedFunction
+        //noinspection JSUnresolvedFunction,JSUnresolvedVariable
         abfrageBegrenzung = IDBKeyRange.lowerBound(zaehler-4);     // damit wird eine Obergrenze festgelegt, die bezweckt, dass nur die ersten zehn Einträge des Objectstores ausgelesen werden
     }
     else {
