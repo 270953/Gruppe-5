@@ -19,6 +19,10 @@
 
 
     <script type="text/javascript" src="js/bootsquiz.js"></script>
+    <script type="text/javascript" src="js/indexedDB.js"></script>
+
+
+
 
 
 </head>
@@ -43,7 +47,6 @@
                 <li><a href="quiz.html">Quiz</a></li>
                 <li><a href="kontakt.html">Kontakt</a></li>
                 <li><a href="impressum.html">Impressum</a></li>
-                <li><a href="readme.html">README</a></li>
             </ul>
         </nav>
     </header>
@@ -51,10 +54,10 @@
     <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
     <main>
         <!-- Ueberschrift -->
-        <h1>Fit f&uuml;r deinen Segelschein</h1>
+        <h1>Mach dich fit für deinen Segelschein!</h1>
 
         <form id="eingabeFormular" class="f1" method="POST" name="quizErstellen">
-            <div class="benutzerInfo">
+
                 <!-- Implementierung von EA3 Aufgabe 1 und 2
                 1) Erstellen Sie ein Formular, in welchem ein Nutzer Daten eingeben kann. (5 P)
                 Das Formular soll folgende Elemente beinhalten -->
@@ -65,36 +68,35 @@
 
                 <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id="benutzernameID" type="text"  minlength="5"></p>
                 <p class="fehlermeldung" id="fehlerMeldung1"></p>
+
                 <!--Textfeld 2 ist Pflichtfeld: EA3 Aufgabe 2-->
                 <p>Gib deinen Vornamen ein (Pflichtfeld): <input id="vornameID" type="text" required></p>
                 <p class="fehlermeldung" id="fehlerMeldung2"></p>
+                <p class="fehlermeldung" id="fehlerMeldung2.1"></p>
 
-                <!--Drop-Down-Menü mit mind. 6 Optionen: EA3 Aufgabe 1
-                    Die Dropdown-Liste erlaubt mehrfach-Auswahl: EA3 Aufgabe 2
+                <!--Die Dropdown-Liste erlaubt mehrfach-Auswahl: EA3 Aufgabe 2
                     In der Drop-down-Liste dürfen nur max. 2 Einträge markiert werden: EA3 Aufgabe 2
                     Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
                 <div class="selectSchwierigkeit">
-                    W&auml;hle Schwierigkeitsstufe(max. 2 Angaben): <select id="schwierigkeitID" multiple="multiple">
-                    <option name="schwierigkeit" value="sehrLeicht">Sehr Leicht</option>
-                    <option name="schwierigkeit" value="leicht">Leicht</option>
-                    <option name="schwierigkeit" value="normal">Normal</option>
-                    <option name="schwierigkeit" value="schwer">Schwer</option>
-                    <option name="schwierigkeit" value="sehrSchwer">Sehr Schwer</option>
-                    <option name="schwierigkeit" value="experte">Experte</option>
-                </select>
-                </div>
-                <p class="fehlermeldung" id="fehlerMeldung3"></p>
+                    W&auml;hle Schwierigkeitsstufe(max. 2 Angaben):
+                    <ul>
+                        <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID1" value=1><label for="schwierigkeitID1">leicht</label></li>
+                        <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID2" value=2><label for="schwierigkeitID2">mittel</label></li>
+                        <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID3" value=3><label for="schwierigkeitID3">schwer</label></li>
+                    </ul>
 
-                <!--Radiobuttons mit mind. 3 Optionen: EA3 Aufgabe 1
-                    Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
+                    <p class="fehlermeldung" id="fehlerMeldung3"></p>
+                    <p class="fehlermeldung" id="fehlerMeldung3.1"></p>
+                </div>
+
+
+                <!--Es muss mindestens ein Radiobutton ODER eine Dropdown-Option ausgewählt sein: EA3 Aufgabe 2 -->
                 <div class="kategoryHeader">
                     <p>W&auml;hle eine Kategorie aus</p>
                     <div class="kselections">
                         <ul>
-                            <li><input type="radio" name="kategorie" id="kategorie1" value="a"><label for="kategorie1">Binnengew&auml;sser</label></li>
-                            <li><input type="radio" name="kategorie" id="kategorie2" value="b"><label for="kategorie2">Binnengew&auml;sser - Spezifisch</label></li>
-                            <li><input type="radio" name="kategorie" id="kategorie3" value="c"><label for="kategorie3">Die See</label></li>
-                            <li><input type="radio" name="kategorie" id="kategorie4" value="d"><label for="kategorie4">Die See - Spezifisch</label></li>
+                            <li><input type="radio" name="kategorie" id="kategorie1"><label for="kategorie1">Binnengew&auml;sser</label></li>
+                            <li><input type="radio" name="kategorie" id="kategorie3"><label for="kategorie3">Die See</label></li>
                         </ul>
                     </div>
 
@@ -109,23 +111,11 @@
 
 
 
-                <!-- Eine Datalist mit mind. 3 Einträgen: EA3 Aufgabe 1-->
-                <div class="bootsTypen">
-                    <p><label for="boote">W&auml;hle einen Bootstyp aus:  </label><input list="bootsTypen" name="boote" id="boote"></p>
-
-                    <datalist id="bootsTypen">
-                        <option value="Segelboot">
-                        <option value="Katamaran">
-                        <option value="Motorboot">
-                        <option value="Ruderboot">
-                    </datalist>
-                </div>
-                <p class="fehlermeldung" id="fehlerMeldung6"></p>
 
 
                 <input type="button" id="neuesQuiz" value="Neues Quiz erstellen">
 
-            </div>
+
         </form>
 
 
@@ -133,12 +123,16 @@
         <form class="f2" method="POST" name="meinQuiz">
 
             <div class="hierEntstehtQuiz" id="hierEntstehtQuizID">
-
+                <p class="quizText" id="quizText">Hier ensteht das Quiz.</p>
 
             </div>
 
+            <div class="buttonErgebnis" id="buttonErgebnis">
             <input type="button" value="Ergebnis" id="auswerten">
+            <input type="button" id="letzteErgebnisse" value="letzteErgebnisse">
             <input type="submit" value="Eingabe l&ouml;schen" id="formularLeeren">
+
+            </div>
 
             <div class="Ergebnis" id="ErgebnisID">
 
@@ -146,7 +140,7 @@
                     <table>
                         <tr>
                             <td>Richtige Antworten:</td>
-                            <td><input id = "antwortRichtigID" type="text" name="p"></td>
+                            <td><input id = "antwortRichtigID" type="textarea" name="p"></td>
                         </tr>
 
                         <tr>
@@ -156,17 +150,22 @@
 
                         <tr>
                             <td>prozentual richtige Antworten:</td>
-                            <td><input id="prozentID" type="text" name="q"></td>
+                            <td><input id="prozentID" type="textarea" name="q"></td>
                         </tr>
                     </table>
+
+
                 </form>
 
             </div>
 
+
+        <output></output>
         </form>
-
-
     </main>
+
+
+
 
     <!-- footer Bereich f�r Impressum und Kontakt -->
     <footer>
