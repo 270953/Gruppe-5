@@ -53,6 +53,52 @@ function datenbankOeffnen() {
 // Funktion, um Daten in die Datenbank zu schreiben
 function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum einen die Daten, die gespeichert werden sollen, übergeben. zum anderen aber auch eine Prüfvariable
 
+    objectStore = pruefeHerkunft(herkunft);                 // mit der Funktion wird geprüft, welche Datei die Datenbank geöffnet hat
+
+    var requestSpeichern = objectStore.add(eingabeDaten);            // es wird ein request mit dem Ziel gestartet, die übergebenen Daten im Objectstore zu speichern
+
+    requestSpeichern.onsuccess = function (event) {
+        console.log('Eintrag ' + event.target.result + ' gespeichert.');    // war der request erfolgreich, erfolgt ein Konsoleneintrag
+    };
+}
+
+
+// Funktion, um die Datenbank auszulesen
+function datenLesen(herkunft) {
+
+    ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse (neueste zuerst):<br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
+
+    objectStore = pruefeHerkunft(herkunft);                 // mit der Funktion wird geprüft, welche Datei die Datenbank geöffnet hat
+    console.log(objectStore);
+
+    var countRequest = objectStore.count();
+    countRequest.onsuccess = function() {
+        console.log(countRequest.result);
+
+        var abfrageBegrenzung = setzeAbfragebegrenzung(countRequest.result);
+        console.log(abfrageBegrenzung);
+
+        //noinspection JSUnresolvedFunction
+        objectStore.openCursor(abfrageBegrenzung, 'prev').onsuccess = function (event) {        // auf dem Objectstore wird ein Zeiger geöffnet, der den Store rückwärts durchläuft. Wenn ein Eintrag gefunden wird, wird das onsuccess-Event ausgelöst
+            var jsObjekt = event.target.result;                                         // findet er einen Eintrag, übergibt er das Ergebnis an 'jsObjekt'
+
+            if (jsObjekt) {                                                             // da auch undefined übergeben werden kann, erfolgt sicherheitshalber eine Abfrage
+                inHTMLwiedergeben(jsObjekt);                                            // wenn positiv, dann wird die Funktion 'inHTMLwiedergeben' aufgerufen
+                //noinspection JSUnresolvedFunction
+                jsObjekt.continue();                                                    // hiermit wird der Zeiger aufgefordert, zum nächsten Eintrag zu springen
+            }
+
+            else {
+                console.log("Keine weiteren Einträge vorhanden!");                      // findet der Zeiger keinen Eintrag, erfolgt ein Konsoleneintrag
+            }
+        };      // schließt openCursor
+    };      // schließt countRequest
+}       // schließt datenLesen
+
+
+
+function pruefeHerkunft(herkunft) {
+
     if (herkunft == 'preis') {                              // ist die Prüfvariable = 'preis', wird eine Transaction für den Objectstore 'letztePreisBerechnungen' geöffnet
         //noinspection JSUnresolvedFunction
         objectStore = datenbank.transaction(['letztePreisBerechnungen'], 'readwrite').objectStore('letztePreisBerechnungen');
@@ -62,46 +108,31 @@ function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum ein
         objectStore = datenbank.transaction(['quizErgebnisse'], 'readwrite').objectStore('quizErgebnisse');
     }
 
-    var request = objectStore.add(eingabeDaten);            // es wird ein request mit dem Ziel gestartet, die übergebenen Daten im Objectstore zu speichern
-    request.onsuccess = function (event) {
-        console.log('Eintrag ' + event.target.result + ' gespeichert.');    // war der request erfolgreich, erfolgt ein Konsoleneintrag
-    };
-}
-
-
-// Funktion, um die Datenbank auszulesen
-function datenLesen(herkunft) {
-
-    ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse:<br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
-
-    if (herkunft == 'preis') {                              // ist die Prüfvariable = 'preis', wird eine Transaction für den Objectstore 'letztePreisBerechnungen' geöffnet
-        //noinspection JSUnresolvedFunction
-        objectStore = datenbank.transaction(['letztePreisBerechnungen'], 'readonly').objectStore('letztePreisBerechnungen');
-    }
-    else if (herkunft == 'quiz') {                          // ist die Prüfvariable = 'quiz', wird eine Transaction für den Objectstore 'quizErgebnisse' geöffnet
-        //noinspection JSUnresolvedFunction
-        objectStore = datenbank.transaction(['quizErgebnisse'], 'readonly').objectStore('quizErgebnisse');
-    }
-
-    //noinspection JSUnresolvedFunction
-    var abfrageBegrenzung = IDBKeyRange.upperBound(10);     // damit wird eine Obergrenze festgelegt, die bezweckt, dass nur die ersten zehn Einträge des Objectstores ausgelesen werden
-
-    //noinspection JSUnresolvedFunction
-    objectStore.openCursor(abfrageBegrenzung).onsuccess = function (event) {        // auf dem Objectstore wird ein Zeiger geöffnet, der den Store durchläuft. Wenn ein Eintrag gefunden wird, wird das onsuccess-Event ausgelöst
-        var jsObjekt = event.target.result;                                         // findet er einen Eintrag, übergibt er das Ergebnis an 'jsObjekt'
-
-        if (jsObjekt) {                                                             // da auch undefined übergeben werden kann, erfolgt sicherheitshalber eine Abfrage
-            inHTMLwiedergeben(jsObjekt);                                            // wenn positiv, dann wird die Funktion 'inHTMLwiedergeben' aufgerufen
-            //noinspection JSUnresolvedFunction
-            jsObjekt.continue();                                                    // hiermit wird der Zeiger aufgefordert, zum nächsten Eintrag zu springen
-        }
-
-        else {
-            console.log("Keine weiteren Einträge vorhanden!");                      // findet der Zeiger keinen Eintrag, erfolgt ein Konsoleneintrag
-        }
-    };
+    return(objectStore);
 
 }
+
+
+
+function setzeAbfragebegrenzung(zaehler) {
+
+    var abfrageBegrenzung;
+
+    if (zaehler && zaehler > 5) {
+        //noinspection JSUnresolvedFunction
+        console.log('Der ObjectStore hat mehr als fünf Einträge');
+        //noinspection JSUnresolvedFunction
+        abfrageBegrenzung = IDBKeyRange.lowerBound(zaehler-4);     // damit wird eine Obergrenze festgelegt, die bezweckt, dass nur die ersten zehn Einträge des Objectstores ausgelesen werden
+    }
+    else {
+        console.log('Der ObjectStore hat weniger als fünf Einträge');
+        abfrageBegrenzung = null;               // keine Obergrenze, falls im ObjectStore weniger als fünf Einträge vorhanden sind
+    }
+
+    return(abfrageBegrenzung);
+
+}
+
 
 
 // Ausgabe der gelesenen Daten in HTML
@@ -114,14 +145,10 @@ function inHTMLwiedergeben(jsObjekt) {
     console.log(jsObjekt);                          // Ausgabe des in der Datenbank gespeicherten Javascript-Objektes in der Konsole
 
     for (var eigenschaft in jsObjekt) {             // iteriert durch das Objekt
-        if (jsObjekt.hasOwnProperty(eigenschaft)) { // Fehler abfangen
+        if (jsObjekt.hasOwnProperty(eigenschaft) && eigenschaft != 'id') { /* Fehler abfangen + da die Datenbank jedem gespeicherten Objekt den keyPath
+                                                                              als Eigenschaft anhängt, muss sichergestellt werden, dass dieser nicht mit ausgegeben wird */
 
-            if (eigenschaft != 'id') {              /* da die Datenbank jedem gespeicherten Objekt den keyPath als Eigenschaft anhängt, muss sichergestellt werden,
-                                                    dass dieser nicht mit ausgegeben wird */
                 ausgabeFeld[0].innerHTML += eigenschaft + ': ' + jsObjekt[eigenschaft] + '<br>';        // dem Ausgabefeld wird die aktuelle Eigenschaft des Objektes hinzugefügt
-            }
-
-        }
-    }
-
-}
+            }   // if
+    }       // for-Schleife
+}       // Funktion 'inHTMLwiedergeben'
