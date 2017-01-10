@@ -60,7 +60,6 @@ function eventHandler ()
         getForms();
         jsonEinlesen(jsonQuelle);
 
-
         var auswertenButton = document.getElementById('auswerten');
         auswertenButton.addEventListener('click', korrektur);
 
@@ -233,11 +232,14 @@ function check()
         }
         var selected;
         //es wird überprüft, ob ein radio gecheckt wurde
+
+
     for (var j = 0; j < kategorieAuswahl.length; j++)
     {
         //zaehle hoch falls keine angaben gemacht wurden
 
-        if (kategorieAuswahl[j].checked)
+
+    if(kategorieAuswahl[j].checked == false)
         {
                 //prüft, ob Binnenwasser gewählt wurde
                 if(kategorieAuswahl[0].checked)
@@ -304,21 +306,23 @@ function check()
                         }
                 }//es wurde eine angabe gemacht, also wird der counter auf den alten stand zurückgesetzt
 
-        }else {
-            //waehlt zufällig eine Kategorie aus
-            random = Math.floor(Math.random() * 2);
-            if(random == 1){
-                var jsonQuelle = "'json/quizBinnenwasser.json'";
-            }else {
-                var jsonQuelle = "'json/quizSee.json'";
-            }
-
         }
+
     }
 
+
         //falls keine kategorie ausgewaehlt wurde
-        if (!selected)
+        if (selected == false)
         {
+                //waehlt zufällig eine Kategorie aus
+                random = Math.floor(Math.random() * 2);
+                if(random == 1){
+                    var jsonQuelle = "'json/quizBinnenwasser.json'";
+                }else {
+                    var jsonQuelle = "'json/quizSee.json'";
+                }
+
+
             ++entwederRadioOderUndListe;
         }
         else if (entwederRadioOderUndListe >= 2)
