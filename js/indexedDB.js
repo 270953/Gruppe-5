@@ -25,10 +25,13 @@ function datenbankOeffnen() {
 
                 console.log('Objektstore wird angelegt.');
                 //noinspection JSUnresolvedFunction
-                datenbank.createObjectStore('letztePreisBerechnungen', {
+                objectStore = datenbank.createObjectStore('letztePreisBerechnungen', {
                     keyPath: 'id',                                                  // als key wird 'id' festgelegt
                     autoIncrement: true                                             // der key zählt bei jedem neuen Eintrag in den Objectstore automatisch einen weiter
                 });
+
+                //noinspection JSUnresolvedFunction
+                objectStore.createIndex('byBootsklasse', 'Bootsklasse', {unique: false});       // legt einen Index an, der den ObjectStore nach Bootsklasse sortiert
             }
 
             //noinspection JSUnresolvedVariable
@@ -69,8 +72,26 @@ function datenLesen(herkunft) {
     ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse (neueste zuerst):<br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
 
     objectStore = pruefeHerkunft(herkunft);                 // mit der Funktion wird geprüft, welche Datei die Datenbank geöffnet hat
+    var index = objectStore.index('byBootsklasse');         // greift auf den Index des Objectstores zu, um im Weiteren auf den nach Bootsklassennamen sortierten Index zugreifen zu können
     console.log(objectStore);
+    console.log(index);
 
+    index.openCursor(null, 'prev').onsuccess = function(event) {            // öffnet einen Cursor auf dem Index, der durch diesen iteriert
+
+        var jsObjekt = event.target.result;                                         // findet er einen Eintrag, übergibt er das Ergebnis an 'jsObjekt'
+
+        if (jsObjekt) {                                                             // da auch undefined übergeben werden kann, erfolgt sicherheitshalber eine Abfrage
+            inHTMLwiedergeben(jsObjekt);                                            // wenn positiv, dann wird die Funktion 'inHTMLwiedergeben' aufgerufen
+            //noinspection JSUnresolvedFunction
+            jsObjekt.continue();                                                    // hiermit wird der Zeiger aufgefordert, zum nächsten Eintrag zu springen
+        }
+
+        else {
+            console.log("Keine weiteren Einträge vorhanden!");                      // findet der Zeiger keinen Eintrag, erfolgt ein Konsoleneintrag
+        }
+    };
+
+    /*
     var countRequest = objectStore.count();
     countRequest.onsuccess = function() {
         console.log(countRequest.result);
@@ -93,6 +114,7 @@ function datenLesen(herkunft) {
             }
         };      // schließt openCursor
     };      // schließt countRequest
+    */
 }       // schließt datenLesen
 
 
