@@ -12,6 +12,7 @@
     <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
 
     <script type="text/javascript" src="js/preise.js"></script>
+    <script type="text/javascript" src="js/jsonEinlesen.js"></script>
     <script type="text/javascript" src="js/indexedDB.js"></script>
 
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
@@ -74,8 +75,8 @@
                      <div>
 
                          <div>
-                             Personenanzahl:
-                             <input type="number" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0" title="Personenanzahl">
+                             <span>Personenanzahl:</span>
+                             <input type="number" title="Personenanzahl" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0">
                          </div>
 
                          <div>
@@ -95,7 +96,7 @@
                          </div>
 
                          <div>
-                             Sind Sie rabattberechtigt?
+                             <span>Sind Sie rabattberechtigt?</span>
                              <select title="Rabatt" class="eingabeFeld" id="rabatt">
                                  <option value="ja">ja</option>
                                  <option value="nein">nein</option>

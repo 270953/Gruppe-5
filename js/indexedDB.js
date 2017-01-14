@@ -23,7 +23,7 @@ function datenbankOeffnen() {
             //noinspection JSUnresolvedVariable
             if (!datenbank.objectStoreNames.contains('letztePreisBerechnungen')) {       // gibt es keinen Objectstore 'letzte Berechnungen', wird dieser angelegt
 
-                console.log('Objektstore wird angelegt.');
+                console.log('Objectstore wird angelegt.');
                 //noinspection JSUnresolvedFunction
                 objectStore = datenbank.createObjectStore('letztePreisBerechnungen', {
                     keyPath: 'id',                                                  // als key wird 'id' festgelegt
@@ -72,8 +72,10 @@ function datenLesen(herkunft) {
     ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse (neueste zuerst):<br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
 
     objectStore = pruefeHerkunft(herkunft);                 // mit der Funktion wird geprüft, welche Datei die Datenbank geöffnet hat
-    var index = objectStore.index('byBootsklasse');         // greift auf den Index des Objectstores zu, um im Weiteren auf den nach Bootsklassennamen sortierten Index zugreifen zu können
     console.log(objectStore);
+
+/*
+    var index = objectStore.index('byBootsklasse');         // greift auf den Index des Objectstores zu, um im Weiteren auf den nach Bootsklassennamen sortierten Index zugreifen zu können
     console.log(index);
 
     index.openCursor(null, 'prev').onsuccess = function(event) {            // öffnet einen Cursor auf dem Index, der durch diesen iteriert
@@ -90,8 +92,7 @@ function datenLesen(herkunft) {
             console.log("Keine weiteren Einträge vorhanden!");                      // findet der Zeiger keinen Eintrag, erfolgt ein Konsoleneintrag
         }
     };
-
-    /*
+*/
     var countRequest = objectStore.count();
     countRequest.onsuccess = function() {
         console.log(countRequest.result);
@@ -114,7 +115,6 @@ function datenLesen(herkunft) {
             }
         };      // schließt openCursor
     };      // schließt countRequest
-    */
 }       // schließt datenLesen
 
 

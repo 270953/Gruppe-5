@@ -1,4 +1,4 @@
-window.onload = eventHandler;
+ window.onload = initOnLoad;
 
 //hier werden die nodes gelagert, damit mehrere funktionen auf diese zugreifen können
 var benutzerNameInput;
@@ -10,6 +10,28 @@ var kategorie = "";
 var fragenWaehler;
 var quizErstellenButton;
 var jsonObjekt;
+
+
+// Array für
+var quellDateien = [
+    'json/quizBinnenwasser.json',
+    'json/quizBinnenwasser1.json',
+    'json/quizBinnenwasser2.json',
+    'json/quizBinnenwasser3.json',
+    'json/quizBinnenwasser12.json',
+    'json/quizBinnenwasser13.json',
+    'json/quizBinnenwasser23.json',
+    'json/quizSee.json',
+    'json/quizSee1.json',
+    'json/quizSee2.json',
+    'json/quizSee3.json',
+    'json/quizSee12.json',
+    'json/quizSee13.json',
+    'json/quizSee23.json'
+];
+
+// in diesem Array werden die JavaScript Objekte abgelegt, die aus den den JSON Dateien mit der funkticn jsonEinlesen abgerufen werden
+var quizFragen = [];
 
 
 //der name des css klasse, die den hintergrund gelb färbt
@@ -49,16 +71,18 @@ AnzahlFragenUserInput = 0;
 
 //Deklariert JSON Objekt
 var jsonDaten;
-var jsonQuelle = "'json/quizSee.json'";
-
 
 //wartet auf die auf Eingaben des Users und führt function aus
-function eventHandler ()
+function initOnLoad ()
 {
         console.log("eventHandler geladen");
         datenbankOeffnen();
         getForms();
-        jsonEinlesen(jsonQuelle);
+
+        for (var i = 0; i < quellDateien.length; i++) {
+            jsonEinlesen(quellDateien[i], i, 'quiz');
+        }
+
 
         var auswertenButton = document.getElementById('auswerten');
         auswertenButton.addEventListener('click', korrektur);
@@ -79,7 +103,6 @@ function eventHandler ()
 //diese methode wird beim laden ddes fensters aufgrufen
 function getForms()
 {
-        that = this;
         //kleine notiz
         console.log("beginne die formulare zu laden");
 
@@ -352,24 +375,10 @@ function check()
         {
             console.log(failCounter);
         }else
-        {   //Lädt .json wird geladen
-            jsonEinlesen(jsonQuelle);
+        {
             quizErstellen();
         }
 }
-
-/**
- *Funktion, zum Einlesen von JSON, für den Fragenkatalog
-*/
-function jsonEinlesen(jsonHerkunft) {
-    var anfrage = new XMLHttpRequest();
-    anfrage.open('GET', jsonHerkunft, true);
-    anfrage.onload = function () {
-        jsonDaten = JSON.parse(anfrage.responseText);
-    };
-    anfrage.send();
-}
-
 
 /**
  *Funktion, zum Erstellen des Quiz
