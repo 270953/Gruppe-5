@@ -13,6 +13,7 @@
 
     <script type="text/javascript" src="js/bootsquiz.js"></script>
     <script type="text/javascript" src="js/indexedDB.js"></script>
+    <script type="text/javascript" src="js/validation.js"></script>
 
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
@@ -65,9 +66,9 @@
                                     <div class="selectSchwierigkeit">
                                         <p>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben):</p>
                                         <ul>
-                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID1" value=1><label for="schwierigkeitID1">leicht</label></li>
-                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID2" value=2><label for="schwierigkeitID2">mittel</label></li>
-                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID3" value=3><label for="schwierigkeitID3">schwer</label></li>
+                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID1" value="leicht"><label for="schwierigkeitID1">leicht</label></li>
+                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID2" value="mittel"><label for="schwierigkeitID2">mittel</label></li>
+                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID3" value="schwer"><label for="schwierigkeitID3">schwer</label></li>
                                         </ul>
                                         <p class="fehlermeldung" id="fehlerMeldung3"></p>
                                         <p class="fehlermeldung" id="fehlerMeldung3.1"></p>
@@ -78,8 +79,8 @@
                                         <p>W&auml;hle eine Kategorie aus</p>
                                         <div class="kselections">
                                         <ul>
-                                            <li><input type="radio" name="kategorie" id="kategorie1"><label for="kategorie1">Binnengew&auml;sser</label></li>
-                                            <li><input type="radio" name="kategorie" id="kategorie3"><label for="kategorie3">Die See</label></li>
+                                            <li><input type="radio" name="kategorie" id="kategorie1" value="Binnenwasser"><label for="kategorie1">Binnengew&auml;sser</label></li>
+                                            <li><input type="radio" name="kategorie" id="kategorie3" value="See"><label for="kategorie3">Die See</label></li>
                                         </ul>
                                         </div>
                                     </div>

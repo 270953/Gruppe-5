@@ -2,11 +2,10 @@
 table
 {
  border-spacing: 0;
- /*box-shadow: 10px 10px 10px #999999;*/
- border-bottom: 4px solid #479bf5;
  font: 18px helvetica, arial, sans-serif;
- margin-bottom: 50px;
  width: 1000px;
+ margin : 30px auto;
+ box-shadow : 10px 10px 10px 0px grey;
 }
 
 
@@ -21,16 +20,40 @@ th
  font-size: 18px;
 }
 
+
 th:nth-child(n+2)
 {
- border-left: 2px solid #FFFFFF;
+ border-left: 2px solid black;
 }
+
+th
+{
+ border-bottom: 2px solid black;
+}
+
 
 tr
 {
  height: 35px;
 }
 
+#preisRechner, #ergebnis
+{
+	margin-left : 4%;
+}
+
+#ergebnis
+{
+	font-weight : bold;
+	font-color : #479bf5;
+	
+	margin : 20px 20px;
+}
+
+h1
+{
+	margin-left: 0px;
+}
 
 td
 {
@@ -45,20 +68,20 @@ td:nth-child(n+2)
 
 .gerade
 {
- background-color: #b3b3b3;
+ background-color: #F8FACF;
 }
 
 .ungerade
 {
- background-color: #e6e6e6;
+ background-color: #CFDAFA;
 }
 
 .gruenGerade
 {
- background-color: #1ec94c;
+ background-color: #6BED6D;
 }
 
 .gruenUngerade
 {
- background-color: #58cc77;
+ background-color: #96FAA2;
 }

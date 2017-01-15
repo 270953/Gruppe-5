@@ -11,6 +11,10 @@ var fragenWaehler;
 var quizErstellenButton;
 var jsonObjekt;
 
+var halbKlein = 0;
+var halbGross = 0;
+var zahlHerkunft = 0;
+
 
 //der name des css klasse, die den hintergrund gelb färbt
 var cssFalseInputClass = "falseInput";
@@ -51,6 +55,8 @@ AnzahlFragenUserInput = 0;
 var jsonDaten;
 var jsonQuelle = "'json/quizSee.json'";
 
+var booleanKorrektur = true;
+
 
 //wartet auf die auf Eingaben des Users und führt function aus
 function eventHandler ()
@@ -59,6 +65,7 @@ function eventHandler ()
         datenbankOeffnen();
         getForms();
         jsonEinlesen(jsonQuelle);
+		navigationEventhandler();
 
         var auswertenButton = document.getElementById('auswerten');
         auswertenButton.addEventListener('click', korrektur);
@@ -79,7 +86,6 @@ function eventHandler ()
 //diese methode wird beim laden ddes fensters aufgrufen
 function getForms()
 {
-        that = this;
         //kleine notiz
         console.log("beginne die formulare zu laden");
 
@@ -99,264 +105,10 @@ function getForms()
             + richtig + "\n"+ quizErstellenButton);
 
         //der button zum voranschreiten kriegt einen click listener
-        quizErstellenButton.addEventListener("click", check);
+	    quizErstellenButton.onclick = function(){ quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, kategorieAuswahl, fragenWaehler, quizErstellenButton);}
 }
 
 
-
-
-//diese methode überprüft die formulardaten, die für das Erstellen des Quiz notwendig sind
-function check()
-{
-        console.log("check beginnt");
-
-        var failCounter = 0;
-
-        //must only contain letters
-        regexLetters = new RegExp('^[a-zA-Z\x7f-\xff]+$');
-
-        //falls der gelbe Hintergrund noch aktiv ist, wird er zu beginn entfernt
-        benutzerNameInput.removeAttribute("class", cssFalseInputClass);
-        vornameInput.removeAttribute("class", cssFalseInputClass);
-        //schwierigkeitsGradSelect.removeAttribute("class", cssFalseInputClass);
-        fragenWaehler.removeAttribute("class", cssFalseInputClass);
-
-
-        var entwederRadioOderUndListe = 0;
-
-        //länge des inputs überprüfen
-        if(benutzerNameInput.value.length < 5 && !benutzerNameInput.tooLong)
-        {
-            benutzerNameInput.setAttribute("class", cssFalseInputClass);
-            benutzerNameInput.setCustomValidity("Der Benutzername muss mind. 5 Zeichen lang sein, max. 16! ");
-            console.log(benutzerNameInput.validationMessage);
-            document.getElementById('fehlerMeldung1').innerHTML = benutzerNameInput.validationMessage;
-            --failCounter;
-            console.log("failCounter: " + --failCounter);
-        }else
-        {
-            document.getElementById('fehlerMeldung1').innerHTML = "";
-        }
-
-        if (!vornameInput.value.match(regexLetters))
-        {
-            vornameInput.setAttribute("class", cssFalseInputClass);
-            vornameInput.setCustomValidity("Vorname darf nur Buchstaben beinhalten!");
-            console.log(vornameInput.validationMessage);
-            document.getElementById('fehlerMeldung2').innerHTML = vornameInput.validationMessage;
-            --failCounter;
-            console.log("failCounter: " + --failCounter);
-        }else
-        {
-            document.getElementById('fehlerMeldung2').innerHTML = "";
-        }
-
-        //die eingabe muss groß genug sein und es dürfen nur Buchstaben eingegeben werden, damit der validity string leer bleibt!
-        if (vornameInput.value.length < 1 && !vornameInput.tooLong)
-        {
-            vornameInput.setCustomValidity("Bitte gib einen Vornamen an. Max. 16 Buchstaben!");
-            console.log(vornameInput.validationMessage);
-            document.getElementById('fehlerMeldung2.1').innerHTML = vornameInput.validationMessage;
-            --failCounter;
-            console.log("failCounter: " + --failCounter);
-        }else
-        {
-            document.getElementById('fehlerMeldung2.1').innerHTML = "";
-        }
-
-
-        //es wird gezählt, wie viele optionen selektiert werden
-        var counterSchwierigkeitsSelection = 0;
-        var selectedIndexArray = [];
-
-
-        //selectedIndexArray speichert die Value von der Checkbox
-       for (var c = 0 ; c < 3 ; c++)
-       {
-            if (schwierigkeitsGradSelect[c].checked == true)
-            {
-                selectedIndexArray += schwierigkeitsGradSelect[c].value;
-                counterSchwierigkeitsSelection++;
-                console.log("Schwierigkeitswert:(1=leicht, 2=mittel, 3=schwer): " + schwierigkeitsGradSelect[c].value);
-            }
-        }
-
-
-        //falls zu viele oder zu wenige optionen ausgewählt wurden
-        if (counterSchwierigkeitsSelection > 2)
-        {
-            schwierigkeitsGradSelect.setAttribute("class", cssFalseInputClass);
-            //schwierigkeitsGradSelect.setCustomValidity("Sie d&uuml;rfen nur maximal 2 Optionen w&auml;hlen!");
-            console.log(schwierigkeitsGradSelect.validationMessage);
-            document.getElementById('fehlerMeldung3').innerHTML = "Sie d&uuml;rfen nur maximal 2 Optionen w&auml;hlen!";
-            //schwierigkeitsGradSelect.validationMessage;
-            --failCounter;
-            console.log("failCounter: " + --failCounter)
-        }else if (counterSchwierigkeitsSelection == 0)
-        {
-            ++entwederRadioOderUndListe;
-        }else
-        {
-           document.getElementById('fehlerMeldung3').innerHTML = "";
-            //prüft welche Checkbox gewählt wurde und vergibt variable einen Wert, der ausgewertet werden kann
-            //value 1 steht für Leicht, value 2 steht für mittel und value 3 für schwer
-            //2 ausgewählt
-            if(selectedIndexArray[0] == 1 && selectedIndexArray[1] == 2)
-            {
-                console.log("inhalt checken ckeckbox:  leicht und mittel");
-                //parameter für switch-Abfrage in inObjektUmwandeln()
-                auswahlSchwierigkeit = 4;
-            }else if(selectedIndexArray[0] == 1 && selectedIndexArray[1] == 3)
-            {
-                console.log("inhalt checken ckeckbox:  leicht und schwer");
-                //parameter für switch-Abfrage in inObjektUmwandeln()
-                auswahlSchwierigkeit = 5;
-            }else if(selectedIndexArray[0] == 2 && selectedIndexArray[1] == 3)
-            {
-                console.log("inhalt checken ckeckbox:  mittel und schwer");
-                //parameter für switch-Abfrage in inObjektUmwandeln()
-                auswahlSchwierigkeit = 6;
-            //eine Schwierigkeit ausgewählt
-            }else
-            {
-                for (var e = 1; e <= 3; e++)
-                {
-                    if(selectedIndexArray[0] == e)
-                    {
-                        console.log("inhalt checken ckeckbox:  einzelnd");
-                        //parameter für switch-Abfrage in inObjektUmwandeln()
-                        auswahlSchwierigkeit = e;
-                    }
-                }
-            }
-        }
-        var selected;
-        //es wird überprüft, ob ein radio gecheckt wurde
-
-
-    for (var j = 0; j < kategorieAuswahl.length; j++)
-    {
-        //zaehle hoch falls keine angaben gemacht wurden
-
-
-    if(kategorieAuswahl[j].checked == false)
-        {
-                //prüft, ob Binnenwasser gewählt wurde
-                if(kategorieAuswahl[0].checked)
-                {
-                    console.log("Kategorie Binnenwasser gewählt");
-                    kategorie = "Binnenwasser";
-                    //prüft, ob eine Schwierigkeit gewählt wurde
-                        if(counterSchwierigkeitsSelection == 1)
-                        {
-                            jsonQuelle = "'json/quizBinnenwasser" + auswahlSchwierigkeit + ".json'";
-                        }else if(counterSchwierigkeitsSelection == 2)
-                        {
-                            if(auswahlSchwierigkeit == 4)
-                            {
-                                jsonEinlesen("'json/quizBinnenwasser" + 12 + ".json'");
-                                selected = true;
-                                break;
-                            }
-                            if(auswahlSchwierigkeit == 5)
-                            {
-                                jsonEinlesen("'json/quizBinnenwasser" + 13 + ".json'");
-                                selected = true;
-                                break;
-                            }
-                            if(auswahlSchwierigkeit == 6)
-                            {
-                                jsonEinlesen("'json/quizBinnenwasser" + 23+ ".json'");
-                                selected = true;
-                                break;
-                            }
-                        }else
-                        {
-                            jsonQuelle = "'json/quizBinnenwasser.json'";
-                        }
-                }
-                //prüft, ob See gewählt wurde
-                else if(kategorieAuswahl[1].checked)
-                {
-                    console.log("Kategorie See gewählt");
-                    kategorie = "See";
-                    //prüft, ob eine Schwierigkeit gewählt wurde
-                        if(counterSchwierigkeitsSelection == 1)
-                        {
-                            jsonQuelle = "'json/quizSee" + auswahlSchwierigkeit + ".json'";
-                        }else if(counterSchwierigkeitsSelection == 2)
-                        {
-                            if(auswahlSchwierigkeit == 4){
-                                jsonEinlesen("'json/quizSee" + 12 + ".json'");
-                                selected = true;
-                                break;
-                            }
-                            if(auswahlSchwierigkeit == 5){
-                                jsonEinlesen("'json/quizSee" + 13 + ".json'");
-                                selected = true;
-                                break;
-                            }
-                            if(auswahlSchwierigkeit == 6){
-                                jsonEinlesen("'json/quizSee" + 23 + ".json'");
-                                selected = true;
-                                break;
-                            }
-                        }else {
-                            jsonQuelle = "'json/quizSee.json'";
-                        }
-                }//es wurde eine angabe gemacht, also wird der counter auf den alten stand zurückgesetzt
-
-        }
-
-    }
-
-
-        //falls keine kategorie ausgewaehlt wurde
-        if (selected == false)
-        {
-                //waehlt zufällig eine Kategorie aus
-                random = Math.floor(Math.random() * 2);
-                if(random == 1){
-                    var jsonQuelle = "'json/quizBinnenwasser.json'";
-                }else {
-                    var jsonQuelle = "'json/quizSee.json'";
-                }
-
-
-            ++entwederRadioOderUndListe;
-        }
-        else if (entwederRadioOderUndListe >= 2)
-        {
-            //schwierigkeitsGradSelect.setCustomValidity("W&auml;hle eine Kategorie und/oder eine Schwierigkeit!");
-            //console.log(schwierigkeitsGradSelect.validationMessage);
-            document.getElementById('fehlerMeldung3.1').innerHTML = "W&auml;hle eine Kategorie und/oder eine Schwierigkeit!";//schwierigkeitsGradSelect.validationMessage;
-            document.getElementById('fehlerMeldung4').innerHTML = "W&auml;hle eine Kategorie und/oder eine Schwierigkeit!";//schwierigkeitsGradSelect.validationMessage;
-            --failCounter;
-            console.log("failCounter: " + --failCounter);
-        }else{
-            document.getElementById('fehlerMeldung3.1').innerHTML = "";
-            document.getElementById('fehlerMeldung4').innerHTML = "";
-        }
-        //liegt die zahl im geforderten Bereich?
-        if (!fragenWaehler.checkValidity())
-        {
-            fragenWaehler.setAttribute("class", cssFalseInputClass);
-            fragenWaehler.setCustomValidity("Die erlaubte Anzahl der Fragen liegt zwischen 1 und 8!");
-            console.log(fragenWaehler.validationMessage);
-            document.getElementById('fehlerMeldung5').innerHTML = fragenWaehler.validationMessage;
-            --failCounter;
-            console.log("failCounter: " + --failCounter);
-        }else {document.getElementById('fehlerMeldung5').innerHTML = "";
-        }
-        if(failCounter != 0)
-        {
-            console.log(failCounter);
-        }else
-        {   //Lädt .json wird geladen
-            jsonEinlesen(jsonQuelle);
-            quizErstellen();
-        }
-}
 
 /**
  *Funktion, zum Einlesen von JSON, für den Fragenkatalog
@@ -374,22 +126,25 @@ function jsonEinlesen(jsonHerkunft) {
 /**
  *Funktion, zum Erstellen des Quiz
  */
-function quizErstellen()
+function quizErstellen(zahlHerkunft)
 {
+
+        booleanKorrektur = true;
         console.log("quizErstellen geladen");
         //Wert aus Eingabe von 1-8 (quiz.html)
         AnzahlFragenUserInput = document.getElementById("numberID").value;
         var str = '<h4>Beantworte alle Fragen</h4>';
         //Fragen generieren
         for (var i = 0; i < AnzahlFragenUserInput; i++) {
-            //wenn nur eine Frage gewählt wurde
+            //prüft, ob eine Frage gewählt wurde
             if (AnzahlFragenUserInput == 1)
             {
-                random = Math.floor(Math.random() * jsonDaten.length);
-            //wenn mehr als eine Frage gewählt wurde
-            }else
+                random = Math.floor(Math.random() * zahlHerkunft);
+            //prüft, ob mehr als eine Frage gewählt wurde
+            }
+            else
             {
-                random = Math.floor(Math.random() * jsonDaten.length);
+                random = Math.floor(Math.random() * zahlHerkunft);
                 //Soll Wiederholungen vermeiden, funktioniert jedoch noch nicht richtig
                 var wiederholungsZaehler = 1;
                 //
@@ -399,7 +154,6 @@ function quizErstellen()
                     if (random == track[i - wiederholungsZaehler])
                     {
                         console.log("Zahl wiederholt sich: " + "random: " + random + " track: " + track[i - wiederholungsZaehler]);
-                        random = Math.floor(Math.random() * jsonDaten.length);
                         wiederholungsZaehler = 1;
                         //continue;
                     }else {
@@ -421,7 +175,9 @@ function quizErstellen()
             //Speichert Lösungen in einem Array,
             loesung[i] = jsonDaten[random].richtig[0];
         }
-        document.getElementById('hierEntstehtQuizID').innerHTML = str;
+
+        return str;
+       //
 }
 
 
@@ -429,6 +185,8 @@ function quizErstellen()
  * Funktion, die die Quizeingabe auf Richtigkeit überprüft
  */
 function korrektur() {
+
+    while (true){
         console.log('korrektur wird geladen');
         FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
         console.log(FrageUserInput);
@@ -458,7 +216,14 @@ function korrektur() {
         document.getElementById('prozentID').value = richtig / AnzahlFragenUserInput * 100 + "%";
         //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
         inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorie, fragenWaehler.value, richtig);
-    //schwierigkeitsGradSelect.value,
+        //schwierigkeitsGradSelect.value,
+
+        //boolean wird auf false gesetzt, damit korrektur nicht erneut ausgeführt wird.
+        //Erst bei function quizErstellen(),wird der boolean wieder auf true gesetzt.
+        booleanKorrektur = false;
+    }
+
+
 }
 
 /**
