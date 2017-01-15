@@ -99,6 +99,7 @@
 
                                     <!--Button zum Abschicken der Benutereingaben-->
                                     <input type="button" id="neuesQuiz" value="Neues Quiz erstellen">
+                                    <input type="button" value="Formular l&ouml;schen" id="formularLeerenOben">
                             </form>
             </section>
 
@@ -115,29 +116,25 @@
                                     <div class="buttonErgebnis" id="buttonErgebnis">
                                     <input type="button" value="Ergebnis" id="auswerten">
                                     <input type="button" id="letzteErgebnisse" value="letzteErgebnisse">
-                                    <input type="submit" value="Eingabe l&ouml;schen" id="formularLeeren">
+                                    <input type="button" value="Eingabe l&ouml;schen" id="formularLeeren">
 
                                     </div>
 
                                     <!--Bereich fuer die Resultate-->
                                     <div class="Ergebnis" id="ErgebnisID">
                                         <form method="GET" name="result">
-                                            <table>
-                                                <tr>
-                                                    <td>Richtige Antworten:</td>
-                                                    <td><p id="antwortRichtigID"></p></td>
-                                                </tr>
 
-                                                <tr>
-                                                    <td>Falsche Antworten:</td>
-                                                    <td><p  id="anzahlFalschID"></p></td>
-                                                </tr>
+                                            <p>Richtige Antworten:
+                                                <input id = "antwortRichtigID" type="textarea" name="p" readonly>
+                                            </p>
 
-                                                <tr>
-                                                    <td>prozentual richtige Antworten:</td>
-                                                    <td><p  id="prozentID"></p></td>
-                                                </tr>
-                                            </table>
+                                            <p>Falsche Antworten:
+                                                <input id="anzahlFalschID" type="textarea" readonly>
+                                            </p>
+
+                                            <p>prozentual richtige Antworten:
+                                                <input id="prozentID" type="textarea" name="q" readonly>
+                                            </p>
                                         </form>
                                     </div>
 

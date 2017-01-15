@@ -65,6 +65,11 @@ function initOnLoad ()
         var auswertenButton = document.getElementById('auswerten');
         auswertenButton.addEventListener('click', korrektur);
 
+        var formularLoeschenButtonOben = document.getElementById('formularLeerenOben');
+        formularLoeschenButtonOben.addEventListener('click', function () {
+            document.quizErstellen.reset();
+        }, false);
+
         var formularLoeschenButton = document.getElementById('formularLeeren');
         formularLoeschenButton.addEventListener('click', function () {
             document.meinQuiz.reset();
@@ -309,9 +314,9 @@ function korrektur() {
                                 console.log("nicht gechecked");
                         }
                 }
-                document.getElementById('antwortRichtigID').innerHTML = richtig;
-                document.getElementById('anzahlFalschID').innerHTML = AnzahlFragenUserInput - richtig;
-                document.getElementById('prozentID').innerHTML = richtig / AnzahlFragenUserInput * 100 + "%";
+                document.getElementById('antwortRichtigID').value = richtig;
+                document.getElementById('anzahlFalschID').value = AnzahlFragenUserInput - richtig;
+                document.getElementById('prozentID').value = richtig / AnzahlFragenUserInput * 100 + "%";
 
                 //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
                 nichtAusgefuehrt = false;
