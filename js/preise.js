@@ -110,7 +110,6 @@ function eingabeMietdauerPruefen() {            // wird aufgerufen, wenn die Mie
             mietdauer.removeAttribute('class');
         }
     }
-
 }
 
 
