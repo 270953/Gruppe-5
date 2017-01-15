@@ -5,6 +5,8 @@ var jsonDaten;      // Objekt, in das später die Daten aus der JSON Datei gesch
 
 function eventHandler() {
 
+	navigationEventhandler();
+
     // Datenbank wird geöffnet oder angelegt; Funktion befindet sich in indexedDB.js
     datenbankOeffnen();
 
@@ -20,7 +22,7 @@ function eventHandler() {
     personenZahl.addEventListener('change', anzahlPersonen, false);
 
     var mietdauerAendern = document.getElementById('mietdauer');
-    mietdauerAendern.addEventListener('change', eingabeMietdauerPruefen, false);
+    mietdauerAendern.onchange = function(){eingabeMietdauerPruefen();};
 
     var letzteBerechnungen = document.getElementById('letzteBerechnungen');
     letzteBerechnungen.addEventListener('click', function () {
@@ -89,6 +91,7 @@ function changeMietdauerText() {                // wird aufgerufen, wenn die Boo
     }
 
 }
+
 
 
 function eingabeMietdauerPruefen() {            // wird aufgerufen, wenn die Mietdauer geändert wird
@@ -171,14 +174,12 @@ function anzahlPersonen() {                 // wird aufgerufen, wenn die Persone
     }
 
     else {                      // wenn die Eingabe des Nutzers ungültig ist, wird folgender Code ausgeführt (siehe oben)
-
-        personenZahl.setAttribute('class', 'falseInput');
-        console.log(personenZahl.validationMessage);
-
         var ausgabeFeld = document.getElementById('ergebnis');
 
-        ausgabeFeld.innerHTML = 'Die eingegebene Personenanzahl ist ungültig.<br>' +
+        ausgabeFeld.innerHTML = '<br>Die eingegebene Personenanzahl ist ungültig.<br>' +
                                 'Bitte geben Sie eine ganze Zahl von 0 bis einschließlich 24 an.';
+								
+		setFalse(personenZahl, ausgabeFeld.innerHTML, 0);
     }
 }
 

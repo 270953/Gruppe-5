@@ -2,11 +2,13 @@
 
 var datenbank;
 var objectStore;
-var ausgabeFeld = document.getElementsByTagName('output');      // im output-Bereich werden später die letzten Ergebnisse angezeigt
+var ausgabeFeld;      // im output-Bereich werden später die letzten Ergebnisse angezeigt
 
 
 // Funktion, um die Datenbank anzulegen oder zu öffnen
 function datenbankOeffnen() {
+
+	ausgabeFeld = document.getElementsByTagName('output');
 
     //noinspection JSUnresolvedVariable
     var request = window.indexedDB.open("gruppe5Datenbank.db",1);       // Es wird ein request gestartet, der die Datenbank 'gruppe5Datenbank' öffnen möchte
@@ -23,7 +25,7 @@ function datenbankOeffnen() {
             //noinspection JSUnresolvedVariable
             if (!datenbank.objectStoreNames.contains('letztePreisBerechnungen')) {       // gibt es keinen Objectstore 'letzte Berechnungen', wird dieser angelegt
 
-                console.log('Objectstore wird angelegt.');
+                console.log('Objektstore wird angelegt.');
                 //noinspection JSUnresolvedFunction
                 datenbank.createObjectStore('letztePreisBerechnungen', {
                     keyPath: 'id',                                                  // als key wird 'id' festgelegt
@@ -41,6 +43,18 @@ function datenbankOeffnen() {
                     autoIncrement: true
                 });
             }
+			
+            //noinspection JSUnresolvedVariable
+            if (!datenbank.objectStoreNames.contains('letzteKontakte')) {       // gibt es keinen Objectstore 'letzte Berechnungen', wird dieser angelegt
+
+                console.log('Objektstore wird angelegt.');
+                //noinspection JSUnresolvedFunction
+                datenbank.createObjectStore('letzteKontakte', {
+                    keyPath: 'id',                                                  // als key wird 'id' festgelegt
+                    autoIncrement: true                                             // der key zählt bei jedem neuen Eintrag in den Objectstore automatisch einen weiter
+                });
+            }
+
     };
 
 
@@ -107,6 +121,14 @@ function pruefeHerkunft(herkunft) {
         //noinspection JSUnresolvedFunction
         objectStore = datenbank.transaction(['quizErgebnisse'], 'readwrite').objectStore('quizErgebnisse');
     }
+	else if(herkunft == 'letzteKontakte')
+	{
+		objectStore = datenbank.transaction(['letzteKontakte'], 'readwrite').objectStore('letzteKontakte');
+	}
+	else
+	{
+		console.log("Herkunft nicht vorhanden1!!");
+	}
 
     return(objectStore);
 
@@ -151,4 +173,5 @@ function inHTMLwiedergeben(jsObjekt) {
                 ausgabeFeld[0].innerHTML += eigenschaft + ': ' + jsObjekt[eigenschaft] + '<br>';        // dem Ausgabefeld wird die aktuelle Eigenschaft des Objektes hinzugefügt
             }   // if
     }       // for-Schleife
+
 }       // Funktion 'inHTMLwiedergeben'

@@ -10,6 +10,8 @@ var fragenWaehler;
 var quizErstellenButton;
 var jsonObjekt;
 
+
+
 var quellDateien = [                //Pfade der Fragen, die in jsonEinlesen verarbeitet werden
     "'json/quizBinnenwasserLeicht.json'",
     "'json/quizBinnenwasserMittel.json'",
@@ -54,6 +56,7 @@ function initOnLoad ()
         getForms();
 
 
+
         for (var i = 0; i < quellDateien.length; i++) {         //quellDateien-Quellepfade werden Methode übergeben und
             jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
 
@@ -82,10 +85,10 @@ function initOnLoad ()
   */
 function getForms()
 {
+
         //kleine notiz
         console.log("getForms() geladen");
 
-        that = this;
         //kleine notiz
         console.log("beginne die formulare zu laden");
 
@@ -106,6 +109,7 @@ function getForms()
             + quizErstellenButton);
 
         //der button zum voranschreiten kriegt einen click listener
+
         quizErstellenButton.addEventListener("click", function (){quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, auswahlKategorie, fragenWaehler, quizErstellenButton)}, false);
 }
 
@@ -211,6 +215,7 @@ function quizZusammenStellen(objValidation) {
 /**
  *Funktion, zum Erstellen der Frageelemente
  */
+
 function fragenErstellen(){
     //kleine notiz
     console.log("fragenErstellen geladen");
@@ -257,6 +262,7 @@ function fragenErstellen(){
                                                                             // um auf die Fragen in der json zugreifen zu können
             loesung[i] = jsonDaten[random].richtig[0];                      //Speichert Lösungen in einem Array
         }
+
         document.getElementById('hierEntstehtQuizID').innerHTML = str;      //zusammengesetzter String wird in HTML ausgegeben
 
         document.getElementById('antwortRichtigID').value = "";         //Die Eingabe löschen, erst relevant, wenn dort schon
@@ -312,6 +318,7 @@ function korrektur() {
                 inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorieAuswahl, fragenWaehler.value, richtig);
 
         }
+
 
     }catch (error){
                 window.alert(error.message);

@@ -8,6 +8,8 @@ var fragenWaehler;
 var bootsTypenListe;
 var quizErstellenButton;
 
+var regexSpecial = new RegExp("<+|>+|;+|\{+|\}+|\\$+");
+
 //der name des css klasse, die den hintergrund gelb färbt
 var cssFalseInputClass = "falseInput";
 
@@ -64,6 +66,16 @@ function check()
 		console.log(benutzerNameInput.validationMessage);
 		
 		--failCounter;
+	}
+	
+	//verhindere XSS, da für das Programiieren relevante Zeichen bei der Eingabe verboten werden.
+	if (benutzerNameInput.value.match(regexSpecial))
+	{
+		benutzerNameInput.setAttribute("class", cssFalseInputClass);
+		benutzerNameInput.setCustomValidity("Folgende Zeichen sind nicht erlaubt : <, >, {, }, $, ;");
+		console.log(benutzerNameInput.validationMessage);
+		
+		--failCounter;		
 	}
 	
 	//die eingabe muss goß genug sein und es dürfen nur Buchstaben eingegeben werden, damit der validity string leer bleibt!
