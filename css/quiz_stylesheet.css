@@ -43,7 +43,17 @@
 
 .fehlermeldung{
 	padding-left: 50px;
-	font: 14px sans-serif;
+	font-weight : bold;
 	color: red;
 }
 
+#quizBereich, #eingabeFormular
+{
+	margin-left: 4%;
+}
+
+.falseInputQuiz
+{
+	border-color: red;
+	background-color: red;
+}

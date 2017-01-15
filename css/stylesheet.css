@@ -1,3 +1,13 @@
+*
+{
+	font-size:20px;
+}
+
+p
+{
+	width : 70%;
+}
+
 /*Die "Hintergrundfarbe"*/
 html
 {
@@ -9,7 +19,7 @@ html
 body
 {
 	margin : 0px 10%;
-	background-color: #D0D7F2;
+	background : linear-gradient(#D0D7F2, #9BA9E0);
 	font: 15px sans-serif;
 }
 
@@ -31,7 +41,7 @@ article *
 	margin-left : 4%;
 }
 
-/*Alle weiter verschachtelten Elemente sollen kein margin left haben*/
+/*Alle weiter verschachtelten Elemente sollen kein margin left mehr haben*/
 article * *
 {
 	margin-left : 0px;
