@@ -10,9 +10,13 @@
     <meta name="author" content="Gruppe 5">
     <meta name="keywords" content="Segeln, Segelverein, Steife Brise, Hamburg">
     <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
+	
+	<script type="text/javascript" src="js/navigation.js"></script>		
+	<script type="text/javascript" src="js/codeLessSide.js"></script>			
 
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+	
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
 
 </head>
@@ -31,12 +35,12 @@
                  <!-- Menüleiste - als unsorted list -->
                  <nav>
                          <ul>
-                                 <li><a href="index.html">Startseite</a></li>
+                                 <li id="activeNav"><a href="index.html">Startseite</a></li>
                                  <li><a href="preise.html">Preisrechner</a></li>
                                  <li><a href="quiz.html">Quiz</a></li>
 								 <li><a href="kontakt.html">Kontakt</a></li>
                                  <li><a href="impressum.html">Impressum</a></li>
-                                 <li><a href="readme.html">README</a></li>
+
                          </ul>
                  </nav>
          </header>
@@ -48,7 +52,7 @@
                  <article>
 
                          <!-- �berschrift des Artikels -->
-                         <h1>Herbstregatta</h1>
+                         <h1 id = "Anker">Herbstregatta</h1>
 
                          <!-- Bild zum Artikel -->
                          <img src="pictures/art1img1.jpg" title="Regatta" name="art1img1">
@@ -64,9 +68,7 @@
 
                          <a href="#Anker">nach oben</a>
 
-                         <div class="dropdown_mehr">mehr...</div>
-
-                         <address>Autor: <a href="Profil_von_Max_Mustermann.html">Max Mustermann</a></address>
+                         <address>Autor: <a href="kontakt.html">Max Mustermann</a></address>
 
                  </article>
 
@@ -80,9 +82,7 @@
 
                          <a href="#Anker">nach oben</a>
 
-                         <div class="dropdown_mehr">mehr...</div>
-
-                         <address>Autor: <a href="Profil_von_Melanie_Mustermann.html">Melanie Mustermann</a></address>
+                         <address>Autor: <a href="kontakt.html">Melanie Mustermann</a></address>
                    </article>
 
           </main>

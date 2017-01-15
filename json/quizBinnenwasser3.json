@@ -1,0 +1,82 @@
+[
+  {
+    "Frage": "Was versteht man unter &quot;Fahrwasser&quot;? (Binnenwasser schwer)",
+    "Antworten": ["Den Teil der Wasserstra&szlig;e, in dem f&uuml;r den durchgehenden Schiffsverkehr bestimmte Breiten und Tiefen vorgehalten bzw. angestrebt werden.",
+      "Es ist der Teil der Wasserstra&szlig;e, der durch die Ufer begrenzt ist.",
+      "Es ist der Teil der Wasserstra&szlig;e, deren Tiefe bei 2,50 m und mehr beginnt.",
+      "Den Teil der Wasserstra&szlig;e, der den &ouml;rtlichen Umst&auml;nden nach vom durchgehenden Schiffsverkehr benutzt wird."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Welche Auswirkungen kann das Erreichen der Hochwassermarke I f&uuml;r die Sportschifffahrt haben? (Binnenwasser schwer)",
+    "Antworten": ["Einstellung der Schifffahrt.",
+      "Geschwindigkeitsbeschr&auml;nkung und Fahrverbot f&uuml;r Fahrzeuge ohne Sprechfunk.",
+      "Verbot der Schifffahrt bei Nacht und unsichtigem Wetter.",
+      "&uuml;berholverbot und Fahrverbot f&uuml;r Fahrzeuge ohne Sprechfunk."],
+    "richtig": ["1"]
+  },
+  {
+    "Frage": "Welche Fahrrinnenseite hat ein Bergfahrer an seiner Steuerbordseite und wie ist diese gekennzeichnet? (Binnenwasser schwer)",
+    "Antworten": ["Die linke Fahrrinnenseite, gekennzeichnet durch rote Stumpftonnen oder Schwimmstangen.",
+      "Die linke Fahrrinnenseite, gekennzeichnet durch gr&uuml;ne Spitztonnen oder Schwimmstangen.",
+      "Die rechte Fahrrinnenseite, gekennzeichnet durch rote Stumpftonnen oder Schwimmstangen.",
+      "Die rechte Fahrrinnenseite, gekennzeichnet durch gr&uuml;ne Spitztonnen oder Schwimmstangen."],
+    "richtig": ["1"]
+  },
+  {
+    "Frage": "Was kennzeichnet eine gr&uuml;n-wei&szlig; gestreifte Schwimmstange mit gr&uuml;nem Kegel, Spitze nach oben, oder eine gr&uuml;ne Tonne mit gr&uuml;nwei&szlig; gestreiftem Aufsatz mit gr&uuml;nem Kegel, Spitze nach oben? (Binnenwasser schwer)",
+    "Antworten": ["Hindernis an der rechten Seite der Wasserstra&szlig;e.",
+      "Fahrrinnenrand an der rechten Seite der Wasserstra&szlig;e.",
+      "Hindernis an der linken Seite der Wasserstra&szlig;e.",
+      "Fahrrinnenrand an der linken Seite der Wasserstra&szlig;e."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Welche Seite wird als Luvseite bezeichnet? (Binnenwasser schwer)",
+    "Antworten": ["Die dem Wind abgewandte Seite.",
+      "Die Seite in Fahrtrichtung links.",
+      "Die Seite in Fahrtrichtung rechts.",
+      "Die dem Wind zugekehrte Seite."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": " In welcher Reihenfolge fahren Fahrzeuge, die nicht Kleinfahrzeuge sind, und Kleinfahrzeuge, die gemeinsam geschleust werden sollen, in die Schleuse ein? (Binnenwasser schwer)",
+    "Antworten": ["Kleinfahrzeuge fahren erst nach den Fahrzeugen, die nicht Kleinfahrzeuge sind und nach Aufforderung durch die Schleusenaufsicht in die Schleuse ein.",
+      "Kleinfahrzeuge fahren vor den Fahrzeugen, die nicht Kleinfahrzeuge sind und vor Aufforderung durch die Schleusenaufsicht in die Schleuse ein.",
+      "Kleinfahrzeuge fahren vor den Fahrzeugen, die nicht Kleinfahrzeuge sind und ohne Aufforderung durch die Schleusenaufsicht in die Schleuse ein.",
+      "Kleinfahrzeuge fahren nach den Fahrzeugen, die nicht Kleinfahrzeuge sind und ohne Aufforderung durch die Schleusenaufsicht in die Schleuse ein."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Was bedeutet dieses Sichtzeichen? (Binnenwasser schwer) <br> <img src='pictures/Binnenwasser/binnenwasserfrage3.jpg'>",
+    "Antworten": ["Fahrzeug hat explosive Stoffe geladen, Abstand beim Stillliegen 100 m.",
+      "Fahrzeug der &uuml;berwachungsbeh&ouml;rden im Einsatz.",
+      "Fahrzeug hat brennbare Stoffe geladen, Abstand beim Stillliegen 10 m.",
+      "Fahrzeug hat gesundheitssch&auml;dliche Stoffe geladen, Abstand beim Stillliegen 50 m."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Wann gilt ein Sportboot auf den Binnenschifffahrtsstraßen nicht mehr als Kleinfahrzeug? (Binnenwasser schwer)",
+    "Antworten": ["Wenn es 15 m oder l&auml;nger ist.",
+      "Wenn es 18 m oder l&auml;nger ist.",
+      "Wenn es 20 m oder l&auml;nger ist.",
+      "Wenn es 10 m oder l&auml;nger ist."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Welches Licht muss ein Kleinfahrzeug ohne Maschinenantrieb mindestens f&uuml;hren? (Binnenwasser schwer)",
+    "Antworten": ["Ein von allen Seiten sichtbares wei&szlig;es Licht.",
+      "Seitenlichter.",
+      "Dreifarbenlaterne im Topp.",
+      "Topp- und Hecklicht."],
+    "richtig": ["0"]
+  },
+  {
+    "Frage": "Was bedeuten diese Lichter? (Binnenwasser schwer) <br> <img src='pictures/Binnenwasser/binnenwasserfrage4.jpg'>",
+    "Antworten": ["Festgefahrenes oder gesunkenes Fahrzeug. Vorbeifahrt an der roten Seite gestattet; rot-wei&szlig;e Seite gesperrt. Vorbeifahrt mit unverminderter Geschwindigkeit m&ouml;glich.",
+      "Festgefahrenes oder gesunkenes Fahrzeug. Vorbeifahrt an der roten Seite gestattet; rot-wei&szlig;e Seite gesperrt. Sog und Wellenschlag vermeiden.",
+      "Festgefahrenes oder gesunkenes Fahrzeug. Vorbeifahrt an der rot-wei&szlig;en Seite gestattet; rote Seite gesperrt. Sog und Wellenschlag vermeiden.",
+      "Festgefahrenes oder gesunkenes Fahrzeug. Vorbeifahrt an der rot-wei&szlig;en Seite gestattet; rote Seite gesperrt. Vorbeifahrt mit unverminderter Geschwindigkeit m&ouml;glich."],
+    "richtig": ["2"]
+  }
+]

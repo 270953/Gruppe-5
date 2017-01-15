@@ -5,6 +5,11 @@ var jsonDaten;      // Objekt, in das später die Daten aus der JSON Datei gesch
 
 function eventHandler() {
 
+	navigationEventhandler();
+
+    // Datenbank wird geöffnet oder angelegt; Funktion befindet sich in indexedDB.js
+    datenbankOeffnen();
+
     jsonEinlesen();
 
     var buttonPreis = document.getElementById('berechnePreis');
@@ -17,7 +22,12 @@ function eventHandler() {
     personenZahl.addEventListener('change', anzahlPersonen, false);
 
     var mietdauerAendern = document.getElementById('mietdauer');
-    mietdauerAendern.addEventListener('change', eingabeMietdauerPruefen, false);
+    mietdauerAendern.onchange = function(){eingabeMietdauerPruefen();};
+
+    var letzteBerechnungen = document.getElementById('letzteBerechnungen');
+    letzteBerechnungen.addEventListener('click', function () {
+        datenLesen('preis');
+    }, false);
 
 }
 
@@ -26,7 +36,7 @@ function eventHandler() {
 function jsonEinlesen () {
 
     var anfrage = new XMLHttpRequest();
-    anfrage.open('GET', 'js/preise.json');
+    anfrage.open('GET', 'json/preise.json');
     anfrage.onload = function() {
 
         jsonDaten = JSON.parse(anfrage.responseText);       // die JSON Daten werden gleich in ein JavaScript Objekt umgewandelt und in jsonDaten gespeichert
@@ -99,29 +109,6 @@ function changeMietdauerText() {                // wird aufgerufen, wenn die Boo
 }
 
 
-function eingabeMietdauerPruefen() {            // wird aufgerufen, wenn die Mietdauer geändert wird
-
-    var mietdauer = document.getElementById('mietdauer');
-
-    if (mietdauer.checkValidity() == false) {       // prüft auf die Richtigkeit der Eingabe
-
-        mietdauer.setAttribute('class', 'falseInput');  // ändert die Farbe des Feldes, wenn die Eingabe nicht den Vorgaben entspricht und...
-        console.log(mietdauer.validationMessage);
-
-        var ausgabeFeld = document.getElementById('ergebnis');
-        ausgabeFeld.innerHTML = 'Mit der eingegebenen Mietdauer kann kein Preis berechnet werden.<br>' +    // ...dann wird dem Anwender auch eine Information
-                                'Bitte geben Sie eine ganze Zahl von 1 bis zur maximalen Mietdauer an.';    // über die falsche Eingabe gegeben.
-    }
-
-    else {
-        if (mietdauer.hasAttribute('class')) {          // wenn die Eingabe korrekt war, wird die Hintergrundfarbe des Feldes wieder neutralisiert
-            mietdauer.removeAttribute('class');
-        }
-    }
-
-}
-
-
 function anzahlPersonen() {                 // wird aufgerufen, wenn die Personenanzahl geändert wird
 
     var personenZahl = document.getElementById('personen');
@@ -180,14 +167,12 @@ function anzahlPersonen() {                 // wird aufgerufen, wenn die Persone
     }
 
     else {                      // wenn die Eingabe des Nutzers ungültig ist, wird folgender Code ausgeführt (siehe oben)
-
-        personenZahl.setAttribute('class', 'falseInput');
-        console.log(personenZahl.validationMessage);
-
         var ausgabeFeld = document.getElementById('ergebnis');
 
-        ausgabeFeld.innerHTML = 'Die eingegebene Personenanzahl ist ungültig.<br>' +
+        ausgabeFeld.innerHTML = '<br>Die eingegebene Personenanzahl ist ungültig.<br>' +
                                 'Bitte geben Sie eine ganze Zahl von 0 bis einschließlich 24 an.';
+								
+		setFalse(personenZahl, ausgabeFeld.innerHTML, 0);
     }
 }
 
@@ -239,21 +224,47 @@ function berechnePreis() {              // wird beim Click auf den Button 'Preis
 
     else {                                          // nur wenn die Mietdauer einen gültigen Wert enthält, wird in die Berechnung des Preises eingestiegen
 
+        var bootsKlasse = ermittleBootsklasse();
         mietdauer = mietdauer.value;
-
-        var selectedBoot = ermittleBootsklasse();
-        console.log(selectedBoot);
-
-        var saisonPreis = ermittleSaisonPreis(selectedBoot);
-        console.log(saisonPreis);
-
-        var rabatt = ermittleRabatt(selectedBoot);
-        console.log(rabatt);
-
-        var endPreis = saisonPreis * mietdauer * rabatt;        // die Berechnung des Preises ist selbsterklärend
-        console.log(endPreis);
+        var saisonPreis = ermittleSaisonPreis(bootsKlasse);
+        var rabatt = ermittleRabatt(bootsKlasse);
+        var endPreis = saisonPreis * mietdauer * rabatt;    // die Berechnung des Preises ist selbsterklärend
 
         ausgabeFeld.innerHTML = 'Der Preis beträgt für diesen Zeitraum ' + endPreis.toFixed(2) + ' Euro.';
+
+        var eingabeDaten = {};
+
+        eingabeDaten.Bootsklasse = jsonDaten[bootsKlasse[0]].name;
+        eingabeDaten.Saison = document.getElementById('saison').value;
+        eingabeDaten.Rabatt = document.getElementById('rabatt').value;
+
+        //noinspection JSUnresolvedVariable
+        var abrechnungsZeitraum = jsonDaten[bootsKlasse[0]].abrechnungsZeitraum;        // holt sich aus den JSON Daten den Abrechnungszeitraum für das ausgewählte Boot
+
+        if (abrechnungsZeitraum == 'pro Tag') {             // je nach Abrechnungszeitraum der gerade gewählten Bootsklasse werden bei der Mietdauer der Text vor dem Input-Feld und das max-Attribut angepasst
+            if (mietdauer > 1) {
+                mietdauer += ' Tage';
+            }
+            else {
+                mietdauer += ' Tag';
+            }
+        }
+        else {
+            if (mietdauer > 1) {
+                mietdauer += ' Stunden';
+            }
+            else {
+                mietdauer += ' Stunde';
+            }
+        }
+
+        eingabeDaten.Mietdauer = mietdauer;
+        eingabeDaten.Preis = '<b>' + endPreis.toFixed(2) + ' Euro</b>';
+
+        var datum = new Date();
+        eingabeDaten.Berechnungsdatum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
+
+        datenSpeichern(eingabeDaten, 'preis');
     }
 
 }

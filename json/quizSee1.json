@@ -1,0 +1,82 @@
+[
+  {
+    "Frage": "Welche Seite wird als Leeseite bezeichnet? (See leicht)",
+    "Antworten": ["Die Seite in Fahrtrichtung rechts.",
+      "Die Seite in Fahrtrichtung links.",
+      "Die dem Wind zugekehrte Seite.",
+      "Die dem Wind abgewandte Seite."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Was ist das f&uuml;r ein Fahrzeug und was ist zu beachten? (See leicht) <br> <img src='pictures/See/See3.jpg'>",
+    "Antworten": ["Ein man&ouml;vrierbehindertes Fahrzeug ohne Fahrt durchs Wasser, das baggert oder Unterwasserarbeiten ausf&uuml;hrt und dabei die Schifffahrt behindert. Es ist an der Steuerbordseite des Fahrwassers (Rechtsfahrgebot) zu passieren.",
+      "Ein man&ouml;vrierbehindertes Fahrzeug ohne Fahrt durchs Wasser, das baggert oder Unterwasserarbeiten ausf&uuml;hrt und dabei die Schifffahrt behindert. Es ist an der Seite zu passieren, die in Fahrtrichtung links liegt.",
+      "Ein man&ouml;vrierbehindertes Fahrzeug ohne Fahrt durchs Wasser, das die Schifffahrt behindert. Es ist an der Seite zu passieren, an der zwei rote Rundumlichter senkrecht &uuml;bereinander angeordnet sind.",
+      "Ein man&ouml;vrierbehindertes Fahrzeug ohne Fahrt durchs Wasser, das baggert oder Unterwasserarbeiten ausf&uuml;hrt und dabei die Schifffahrt behindert. Es ist an der Seite zu passieren, an der zwei gr&uuml;ne Rundumlichter senkrecht &uuml;bereinander angeordnet sind."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Welche Lichter muss ein Fahrzeug unter Segel, das gleichzeitig mit Maschinenkraft f&auml;hrt, f&uuml;hren? (See leicht)",
+    "Antworten": ["Seitenlichter rot und gr&uuml;n und ein rotes Rundumlicht.",
+      "Zwei rote Rundumlichter senkrecht &uuml;bereinander.",
+      "Die f&uuml;r ein Maschinenfahrzeug vorgeschriebenen Lichter.",
+      "Die f&uuml;r ein Segelfahrzeug vorgeschriebenen Lichter."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Was bedeuten diese Lichter vor einer Schleuse? (See leicht) <br> <img src='pictures/See/See0.jpg'>",
+    "Antworten": ["Schleuse in Betrieb, auf Ausfahrtsignal gem&auml;&szlig; Reihenfolge warten.",
+      "Schleuse in Betrieb, auf Einfahrtsignal gem&auml;&szlig; Reihenfolge warten.",
+      "Einfahrt frei, Schleusentor &ouml;ffnet.",
+      "Einfahrt frei, Gegenverkehr gesperrt."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Welches ist der g&uuml;nstigste Anlaufwinkel beim Anlegen? (See leicht)",
+    "Antworten": ["Ein m&ouml;glichst stumpfer Winkel.",
+      "Ein Winkel von 90° bis 100°.",
+      "Ein Winkel von 60° bis 70°.",
+      "Ein m&ouml;glichst spitzer Winkel."],
+    "richtig": ["3"]
+  },
+  {
+    "Frage": "Wodurch wird bei einem Fahrzeug mit Au&szlig;enbordmotor und ohne Ruderanlage die Ruderwirkung erzielt? (See leicht)",
+    "Antworten": ["Durch Schraubenstrom und Anstellwinkel des Propellers.",
+      "Durch Schraubenstrom und Richtung des Propellers.",
+      "Durch den Schraubenwiderstand und Richtung des Propellers.",
+      "Durch den Schraubenwiderstand und Anstellwinkel des Propellers."],
+    "richtig": ["1"]
+  },
+  {
+    "Frage": "Ein Au&szlig;enborder mit gef&uuml;lltem Tank bleibt w&auml;hrend der Fahrt stehen. Was k&ouml;nnten die Ursachen sein? (See leicht)",
+    "Antworten": ["Schraube an der Welle lose.",
+      "Bel&uuml;ftungsschraube geschlossen; verstopfte Kraftstoffleitung.",
+      "Tankdeckel ist offen.",
+      "Ansaugd&uuml;sen zu gro&szlig; bzw. zu klein."],
+    "richtig": ["1"]
+  },
+  {
+    "Frage": "Was ist zu tun, wenn Fl&uuml;ssiggas in das Innere des Bootes gelangt? (See leicht)",
+    "Antworten": ["Gasleitung entleeren und die Gasfreiheit mit dem Feuerzeug pr&uuml;fen sowie &uuml;ber Funk oder Mobiltelefon Hilfe anfordern",
+      "Gasleitung entleeren und f&uuml;r L&uuml;ftung sorgen. Au&szlig;erdem keine elektrischen Schalter bet&auml;tigen und keine Telefone benutzen.",
+      "Gaszuf&uuml;hrung absperren und f&uuml;r L&uuml;ftung sorgen. Au&szlig;erdem keine elektrischen Schalter bet&auml;tigen und keinen Funk und keine Mobiltelefone benutzen.",
+      "Gaszuf&uuml;hrung absperren und f&uuml;r L&uuml;ftung sorgen. Au&szlig;erdem keine elektrischen Schalter bet&auml;tigen und per Telefon Hilfe holen."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Wo gelten die Kollisionsverh&uuml;tungsregeln (KVR)? (See leicht)",
+    "Antworten": ["Auf den Seeschifffahrtsstra&szlig;en und den k&uuml;stennahen deutschen Seegew&auml;ssern, die von Seeschiffen befahren werden.",
+      "Auf der Hohen See und den von Seeschiffen befahrbaren Randmeeren, mit Ausnahme der Verkehrstrennungsgebiete.",
+      "Auf der Hohen See und auf den mit dieser zusammenh&auml;ngenden, von Seeschiffen befahrbaren Gew&auml;ssern.",
+      "Auf der Hohen See und den deutschen Seeschifffahrtsstra&szlig;en, die von Seeschiffen befahren werden."],
+    "richtig": ["2"]
+  },
+  {
+    "Frage": "Wann ist ein Fahrzeug man&ouml;vrierbehindert? (See leicht)",
+    "Antworten": ["Wenn es wegen der Art seines Einsatzes behindert ist und deshalb nicht so wie vorgeschrieben man&ouml;vrieren und daher einem anderen Fahrzeug nicht ausweichen kann.",
+      "Wenn es wegen seines Tiefgangs im Verh&auml;ltnis zu der vorhandenen Tiefe und Breite des befahrbaren Gew&auml;ssers erheblich behindert ist, von seinem zu verfolgenden Kurs abzuweichen.",
+      "Wenn es mit Netzen, Leinen, Schleppnetzen oder anderen Fangger&auml;ten fischt, welche die Man&ouml;vrierf&auml;higkeit einschr&auml;nken.",
+      "Wenn es wegen au&szlig;ergew&ouml;hnlicher Umst&auml;nde, z. B. Ausfall der Ruderoder Maschinenanlage, nicht so wie vorgeschrieben man&ouml;vrieren und daher einem anderen Fahrzeug nicht ausweichen kann."],
+    "richtig": ["0"]
+  }
+]
