@@ -1,4 +1,4 @@
-window.onload = eventHandler;
+ window.onload = initOnLoad;
 
 //hier werden die nodes gelagert, damit mehrere funktionen auf diese zugreifen können
 var benutzerNameInput;
@@ -6,66 +6,61 @@ var vornameInput;
 var schwierigkeitsGradSelect;
 var auswahlSchwierigkeit;
 var kategorieAuswahl;
-var kategorie = "";
 var fragenWaehler;
 var quizErstellenButton;
 var jsonObjekt;
 
-var halbKlein = 0;
-var halbGross = 0;
-var zahlHerkunft = 0;
 
 
-//der name des css klasse, die den hintergrund gelb färbt
-var cssFalseInputClass = "falseInput";
+var quellDateien = [                //Pfade der Fragen, die in jsonEinlesen verarbeitet werden
+    "'json/quizBinnenwasserLeicht.json'",
+    "'json/quizBinnenwasserMittel.json'",
+    "'json/quizBinnenwasserSchwer.json'",
+    "'json/quizSeeLeicht.json'",
+    "'json/quizSeeMittel.json'",
+    "'json/quizSeeSchwer.json'",
+    "'json/quizBinnenwasserLeichtMittel.json'",
+    "'json/quizBinnenwasserLeichtSchwer.json'",
+    "'json/quizBinnenwasserMittelSchwer.json'",
+    "'json/quizSeeLeichtMittel.json'",
+    "'json/quizSeeLeichtSchwer.json'",
+    "'json/quizSeeMittelSchwer.json'"
+];
 
-//Variable für die Zufallszahl. Diese wird im Schleifendurchlauf immer neu vergeben
-var random;
+var jsonDaten;                  //Deklariert JSON Objekt
 
-/*
- Variable, die die Zufallszahenl als Array speichert, anhand der Fragen-Index identifiziert werden kann.
- Dies ist für den Vergleich von Eingabe und Lösung notwendig
- */
-var track;
-track = [];
 
-//Variable für die richtige Lösungen. Beim Erstellen des Quiz, werden die Lösungen darin gespeichert.
-var loesung;
-loesung = [];
+var quizFragen = [];            //in diesem Array werden die JavaScript Objekte abgelegt,
+                                // die aus den den JSON Dateien mit der funkticn jsonEinlesen abgerufen werden
 
-//Speichert die Anzahl der nicht richtig beantworteten Fragen
-var nichtRichtig;
-nichtRichtig = 0;
+var track;                      //Variable, die die Zufallszahenl als Array speichert, anhand der Fragen-Index
+track = [];                     //identifiziert werden kann. Dies ist für den Vergleich von Eingabe und Lösung notwendig
 
-//Speichert die Anzahl der nicht richtig beantworteten Fragen
-var richtig;
-richtig= 0;
+var loesung;                    //Variable für die richtige Lösungen. Beim Erstellen des Quiz, werden die Lösungen darin gespeichert.
+loesung = [];                   //werden die Lösungen darin gespeichert.
 
-//Speichert die Eingabe aus dem Bootsquiz
-var FrageUserInput;
+var FrageUserInput;             //Speichert die Eingabe aus dem Bootsquiz
 FrageUserInput= [];
 
-//document.cookie = "ready=yes"; nicht mehr gebraucht
-
-//Anzahl der Fragen, die vom Benutzer eingegeben werden. Zunächst mit 0 initialisiert
-var AnzahlFragenUserInput;
-AnzahlFragenUserInput = 0;
-
-//Deklariert JSON Objekt
-var jsonDaten;
-var jsonQuelle = "'json/quizSee.json'";
-
-var booleanKorrektur = true;
+var AnzahlFragenUserInput;      //Anzahl der Fragen, die vom Benutzer eingegeben werden.
+AnzahlFragenUserInput = 0;      //Zunächst mit 0 initialisiert
 
 
-//wartet auf die auf Eingaben des Users und führt function aus
-function eventHandler ()
+ /**
+  * Funktionen, die beim Laden von quiz.html ausgeführt werden
+  */
+function initOnLoad ()
 {
         console.log("eventHandler geladen");
         datenbankOeffnen();
         getForms();
-        jsonEinlesen(jsonQuelle);
-		navigationEventhandler();
+
+
+
+        for (var i = 0; i < quellDateien.length; i++) {         //quellDateien-Quellepfade werden Methode übergeben und
+            jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
+
+        }
 
         var auswertenButton = document.getElementById('auswerten');
         auswertenButton.addEventListener('click', korrektur);
@@ -79,13 +74,21 @@ function eventHandler ()
         letzteErgebnisse.addEventListener('click', function () {
             datenLesen('quiz');
         }, false);
+
+
+        document.getElementById("ErgebnisID").style.visibility = "hidden";
+
 }
 
-
-
-//diese methode wird beim laden ddes fensters aufgrufen
+ /**
+  * Funktion, die die HTML Elemente holt und anschließend die Eingaben mit quizCheck() aus validation.js überprüft
+  */
 function getForms()
 {
+
+        //kleine notiz
+        console.log("getForms() geladen");
+
         //kleine notiz
         console.log("beginne die formulare zu laden");
 
@@ -93,91 +96,178 @@ function getForms()
         benutzerNameInput = document.getElementById("benutzernameID");
         vornameInput = document.getElementById("vornameID");
         schwierigkeitsGradSelect = document.querySelectorAll('.selectSchwierigkeit ul li input[type="checkbox"]');
-        kategorieAuswahl = document.querySelectorAll('.kselections ul li input[type="radio"]');
+        auswahlKategorie = document.querySelectorAll('.kselections ul li input[type="radio"]');
         fragenWaehler = document.getElementById("numberID");
         quizErstellenButton = document.getElementById("neuesQuiz");
 
+        zahlHerkunft = fragenWaehler;
+
         //zum überprüfen hier ausgegeben
-        //+ schwierigkeitsGradSelect.length + "\n"
         console.log("documente geladen : \n" + benutzerNameInput + "\n "
             + vornameInput + "\n" + "Anzahl Schwierigkeit: " + schwierigkeitsGradSelect.length + "\n"
-            + kategorieAuswahl + " : " + kategorieAuswahl.length + "\n" + fragenWaehler + "\n"
-            + richtig + "\n"+ quizErstellenButton);
+            + auswahlKategorie + " : " + auswahlKategorie.length + "\n" + fragenWaehler + "\n"
+            + quizErstellenButton);
 
         //der button zum voranschreiten kriegt einen click listener
-	    quizErstellenButton.onclick = function(){ quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, kategorieAuswahl, fragenWaehler, quizErstellenButton);}
+
+        quizErstellenButton.addEventListener("click", function (){quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, auswahlKategorie, fragenWaehler, quizErstellenButton)}, false);
 }
 
 
+ /**
+  * Funktion, welches anhand der Kategorie und der Schwierigkeit das Quiz zusammenerstellt
+  */
+function quizZusammenStellen(objValidation) {
+     //kleine notiz
+    console.log('quizZusammenStellen(objValidation) geladen');
 
-/**
- *Funktion, zum Einlesen von JSON, für den Fragenkatalog
-*/
-function jsonEinlesen(jsonHerkunft) {
-    var anfrage = new XMLHttpRequest();
-    anfrage.open('GET', jsonHerkunft, true);
-    anfrage.onload = function () {
-        jsonDaten = JSON.parse(anfrage.responseText);
-    };
-    anfrage.send();
-}
+    var auswahlZufall;
+    //Zuordnen der Werte, die für inObjektUmwandeln() benötigt werden
+    if(objValidation.schwierigkeit.length > 0){
+        auswahlSchwierigkeit = objValidation.schwierigkeit.valueOf();
+    }else{
+        auswahlSchwierigkeit = "keine Auswahl";
+    }
+     if((objValidation.kategorie.valueOf() == "Binnenwasser") || (objValidation.kategorie.valueOf() == "See")){
+         kategorieAuswahl = objValidation.kategorie.valueOf();
+     }else{
+         kategorieAuswahl = "keine Auswahl";
+     }
 
 
-/**
- *Funktion, zum Erstellen des Quiz
- */
-function quizErstellen(zahlHerkunft)
-{
-
-        booleanKorrektur = true;
-        console.log("quizErstellen geladen");
-        //Wert aus Eingabe von 1-8 (quiz.html)
-        AnzahlFragenUserInput = document.getElementById("numberID").value;
-        var str = '<h4>Beantworte alle Fragen</h4>';
-        //Fragen generieren
-        for (var i = 0; i < AnzahlFragenUserInput; i++) {
-            //prüft, ob eine Frage gewählt wurde
-            if (AnzahlFragenUserInput == 1)
-            {
-                random = Math.floor(Math.random() * zahlHerkunft);
-            //prüft, ob mehr als eine Frage gewählt wurde
-            }
-            else
-            {
-                random = Math.floor(Math.random() * zahlHerkunft);
-                //Soll Wiederholungen vermeiden, funktioniert jedoch noch nicht richtig
-                var wiederholungsZaehler = 1;
-                //
-                while (wiederholungsZaehler <= i)
-                {
-                    console.log("while loop");
-                    if (random == track[i - wiederholungsZaehler])
-                    {
-                        console.log("Zahl wiederholt sich: " + "random: " + random + " track: " + track[i - wiederholungsZaehler]);
-                        wiederholungsZaehler = 1;
-                        //continue;
-                    }else {
-                        wiederholungsZaehler++;
-                        console.log("keine Wiederholung ermittelt");
+    if (objValidation.kategorie.valueOf() == "Binnenwasser") {                 //Kategorie "Binnenwasser" wurde gewählt
+        console.log("in Binnenwasser verzweigt");
+            if (objValidation.schwierigkeit.length == 1) {                     //Falls eine Schwierigkeit gewählt wurde
+                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht") {         //Falls Leicht gewählt wurde
+                        jsonDaten = quizFragen[0].valueOf();
+                    }else if (objValidation.schwierigkeit[0].valueOf() == "Mittel") {   //Falls Mittel gewählt wurde
+                        jsonDaten = quizFragen[1].valueOf();
+                    }else {                                                             //Falls Schwer gewählt wurde
+                        jsonDaten = quizFragen[2].valueOf();
                     }
-                }
+            }else if (objValidation.schwierigkeit.length == 2) {                        //Falls zwei Schwierigkeiten gewählt wurde
+
+                    if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {    //Falls Leicht und Mittel gewählt wurden
+                        jsonDaten = quizFragen[6].valueOf();
+                    }else if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {     //Falls Leicht und Schwer gewählt wurden
+                        jsonDaten = quizFragen[7].valueOf();
+                    }else {
+                        jsonDaten = quizFragen[8].valueOf();
+                    }
+            }else {                                                             //Falls keine Schwierigkeit gewählt wurde
+                    auswahlZufall = Math.floor(Math.random() * 3);
+                    jsonDaten = quizFragen[auswahlZufall].valueOf();
             }
-            //Generiert Radiobutton
-            str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';
+    }else if (objValidation.kategorie.valueOf() == "See") {                     //Kategorie "See" wurde gewählt
+        console.log("in See verzweigt");
+            if (objValidation.schwierigkeit.length == 1) {        //Falls eine Schwierigkeit gewählt wurde
+                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht") {          //Falls Leicht gewählt wurde
+                        jsonDaten = quizFragen[3].valueOf();
+                    }else if (objValidation.schwierigkeit[0].valueOf() == "Mittel") {    //Falls Mittel gewählt wurde
+                        jsonDaten = quizFragen[4].valueOf();
+                    }else{                                                               //Falls Schwer gewählt wurde
+                        console.log("in Schwer verzweigt");
+                        jsonDaten = quizFragen[5].valueOf();
+                    }
+            }else if (objValidation.schwierigkeit.length == 2) {                //Falls zwei Schwierigkeiten gewählt wurde
+                    if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
+                        && (objValidation.schwierigkeit[1].valueOf() == "Mittel")) {      //Falls Leicht und Mitte gewählt wurde
+                        jsonDaten = quizFragen[9].valueOf();
+                    }else if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")      //Falls Leicht und Schwer gewählt wurde
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {
+                        jsonDaten = quizFragen[10].valueOf();
+                    }else {                                                               //Falls Mittel und Schwer gewählt wurde
+                        jsonDaten = quizFragen[11].valueOf();
+                    }
+            }else {                                                                //Fallwierigkeit gewählt wurdes keine Sch
+                    auswahlZufall = Math.floor(Math.random() * 3);
+                    jsonDaten = quizFragen[auswahlZufall].valueOf();
+            }
+        }
+    else{                                                                          //keine Kategorie wurde gewählt
+        console.log("Keine Kategorie");
+        auswahlZufall = Math.floor(Math.random() * 2);
+            if (objValidation.schwierigkeit.length == 1) {                                  //Falls eine Schwierigkeit gewählt wurde
+                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht"){              //Falls Leicht gewählt wurde
+                        jsonDaten = quizFragen[auswahlZufall * 3].valueOf();
+                    } else if (objValidation.schwierigkeit[0].valueOf() == "Mittel") {      //Falls Mittel gewählt wurde
+                        jsonDaten = quizFragen[(auswahlZufall * 3) + 1].valueOf();
+                    } else {
+                        jsonDaten = quizFragen[(auswahlZufall * 3) + 2].valueOf();          //Falls Schwer gewählt wurde
+                    }
+            }else {                                                                         //Falls zwei Schwierigkeiten gewählt wurde
+                    if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
+                        && (objValidation.schwierigkeit[1].valueOf() == "Mittel")) {        //Falls Leicht und Mittel gewählt wurden
+                        jsonDaten = quizFragen[(auswahlZufall * 3) + 6].valueOf();
+                    }else if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {        //Falls Leicht und Schwer gewählt wurden
+                        jsonDaten = quizFragen[(auswahlZufall * 3) + 7].valueOf();
+                    }else {                                                                 //Falls Mittel und Schwer gewählt wurden
+                        jsonDaten = quizFragen[(auswahlZufall * 3) + 8].valueOf();
+                    }
+            }
+    }
+    fragenErstellen();
+}
+
+/**
+ *Funktion, zum Erstellen der Frageelemente
+ */
+
+function fragenErstellen(){
+    //kleine notiz
+    console.log("fragenErstellen geladen");
+    nichtAusgefuehrt = true;
+
+    AnzahlFragenUserInput = document.getElementById("numberID").value;
+    var random;  //Variable für die Zufallszahl. Diese wird im Schleifendurchlauf immer neu vergeben
+
+        var str;                                                     //Stringvariable, in das die HTML Elemente gespeichert werden
+        str = '<h4>Beantworte alle Fragen</h4>';
+
+        for (var i = 0; i < AnzahlFragenUserInput; i++){            //for Schleife, die die Anzahl der gewählte Fragen durchläuft
+
+            if (AnzahlFragenUserInput == 1){                        //wenn nur eine Frage gewählt wurde
+                    random = Math.floor(Math.random() * jsonDaten.length);
+
+            }else{                                                  //wenn mehr als eine Frage gewählt wurde
+                    random = Math.floor(Math.random() * jsonDaten.length); //Zufallszahl, um die Fragen zufällig zu generieren
+
+                    var wiederholungsZaehler = 1;                   //Prüfzähler für die whileschreife
+                    //
+                    while (wiederholungsZaehler <= i){              //Soll Wiederholungen vermeiden
+                            console.log("while loop");
+                            if (random == track[i - wiederholungsZaehler]){
+                                console.log("Zahl wiederholt sich: " + "random: " + random + " track: " + track[i - wiederholungsZaehler]);
+                                random = Math.floor(Math.random() * jsonDaten.length);
+                                wiederholungsZaehler = 1;
+                                //continue;
+                            }else{
+                                wiederholungsZaehler++;
+                                console.log("keine Wiederholung ermittelt");
+                            }
+                    }
+            }
+
+            str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';          //Generiert Radiobutton
             str += '<form><table>' +
-                '<tr><td><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
-                '<tr><td><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
-                '<tr><td><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
-                '<tr><td><input type="radio" name="radio' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
-                '</table></form><br>';
-            //Speichert Zufallszahl in einem Array, um auf die Fragen in der json zugreifen zu können
-            track[i] = random;
-            //Speichert Lösungen in einem Array,
-            loesung[i] = jsonDaten[random].richtig[0];
+                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
+                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
+                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
+                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
+                        '</table></form><br>';
+            track[i] = random;                                              //Speichert Zufallszahl in einem Array,
+                                                                            // um auf die Fragen in der json zugreifen zu können
+            loesung[i] = jsonDaten[random].richtig[0];                      //Speichert Lösungen in einem Array
         }
 
-        return str;
-       //
+        document.getElementById('hierEntstehtQuizID').innerHTML = str;      //zusammengesetzter String wird in HTML ausgegeben
+
+        document.getElementById('antwortRichtigID').value = "";         //Die Eingabe löschen, erst relevant, wenn dort schon
+        document.getElementById('anzahlFalschID').value = "";           //Einträge drin sind und der Benutzer ein neues Quiz
+        document.getElementById('prozentID').value = "";                //starten will
 }
 
 
@@ -186,89 +276,72 @@ function quizErstellen(zahlHerkunft)
  */
 function korrektur() {
 
-    while (true){
-        console.log('korrektur wird geladen');
-        FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
-        console.log(FrageUserInput);
-        //prueft jede Frage, in Abhaengigkeit von AnzahlFragenUserInput
-        for (var j = 0; j < (AnzahlFragenUserInput*4); j++)
-        {
-            //prueft, ob gecheckt
-            if ((FrageUserInput[j].checked == true))
-            {
-                console.log("gechecked");
-                if((j-(4*(Math.floor(j/4)))) != loesung[Math.floor(j/4)])
-                {
-                    console.log("Antwort falsch");
-                    nichtRichtig++;
-                }else
-                {
-                    console.log("Antwort richtig");
-                    richtig++;
+    //kleine notiz
+    console.log('korrektur() geladen');
+
+    try { // Fehlerbehandlung, die mit catch aufgefangen wird
+        while (nichtAusgefuehrt){
+                document.getElementById("ErgebnisID").style.visibility = "visible";
+                var cssFalseInputQuizClass = "falseInputQuiz";
+                var richtig;                    //Speichert die Anzahl der nicht richtig beantworteten Fragen
+                richtig= 0;
+                console.log('korrektur wird geladen');
+                FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
+                console.log(FrageUserInput);
+
+                for (var j = 0; j < (AnzahlFragenUserInput * 4); j++) {     //prueft jede Frage, in Abhaengigkeit von AnzahlFragenUserInput
+
+                        if ((FrageUserInput[j].checked == true)) {          //prueft, ob gecheckt
+                                console.log("gechecked");
+                                if ((j - (4 * (Math.floor(j / 4)))) != loesung[Math.floor(j / 4)]) {
+                                    console.log("Antwort falsch");
+
+//falsche sollen eingefärbt werden
+                                    //geht so nicht
+                                    //FrageUserInput[j].setAttribute("class", cssFalseInputQuizClass);
+
+
+                                } else {
+                                    console.log("Antwort richtig");
+                                    richtig++;
+                                }
+                        }else {
+                                console.log("nicht gechecked");
+                        }
                 }
-            }else
-            {
-                console.log("nicht gechecked");
-            }
+                document.getElementById('antwortRichtigID').innerHTML = richtig;
+                document.getElementById('anzahlFalschID').innerHTML = AnzahlFragenUserInput - richtig;
+                document.getElementById('prozentID').innerHTML = richtig / AnzahlFragenUserInput * 100 + "%";
+
+                //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
+                nichtAusgefuehrt = false;
+                inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorieAuswahl, fragenWaehler.value, richtig);
+
         }
-        document.getElementById('antwortRichtigID').value = richtig;
-        document.getElementById('anzahlFalschID').value = nichtRichtig;
-        document.getElementById('prozentID').value = richtig / AnzahlFragenUserInput * 100 + "%";
-        //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
-        inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorie, fragenWaehler.value, richtig);
-        //schwierigkeitsGradSelect.value,
 
-        //boolean wird auf false gesetzt, damit korrektur nicht erneut ausgeführt wird.
-        //Erst bei function quizErstellen(),wird der boolean wieder auf true gesetzt.
-        booleanKorrektur = false;
+
+    }catch (error){
+                window.alert(error.message);
     }
-
 
 }
 
 /**
  * Funktion, die die Formulareingabe in ein JSON-Objekt umwandelt
  */
-function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, kategorie, fragenAnzahl, richtig)
-{
-        console.log('test inObjektUmwandeln ()');
-        console.log('test inObjektUmwandeln ()' +auswahlSchwierigkeit);
-        console.log('test inObjektUmwandeln ()'+ kategorieAuswahl);
-        switch (auswahlSchwierigkeit){
-            case(1): {
-                auswahlSchwierigkeit = "Leicht";
-                break;
-            }
-            case(2): {
-                auswahlSchwierigkeit = "Mittel";
-                break;
-            }
-            case(3): {
-                auswahlSchwierigkeit = "Schwer";
-                break;
-            }
-            case(4): {
-                auswahlSchwierigkeit = "Leicht und Mittel";
-                break;
-            }
-            case(5): {
-                auswahlSchwierigkeit = "Leicht und Schwer";
-                break;
-            }
-            case(6): {
-                auswahlSchwierigkeit = "Mittel und Schwer";
-                break;
-            }
-        }
+function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, kategorieAuswahl, fragenAnzahl, richtig){
+        //kleine notiz
+        console.log('inObjektUmwandeln() geladen');
+
         var eingabeDaten = {};
-            eingabeDaten.benutzerName = benutzerName;
-            eingabeDaten.vorname = vorname;
-            eingabeDaten.auswahlschwierigkeit = auswahlSchwierigkeit;
-            eingabeDaten.kategorie = kategorie;
-            eingabeDaten.fragenAnzahl = fragenAnzahl;
-            eingabeDaten.richtig = richtig;
-            var datum = new Date();
-            eingabeDaten.Datum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
+                eingabeDaten.Benutzername = benutzerName;
+                eingabeDaten.Vorname = vorname;
+                eingabeDaten.Schwierigkeit = auswahlSchwierigkeit;
+                eingabeDaten.Kategorie = kategorieAuswahl;
+                eingabeDaten.Fragenanzahl = fragenAnzahl;
+                eingabeDaten.Richtig = richtig;
+                var datum = new Date();
+                eingabeDaten.Datum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
         jsonObjekt = JSON.stringify(eingabeDaten);        // umwandeln des JavaScript Objektes in ein JSON Objekt
         console.log('JSON Objekt: ' + jsonObjekt);              // Ausgabe des JSON Objektes in der Konsole
         datenSpeichern(eingabeDaten, 'quiz');

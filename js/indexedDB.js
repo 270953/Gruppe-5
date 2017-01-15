@@ -173,4 +173,5 @@ function inHTMLwiedergeben(jsObjekt) {
                 ausgabeFeld[0].innerHTML += eigenschaft + ': ' + jsObjekt[eigenschaft] + '<br>';        // dem Ausgabefeld wird die aktuelle Eigenschaft des Objektes hinzugefügt
             }   // if
     }       // for-Schleife
+
 }       // Funktion 'inHTMLwiedergeben'

@@ -10,7 +10,7 @@ function eventHandler() {
     // Datenbank wird geöffnet oder angelegt; Funktion befindet sich in indexedDB.js
     datenbankOeffnen();
 
-    jsonEinlesen();
+    jsonEinlesen('json/preise.json', null, 'preise');
 
     var buttonPreis = document.getElementById('berechnePreis');
     buttonPreis.addEventListener('click', berechnePreis, false);
@@ -29,22 +29,6 @@ function eventHandler() {
         datenLesen('preis');
     }, false);
 
-}
-
-
-// JSON Datei wird per AJAX eingelesen
-function jsonEinlesen () {
-
-    var anfrage = new XMLHttpRequest();
-    anfrage.open('GET', 'json/preise.json');
-    anfrage.onload = function() {
-
-        jsonDaten = JSON.parse(anfrage.responseText);       // die JSON Daten werden gleich in ein JavaScript Objekt umgewandelt und in jsonDaten gespeichert
-        listeLaden();                                       // lädt die Preistabelle auf der Seite dynamisch, je nach Inhalt der JSON Datei
-        anzahlPersonen();                                   // legt erstmalig die Liste der Checkbox 'Bootswahl' dynamisch an
-    };
-
-    anfrage.send();
 }
 
 
@@ -106,6 +90,29 @@ function changeMietdauerText() {                // wird aufgerufen, wenn die Boo
         mietdauer.setAttribute('max', '10');
     }
 
+}
+
+
+
+function eingabeMietdauerPruefen() {            // wird aufgerufen, wenn die Mietdauer geändert wird
+
+    var mietdauer = document.getElementById('mietdauer');
+
+    if (mietdauer.checkValidity() == false) {       // prüft auf die Richtigkeit der Eingabe
+
+        mietdauer.setAttribute('class', 'falseInput');  // ändert die Farbe des Feldes, wenn die Eingabe nicht den Vorgaben entspricht und...
+        console.log(mietdauer.validationMessage);
+
+        var ausgabeFeld = document.getElementById('ergebnis');
+        ausgabeFeld.innerHTML = 'Mit der eingegebenen Mietdauer kann kein Preis berechnet werden.<br>' +    // ...dann wird dem Anwender auch eine Information
+                                'Bitte geben Sie eine ganze Zahl von 1 bis zur maximalen Mietdauer an.';    // über die falsche Eingabe gegeben.
+    }
+
+    else {
+        if (mietdauer.hasAttribute('class')) {          // wenn die Eingabe korrekt war, wird die Hintergrundfarbe des Feldes wieder neutralisiert
+            mietdauer.removeAttribute('class');
+        }
+    }
 }
 
 

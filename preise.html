@@ -5,13 +5,15 @@
 <!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
 <head>
     <!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
-    <title>Segelverein Steife Brise</title>
+    <title>Bootsvermietung und Bootsführerschein</title>
 
+    <meta charset="UTF-8">
     <meta name="author" content="Gruppe 5">
-    <meta name="keywords" content="Segeln, Segelverein, Steife Brise, Hamburg">
-    <meta name="description" content="Wir sind ein Hamburger Segelverein f&uuml;r jedermann">
+    <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
+    <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
     <script type="text/javascript" src="js/preise.js"></script>
+    <script type="text/javascript" src="js/jsonEinlesen.js"></script>
     <script type="text/javascript" src="js/indexedDB.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>	
 	<script type="text/javascript" src="js/validation.js"></script>			
@@ -78,10 +80,11 @@
 
                      <div>
 
-                         <p>
-                             Personenanzahl:
-                             <input type="number" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0" title="Personenanzahl">
-                         </p>
+
+                         <div>
+                             <span>Personenanzahl:</span>
+                             <input type="number" title="Personenanzahl" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0">
+                         </div>
 
                          <p>
                              Bootsklasse:
@@ -99,14 +102,17 @@
                              </select>
                          </p>
 
-                         <p>
-                             Sind Sie rabattberechtigt?
+
+                         <div>
+                             <span>Sind Sie rabattberechtigt?</span>
+
                              <select title="Rabatt" class="eingabeFeld" id="rabatt">
                                  <option value="ja">ja</option>
                                  <option value="nein">nein</option>
 
                              </select>
-                         </p>
+
+                       </div>
 
                          <p>
                              <span id='mietdauerText'>Mietdauer in Tagen (max. 30): </span>
