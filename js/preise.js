@@ -8,7 +8,7 @@ function eventHandler() {
     // Datenbank wird geöffnet oder angelegt; Funktion befindet sich in indexedDB.js
     datenbankOeffnen();
 
-    jsonEinlesen();
+    jsonEinlesen('json/preise.json', null, 'preise');
 
     var buttonPreis = document.getElementById('berechnePreis');
     buttonPreis.addEventListener('click', berechnePreis, false);
@@ -27,22 +27,6 @@ function eventHandler() {
         datenLesen('preis');
     }, false);
 
-}
-
-
-// JSON Datei wird per AJAX eingelesen
-function jsonEinlesen () {
-
-    var anfrage = new XMLHttpRequest();
-    anfrage.open('GET', 'json/preise.json');
-    anfrage.onload = function() {
-
-        jsonDaten = JSON.parse(anfrage.responseText);       // die JSON Daten werden gleich in ein JavaScript Objekt umgewandelt und in jsonDaten gespeichert
-        listeLaden();                                       // lädt die Preistabelle auf der Seite dynamisch, je nach Inhalt der JSON Datei
-        anzahlPersonen();                                   // legt erstmalig die Liste der Checkbox 'Bootswahl' dynamisch an
-    };
-
-    anfrage.send();
 }
 
 
@@ -126,7 +110,6 @@ function eingabeMietdauerPruefen() {            // wird aufgerufen, wenn die Mie
             mietdauer.removeAttribute('class');
         }
     }
-
 }
 
 

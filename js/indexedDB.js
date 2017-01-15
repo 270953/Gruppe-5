@@ -23,7 +23,7 @@ function datenbankOeffnen() {
             //noinspection JSUnresolvedVariable
             if (!datenbank.objectStoreNames.contains('letztePreisBerechnungen')) {       // gibt es keinen Objectstore 'letzte Berechnungen', wird dieser angelegt
 
-                console.log('Objektstore wird angelegt.');
+                console.log('Objectstore wird angelegt.');
                 //noinspection JSUnresolvedFunction
                 datenbank.createObjectStore('letztePreisBerechnungen', {
                     keyPath: 'id',                                                  // als key wird 'id' festgelegt

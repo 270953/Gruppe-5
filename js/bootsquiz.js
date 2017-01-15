@@ -53,8 +53,10 @@ function initOnLoad ()
         datenbankOeffnen();
         getForms();
 
+
         for (var i = 0; i < quellDateien.length; i++) {         //quellDateien-Quellepfade werden Methode übergeben und
             jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
+
         }
 
         var auswertenButton = document.getElementById('auswerten');
@@ -70,7 +72,9 @@ function initOnLoad ()
             datenLesen('quiz');
         }, false);
 
+
         document.getElementById("ErgebnisID").style.visibility = "hidden";
+
 }
 
  /**
@@ -92,6 +96,8 @@ function getForms()
         auswahlKategorie = document.querySelectorAll('.kselections ul li input[type="radio"]');
         fragenWaehler = document.getElementById("numberID");
         quizErstellenButton = document.getElementById("neuesQuiz");
+
+        zahlHerkunft = fragenWaehler;
 
         //zum überprüfen hier ausgegeben
         console.log("documente geladen : \n" + benutzerNameInput + "\n "
@@ -289,7 +295,6 @@ function korrektur() {
                                     //FrageUserInput[j].setAttribute("class", cssFalseInputQuizClass);
 
 
-
                                 } else {
                                     console.log("Antwort richtig");
                                     richtig++;
@@ -301,14 +306,17 @@ function korrektur() {
                 document.getElementById('antwortRichtigID').innerHTML = richtig;
                 document.getElementById('anzahlFalschID').innerHTML = AnzahlFragenUserInput - richtig;
                 document.getElementById('prozentID').innerHTML = richtig / AnzahlFragenUserInput * 100 + "%";
+
                 //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
                 nichtAusgefuehrt = false;
                 inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorieAuswahl, fragenWaehler.value, richtig);
 
         }
+
     }catch (error){
                 window.alert(error.message);
     }
+
 }
 
 /**
