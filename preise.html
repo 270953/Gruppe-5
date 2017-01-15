@@ -15,6 +15,9 @@
     <script type="text/javascript" src="js/preise.js"></script>
     <script type="text/javascript" src="js/jsonEinlesen.js"></script>
     <script type="text/javascript" src="js/indexedDB.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>	
+	<script type="text/javascript" src="js/validation.js"></script>			
+	
 
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
@@ -48,9 +51,10 @@
          <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
          <main>
 
-                 <section id="preisTabelle">
+		        <h1>Preistabelle</h1>
 
-                         <h1>Preistabelle</h1>
+		 
+                <section id="preisTabelle">
 
                                  <!-- Preistabelle: Daten werden aus Json eingelesen -->
                                  <table id="preise">
@@ -66,49 +70,53 @@
 
                  </section>
 
+                <h1>Preisrechner</h1>
+				 
+				 
+                <section id="preisRechner">
 
-                 <section id="preisRechner">
-
-                     <h1>Preisrechner</h1>
 
                      <p>Treffen Sie Ihre Auswahl:</p>
 
                      <div>
+
 
                          <div>
                              <span>Personenanzahl:</span>
                              <input type="number" title="Personenanzahl" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0">
                          </div>
 
-                         <div>
+
+                         <p>
                              Bootsklasse:
                              <select class="eingabeFeld" id="bootsKlasse" title="Bootsklasse wählen">
 
                              </select>
-                         </div>
+                         </p>
 
-                         <div>
+                         <p>
                              Zu welcher Zeit möchten Sie mieten:
                              <select title="Saison" class="eingabeFeld" id="saison">
                                  <option value="Hauptsaison">Hauptsaison</option>
                                  <option value="Nebensaison">Nebensaison</option>
 
                              </select>
-                         </div>
+                         </p>
 
                          <div>
                              <span>Sind Sie rabattberechtigt?</span>
+
                              <select title="Rabatt" class="eingabeFeld" id="rabatt">
                                  <option value="ja">ja</option>
                                  <option value="nein">nein</option>
 
                              </select>
-                         </div>
+                       </div>
 
-                         <div>
+                         <p>
                              <span id='mietdauerText'>Mietdauer in Tagen (max. 30): </span>
                              <input type="number" title="Mietdauer" class="eingabeFeld" id="mietdauer" min="1" max="30" step="1" value="1">
-                         </div>
+                         </p>
 
                          <div>
                              <input type="button" id="berechnePreis" value="Preis berechnen">

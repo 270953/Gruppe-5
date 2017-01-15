@@ -25,6 +25,8 @@ var quellDateien = [                //Pfade der Fragen, die in jsonEinlesen vera
     "'json/quizSeeMittelSchwer.json'"
 ];
 
+var jsonDaten;                  //Deklariert JSON Objekt
+
 
 var quizFragen = [];            //in diesem Array werden die JavaScript Objekte abgelegt,
                                 // die aus den den JSON Dateien mit der funkticn jsonEinlesen abgerufen werden
@@ -41,10 +43,6 @@ FrageUserInput= [];
 var AnzahlFragenUserInput;      //Anzahl der Fragen, die vom Benutzer eingegeben werden.
 AnzahlFragenUserInput = 0;      //Zunächst mit 0 initialisiert
 
-var jsonDaten;                  //Deklariert JSON Objekt
-
-var nichtAusgefuehrt = true;    //Boolean für korrektur(), welches nach ausführung auf false gesetzt wird.
-                                // Weitere Ausführen soll vermieden werden
 
  /**
   * Funktionen, die beim Laden von quiz.html ausgeführt werden
@@ -55,8 +53,10 @@ function initOnLoad ()
         datenbankOeffnen();
         getForms();
 
-        for (var i = 0; i < quellDateien.length; i++) {
-            quizFragen[i] = jsonEinlesen(quellDateien[i]);
+
+        for (var i = 0; i < quellDateien.length; i++) {         //quellDateien-Quellepfade werden Methode übergeben und
+            jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
+
         }
 
         var auswertenButton = document.getElementById('auswerten');
@@ -71,6 +71,10 @@ function initOnLoad ()
         letzteErgebnisse.addEventListener('click', function () {
             datenLesen('quiz');
         }, false);
+
+
+        document.getElementById("ErgebnisID").style.visibility = "hidden";
+
 }
 
  /**
@@ -265,14 +269,16 @@ function fragenErstellen(){
  * Funktion, die die Quizeingabe auf Richtigkeit überprüft
  */
 function korrektur() {
-    var cssFalseInputQuizClass = "falseInputQuiz";
-    var richtig;                    //Speichert die Anzahl der nicht richtig beantworteten Fragen
-    richtig= 0;
+
     //kleine notiz
     console.log('korrektur() geladen');
 
     try { // Fehlerbehandlung, die mit catch aufgefangen wird
         while (nichtAusgefuehrt){
+                document.getElementById("ErgebnisID").style.visibility = "visible";
+                var cssFalseInputQuizClass = "falseInputQuiz";
+                var richtig;                    //Speichert die Anzahl der nicht richtig beantworteten Fragen
+                richtig= 0;
                 console.log('korrektur wird geladen');
                 FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
                 console.log(FrageUserInput);
@@ -284,17 +290,9 @@ function korrektur() {
                                 if ((j - (4 * (Math.floor(j / 4)))) != loesung[Math.floor(j / 4)]) {
                                     console.log("Antwort falsch");
 
-
-
 //falsche sollen eingefärbt werden
                                     //geht so nicht
                                     //FrageUserInput[j].setAttribute("class", cssFalseInputQuizClass);
-
-
-
-
-
-
 
 
                                 } else {
@@ -305,17 +303,20 @@ function korrektur() {
                                 console.log("nicht gechecked");
                         }
                 }
-                document.getElementById('antwortRichtigID').value = richtig;
-                document.getElementById('anzahlFalschID').value = AnzahlFragenUserInput - richtig;
-                document.getElementById('prozentID').value = richtig / AnzahlFragenUserInput * 100 + "%";
+                document.getElementById('antwortRichtigID').innerHTML = richtig;
+                document.getElementById('anzahlFalschID').innerHTML = AnzahlFragenUserInput - richtig;
+                document.getElementById('prozentID').innerHTML = richtig / AnzahlFragenUserInput * 100 + "%";
+
                 //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
                 nichtAusgefuehrt = false;
                 inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorieAuswahl, fragenWaehler.value, richtig);
 
         }
-    }catch (error) {
+
+    }catch (error){
                 window.alert(error.message);
-            }
+    }
+
 }
 
 /**
