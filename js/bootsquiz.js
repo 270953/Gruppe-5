@@ -78,7 +78,7 @@ function initOnLoad ()
             document.getElementById('fehlerMeldung6').innerHTML = "";
             document.meinQuiz.reset();
             FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
-            for(var i=0;i<FrageUserInput.length;i++)
+            for(var i=0 ; i<FrageUserInput.length ; i++)
                 FrageUserInput[i].checked = false;
         }, false);
 
@@ -268,7 +268,7 @@ function fragenErstellen(){
             }
 
             str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';          //Generiert Radiobutton
-            str += '<form>' +
+            str += '<form><table>' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
