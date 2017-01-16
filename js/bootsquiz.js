@@ -45,6 +45,8 @@ FrageUserInput= [];
 var AnzahlFragenUserInput;      //Anzahl der Fragen, die vom Benutzer eingegeben werden.
 AnzahlFragenUserInput = 0;      //Zunächst mit 0 initialisiert
 
+var nichtAusgefuehrt = false;   //Quiz kann noch nicht ausgewertet werden, wird bei fragenErstellen() auf true gesetzt
+
 
  /**
   * Funktionen, die beim Laden von quiz.html ausgeführt werden
@@ -65,15 +67,21 @@ function initOnLoad ()
         var auswertenButton = document.getElementById('auswerten');
         auswertenButton.addEventListener('click', korrektur);
 
-        var formularLoeschenButtonOben = document.getElementById('formularLeerenOben');
-        formularLoeschenButtonOben.addEventListener('click', function () {
+        var formularLoeschenButtonOben = document.getElementById('formularLeerenOben');     //loescht alle Eingaben aus dem
+        formularLoeschenButtonOben.addEventListener('click', function () {                  //oberen Formularbereich
             document.quizErstellen.reset();
         }, false);
 
-        var formularLoeschenButton = document.getElementById('formularLeeren');
-        formularLoeschenButton.addEventListener('click', function () {
+       var formularLoeschenButton = document.getElementById('formularLeeren');      //loescht alle Eingaben
+        formularLoeschenButton.addEventListener('click', function () {              //aus dem Quizbereich
+            nichtAusgefuehrt = true;
+            document.getElementById('fehlerMeldung6').innerHTML = "";
             document.meinQuiz.reset();
+            FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
+            for(var i=0;i<FrageUserInput.length;i++)
+                FrageUserInput[i].checked = false;
         }, false);
+
 
         var letzteErgebnisse = document.getElementById('letzteErgebnisse');
         letzteErgebnisse.addEventListener('click', function () {
@@ -162,6 +170,7 @@ function quizZusammenStellen(objValidation) {
                         jsonDaten = quizFragen[8].valueOf();
                     }
             }else {                                                             //Falls keine Schwierigkeit gewählt wurde
+                document.getElementById('fehlerMeldung3').innerHTML = "Es wurde keine Schwierigkeit ausgew&auml;hlt. Eine Schwierigkeit wurde zuf&auml;llig gew&auml;hlt.";
                     auswahlZufall = Math.floor(Math.random() * 3);
                     jsonDaten = quizFragen[auswahlZufall].valueOf();
             }
@@ -187,12 +196,14 @@ function quizZusammenStellen(objValidation) {
                         jsonDaten = quizFragen[11].valueOf();
                     }
             }else {                                                                //Fallwierigkeit gewählt wurdes keine Sch
+                    document.getElementById('fehlerMeldung3').innerHTML = "Es wurde keine Schwierigkeit ausgew&auml;hlt. Eine Schwierigkeit wurde zuf&auml;llig gew&auml;hlt.";
                     auswahlZufall = Math.floor(Math.random() * 3);
                     jsonDaten = quizFragen[auswahlZufall].valueOf();
             }
         }
     else{                                                                          //keine Kategorie wurde gewählt
         console.log("Keine Kategorie");
+        document.getElementById('fehlerMeldung4').innerHTML = "Es wurde keine Kategorie ausgew&auml;hlt. Eine Kategorie wurde zuf&auml;llig gew&auml;hlt.";
         auswahlZufall = Math.floor(Math.random() * 2);
             if (objValidation.schwierigkeit.length == 1) {                                  //Falls eine Schwierigkeit gewählt wurde
                     if (objValidation.schwierigkeit[0].valueOf() == "Leicht"){              //Falls Leicht gewählt wurde
@@ -257,12 +268,12 @@ function fragenErstellen(){
             }
 
             str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';          //Generiert Radiobutton
-            str += '<form><table>' +
-                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
-                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
-                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
-                        '<tr><td><input type="radio" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
-                        '</table></form><br>';
+            str += '<form>' +
+                        '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
+                        '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
+                        '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
+                        '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
+                    '</table></form><br>';
             track[i] = random;                                              //Speichert Zufallszahl in einem Array,
                                                                             // um auf die Fragen in der json zugreifen zu können
             loesung[i] = jsonDaten[random].richtig[0];                      //Speichert Lösungen in einem Array
@@ -284,8 +295,13 @@ function korrektur() {
     //kleine notiz
     console.log('korrektur() geladen');
 
+    if (nichtAusgefuehrt == false){         //preft, ob Korrektur schon ausgeführt wurde
+        document.getElementById('fehlerMeldung6').innerHTML = "Erstelle ein neues Quiz, um ein neues Quiz zu starten, oder leere die Eingabe zur Wiederholung. Viel Erfolg!";
+    }
+
     try { // Fehlerbehandlung, die mit catch aufgefangen wird
         while (nichtAusgefuehrt){
+
                 document.getElementById("ErgebnisID").style.visibility = "visible";
                 var cssFalseInputQuizClass = "falseInputQuiz";
                 var richtig;                    //Speichert die Anzahl der nicht richtig beantworteten Fragen
@@ -301,10 +317,7 @@ function korrektur() {
                                 if ((j - (4 * (Math.floor(j / 4)))) != loesung[Math.floor(j / 4)]) {
                                     console.log("Antwort falsch");
 
-//falsche sollen eingefärbt werden
-                                    //geht so nicht
-                                    //FrageUserInput[j].setAttribute("class", cssFalseInputQuizClass);
-
+                                    FrageUserInput[j].setAttribute('disabled', 'disabled');     //falsche Antworten werden ausgeblendet
 
                                 } else {
                                     console.log("Antwort richtig");

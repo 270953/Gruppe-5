@@ -115,14 +115,15 @@
                                     <!--Buttons-->
                                     <div class="buttonErgebnis" id="buttonErgebnis">
                                     <input type="button" value="Ergebnis" id="auswerten">
-                                    <input type="button" id="letzteErgebnisse" value="letzteErgebnisse">
+                                    <input type="button" id="letzteErgebnisse" value="letzte Ergebnisse">
                                     <input type="button" value="Eingabe l&ouml;schen" id="formularLeeren">
+                                    <p class="fehlermeldung" id="fehlerMeldung6"></p>
 
                                     </div>
 
                                     <!--Bereich fuer die Resultate-->
                                     <div class="Ergebnis" id="ErgebnisID">
-                                        <form method="GET" name="result">
+                                        <form method="Post" name="result">
 
                                             <p>Richtige Antworten:
                                                 <input id = "antwortRichtigID" type="textarea" name="p" readonly>

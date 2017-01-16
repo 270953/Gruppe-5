@@ -17,7 +17,7 @@ function checkVal(inputElement)
 function setFalse(inputElement, errorText, counter)
 {
 	inputElement.setAttribute("class", cssFalseInputClass);
-    inputElement.setCustomValidity("Der Benutzername muss mind. 5 Zeichen lang sein, max. 16! ");
+    inputElement.setCustomValidity(errorText);
     console.log(inputElement.validationMessage);
     console.log("failCounter: " + (--counter));
 	
