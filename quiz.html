@@ -62,11 +62,11 @@
                                     <!--Benutzername-->
 
                                     <h3>Gib deinen Benutzernamen ein (mind. 5 Buchstaben):</h3>
-                                        <input id="benutzernameID" type="text" required minlength="5"><span class="fehlermeldung" id="fehlerMeldung1"></span>
+                                        <input id="benutzernameID" type="text" title="Benutzername" required minlength="5"><span class="fehlermeldung" id="fehlerMeldung1"></span>
 
                                     <!--Vorname-->
                                     <h3>Gib deinen Vornamen ein (Pflichtfeld): </h3>
-                                        <input id="vornameID" type="text" required><span class="fehlermeldung" id="fehlerMeldung2"></span>
+                                        <input id="vornameID" type="text" title="Vorname" required><span class="fehlermeldung" id="fehlerMeldung2"></span>
 
                                     <!--Schwierigkeit-->
                                     <div class="selectSchwierigkeit">
@@ -95,8 +95,11 @@
 
                                     <!--Anzahl der Fragen bestimmen-->
 
-                                    <p><h3>W&auml;hle bis zu 8 Fragen: </h3>
-                                        <input type="number" id="numberID" required min="1" max="8"><span class="fehlermeldung" id="fehlerMeldung5"></span></p>
+                                    <div>
+                                        <h3>W&auml;hle bis zu 8 Fragen: </h3>
+                                        <input type="number" id="numberID" title="Fragenanzahl" required min="1" max="8">
+                                        <span class="fehlermeldung" id="fehlerMeldung5"></span>
+                                    </div>
 
                                     <!--Button zum Abschicken der Benutereingaben-->
                                     <input type="button" id="neuesQuiz" value="Neues Quiz erstellen">
@@ -129,14 +132,23 @@
                                             <fieldset>
                                                 <legend>Ergebnisse</legend>
 
-                                                Richtige Antworten:
-                                                <output id="antwortRichtigID"></output>
+                                                <ul>
+                                                    <li>
+                                                    Richtige Antworten:
+                                                    <output id="antwortRichtigID"></output>
+                                                    </li>
 
-                                                Falsche Antworten:
-                                                <output id="anzahlFalschID"></output>
+                                                    <li>
+                                                    Falsche Antworten:
+                                                    <output id="anzahlFalschID"></output>
+                                                    </li>
 
-                                                Prozentual richtige Antworten:
-                                                <output id="prozentID"></output>
+                                                    <li>
+                                                    Prozentual richtige Antworten:
+                                                    <output id="prozentID"></output>
+                                                    </li>
+
+                                                </ul>
 
                                             </fieldset>
                                         </form>
