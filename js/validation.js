@@ -6,7 +6,17 @@ regexLetters = new RegExp('^[a-zA-Z\x7f-\xff]+$');
 regexMail = new RegExp('^[^ ]*@[^ ]*$');//must match a mail domain
 regexSpecial = new RegExp("<+|>+|;+|\{+|\}+|\\$+");
 
+
 var cssFalseInputClass = "falseInput";
+
+var korrekterBenutzername = false;
+var korrekteSchwierigkeit = false;
+var korrekteKategorie = false;
+var korrekteAnzahl = false;
+var korrekterVorname = false;
+var korrekterNachname = false;
+var korrekteEmail = false;
+var korrekterText = false;
 
 //checks the validity and sets the errorText
 function checkVal(inputElement, errorText, fehlermeldungOutput)
@@ -26,14 +36,17 @@ function checkVal(inputElement, errorText, fehlermeldungOutput)
 }
 
 //checks the pattern
+
 function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match = true)//default true
 {
 	//bool wird falsch gesetzt (negation vom parameter)
+
 	var bool = !match;
 	//initialisiere den ausgabetext
 	var ausgabeText = "";
 	
 	if (inputElement.value.match(regExPattern))
+
 	{
 		//inventiere das bool
 		bool = !bool;

@@ -113,6 +113,14 @@ h1
 	margin-left : 0px;/*Setze den Margin des "articles *" zurück*/
 }
 
+h2{
+	font-size: x-large;
+}
+
+h3{
+	font-font-weight: bold;
+}
+
 /*Die Darstellun des Footers*/
 footer
 {

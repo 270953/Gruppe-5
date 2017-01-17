@@ -72,6 +72,7 @@ function getForms()
 	buttonAbschicken.onclick = function(){ 
 		
 	if (nachNameCheck() && vornameCheck() && emailCheck() && textAreaCheck())
+
 		{
 			console.log("abschicken");
 			
