@@ -17,32 +17,28 @@ function initOnLoad ()
 
 function vornameCheck()
 	{ 			
-		fehlerDoc = document.getElementById("fehlerMeldungVorName");
+		var fehlerDoc = document.getElementById("fehlerMeldungVorName");
 	
-		return (checkVal(formElementsText[0], formElementsText[0].validationMessage, fehlerDoc) &&
-		checkPattern(formElementsText[0], regexLetters, "Bitte nur Buchstaben", fehlerDoc));
+		return (checkVal(formElementsText[0], formElementsText[0].validationMessage, fehlerDoc) && checkPattern(formElementsText[0], regexLetters, "Bitte nur Buchstaben", fehlerDoc));
 	}
 
 function nachNameCheck()
 	{ 			
-		fehlerDoc = document.getElementById("fehlerMeldungName");
+		var fehlerDoc = document.getElementById("fehlerMeldungName");
 	
-		return (checkVal(formElementsText[1], formElementsText[1].validationMessage, fehlerDoc) &&
-		checkPattern(formElementsText[1], regexLetters, "Bitte nur Buchstaben", fehlerDoc));	
+		return (checkVal(formElementsText[1], formElementsText[1].validationMessage, fehlerDoc) && checkPattern(formElementsText[1], regexLetters, "Bitte nur Buchstaben", fehlerDoc));	
 	}
 	
 function emailCheck()
 	{ 
 		return (checkVal(formEmail, formEmail.validationMessage, document.getElementById("fehlerMeldungEMail")));
-	
 	} 
 	
 function textAreaCheck()
 	{ 
-		fehlerDoc = document.getElementById("fehlerMeldungText");
+		var fehlerDoc = document.getElementById("fehlerMeldungText");
 	
-		return (checkVal(formTextArea, formTextArea.validationMessage, fehlerDoc) &&
-		checkPattern(formTextArea, regexSpecial, "Der Text darf folgende Zeichen nicht enthalten : <, >, {, }, $, ;", fehlerDoc, false));
+		return (checkVal(formTextArea, formTextArea.validationMessage, fehlerDoc) && checkPattern(formTextArea, regexSpecial, "Der Text darf folgende Zeichen nicht enthalten : <, >, {, }, $, ;", fehlerDoc, false));
 	}
 
 function getForms()
@@ -54,8 +50,8 @@ function getForms()
 	formEmail = document.querySelector("form p input[type='email']");
 	formTextArea = document.querySelector("form p textarea");
 	
-	buttonAbschicken = document.getElementById("abschicken");
-	buttonLetzteErgebnisse = document.getElementById("ergebnisseAbrufen");
+	var buttonAbschicken = document.getElementById("abschicken");
+	var buttonLetzteErgebnisse = document.getElementById("ergebnisseAbrufen");
 	
 	//log zum überprüfen
 	console.log("documente geladen : \n"
@@ -69,10 +65,10 @@ function getForms()
 	formTextArea.onchange = textAreaCheck;
 	 
 	//eventlistener beim kilicken zum überprüfen der formulare
-	buttonAbschicken.onclick = function(){ 
-		
-	if (nachNameCheck() && vornameCheck() && emailCheck() && textAreaCheck())
-
+	buttonAbschicken.onclick = function()
+	{ 
+	//überprüfe alle methoden
+	if (vornameCheck() & nachNameCheck() & emailCheck() & textAreaCheck())
 		{
 			console.log("abschicken");
 			
@@ -80,7 +76,7 @@ function getForms()
 			datenSpeichern(eingabeDaten, 'letzteKontakte'); 			
 		}
 		
-	}
+	};
 		
 	buttonLetzteErgebnisse.onclick = function(){ datenLesen('letzteKontakte'); };
 }
@@ -99,7 +95,6 @@ function inObjektUmwandeln(){
 		eingabeDaten.Eingabefeld = formTextArea.value;
 
         eingabeDaten.Datum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
-
 }
 
 window.onload = initOnLoad;

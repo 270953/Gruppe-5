@@ -49,12 +49,15 @@
 				</h1>
 			  			  
 			<form action="mailto:nikog3@tlen.pl" method="POST" enctype="text/plain">
-			  
+						  
 				<p>
 					Vorname 
 					<br>
 					<input type="text" name="vorname" title="Vorname" minLength="2" maxLength="25" required/>
 				</p>
+				
+				<p id="fehlerMeldungVorName"></p>
+
 				
 				<p>
 					Nachname 
@@ -62,17 +65,23 @@
 					<input type="text" name="nachname" title="Nachname" minLength="3" maxLength="25" required/>
 				</p>
 				
+				<p id="fehlerMeldungName"></p>
+				
 				<p>
 					Ihre E-Mail Adresse 
 					<br>
 					<input type="email" name="email" title="E-Mail" minLength="3" maxLength="25" required/>
 				</p>	
 
+				<p id="fehlerMeldungEMail"></p>
+				
 				<p>
 					Ihre Nachricht 
 					<br>
 					<textarea title="Ihre Nachricht" rows="5" cols="50" minLength="15" required></textarea>
 				</p>
+				
+				<p id="fehlerMeldungText"></p>
 				
 				
 				<input type="submit" value="Abschicken" id="abschicken"/>
