@@ -1,4 +1,4 @@
- window.onload = initOnLoad;
+window.onload = initOnLoad;
 
 //hier werden die nodes gelagert, damit mehrere funktionen auf diese zugreifen können
 var benutzerNameInput;
@@ -9,6 +9,15 @@ var kategorieAuswahl;
 var fragenWaehler;
 var quizErstellenButton;
 var jsonObjekt;
+var auswahlKategorieSpeicher;
+
+var fehlermeldungBenutzername;
+var fehlermeldungVorname;
+var fehlermeldungSchwierigkeit;
+var fehlermeldungKategorie;
+var fehlermeldungAnzahlFragen;
+var hinweisSchwierigkeit;
+var hinweisKategorie;
 
 
 
@@ -59,7 +68,8 @@ function initOnLoad ()
 
 
 
-        for (var i = 0; i < quellDateien.length; i++) {         //quellDateien-Quellepfade werden Methode übergeben und
+        for (var i = 0; i < quellDateien.length; i++)
+        {                                                       //quellDateien-Quellepfade werden Methode übergeben und
             jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
 
         }
@@ -69,6 +79,14 @@ function initOnLoad ()
 
         var formularLoeschenButtonOben = document.getElementById('formularLeerenOben');     //loescht alle Eingaben aus dem
         formularLoeschenButtonOben.addEventListener('click', function () {                  //oberen Formularbereich
+            benutzerNameInput.removeAttribute("class", cssFalseInputClass);
+            vornameInput.removeAttribute("class", cssFalseInputClass);
+            fragenWaehler.removeAttribute("class", cssFalseInputClass);
+            fehlermeldungBenutzername.innerHTML = "";
+            fehlermeldungVorname.innerHTML = "";
+            fehlermeldungSchwierigkeit.innerHTML = "";
+            fehlermeldungKategorie.innerHTML = "";
+            fehlermeldungAnzahlFragen.innerHTML = "";
             document.quizErstellen.reset();
         }, false);
 
@@ -78,9 +96,9 @@ function initOnLoad ()
             document.getElementById('fehlerMeldung6').innerHTML = "";
             document.meinQuiz.reset();
             FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
-            for(var i=0 ; i<FrageUserInput.length ; i++)
+            for(var i=0 ; i<FrageUserInput.length ; i++) {
                 FrageUserInput[i].checked = false;
-        }, false);
+            }}, false);
 
 
         var letzteErgebnisse = document.getElementById('letzteErgebnisse');
@@ -109,21 +127,33 @@ function getForms()
         benutzerNameInput = document.getElementById("benutzernameID");
         vornameInput = document.getElementById("vornameID");
         schwierigkeitsGradSelect = document.querySelectorAll('.selectSchwierigkeit ul li input[type="checkbox"]');
-        auswahlKategorie = document.querySelectorAll('.kselections ul li input[type="radio"]');
+        kategorieAuswahl = document.getElementsByName('kategorie');
         fragenWaehler = document.getElementById("numberID");
         quizErstellenButton = document.getElementById("neuesQuiz");
 
-        zahlHerkunft = fragenWaehler;
+        fehlermeldungBenutzername = document.getElementById('fehlerMeldung1');
+        fehlermeldungVorname = document.getElementById('fehlerMeldung2');
+        fehlermeldungSchwierigkeit = document.getElementById('fehlerMeldung3');
+        fehlermeldungKategorie = document.getElementById('fehlerMeldung4');
+        fehlermeldungAnzahlFragen = document.getElementById('fehlerMeldung5');
+
 
         //zum überprüfen hier ausgegeben
         console.log("documente geladen : \n" + benutzerNameInput + "\n "
             + vornameInput + "\n" + "Anzahl Schwierigkeit: " + schwierigkeitsGradSelect.length + "\n"
-            + auswahlKategorie + " : " + auswahlKategorie.length + "\n" + fragenWaehler + "\n"
+            + kategorieAuswahl + " : " + kategorieAuswahl.length + "\n" + fragenWaehler + "\n"
             + quizErstellenButton);
 
         //der button zum voranschreiten kriegt einen click listener
 
-        quizErstellenButton.addEventListener("click", function (){quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, auswahlKategorie, fragenWaehler, quizErstellenButton)}, false);
+
+
+        quizErstellenButton.addEventListener("click", function (){
+            pruefeBenutzername();
+            pruefeVorname();
+            pruefenAnzahlFragen();
+            quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, kategorieAuswahl, fragenWaehler)
+            }, false);
 }
 
 
@@ -131,10 +161,19 @@ function getForms()
   * Funktion, welches anhand der Kategorie und der Schwierigkeit das Quiz zusammenerstellt
   */
 function quizZusammenStellen(objValidation) {
+
+
+
+
      //kleine notiz
     console.log('quizZusammenStellen(objValidation) geladen');
 
     var auswahlZufall;
+    var csshinweisfarbeClass = "hinweisfarbe";
+
+     hinweisSchwierigkeit = document.getElementById('fehlerMeldung3');
+     hinweisKategorie = document.getElementById('fehlerMeldung4');
+
     //Zuordnen der Werte, die für inObjektUmwandeln() benötigt werden
     if(objValidation.schwierigkeit.length > 0){
         auswahlSchwierigkeit = objValidation.schwierigkeit.valueOf();
@@ -142,90 +181,130 @@ function quizZusammenStellen(objValidation) {
         auswahlSchwierigkeit = "keine Auswahl";
     }
      if((objValidation.kategorie.valueOf() == "Binnenwasser") || (objValidation.kategorie.valueOf() == "See")){
-         kategorieAuswahl = objValidation.kategorie.valueOf();
+         kategorieAuswahl = auswahlKategorieSpeicher;
      }else{
-         kategorieAuswahl = "keine Auswahl";
+         auswahlKategorieSpeicher = "keine Auswahl";
      }
 
 
-    if (objValidation.kategorie.valueOf() == "Binnenwasser") {                 //Kategorie "Binnenwasser" wurde gewählt
+
+    if (objValidation.kategorie.valueOf() == "Binnenwasser")                  //Kategorie "Binnenwasser" wurde gewählt
+    {
+        hinweisKategorie.innerHTML = "";
         console.log("in Binnenwasser verzweigt");
-            if (objValidation.schwierigkeit.length == 1) {                     //Falls eine Schwierigkeit gewählt wurde
-                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht") {         //Falls Leicht gewählt wurde
+            if (objValidation.schwierigkeit.length == 1)               //Falls eine Schwierigkeit gewählt wurde
+            {
+                hinweisSchwierigkeit.innerHTML = "";
+                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht")          //Falls Leicht gewählt wurde
+                    {
                         jsonDaten = quizFragen[0].valueOf();
-                    }else if (objValidation.schwierigkeit[0].valueOf() == "Mittel") {   //Falls Mittel gewählt wurde
+                    }else if (objValidation.schwierigkeit[0].valueOf() == "Mittel")    //Falls Mittel gewählt wurde
+                    {
                         jsonDaten = quizFragen[1].valueOf();
-                    }else {                                                             //Falls Schwer gewählt wurde
+                    }else                                                              //Falls Schwer gewählt wurde
+                    {
                         jsonDaten = quizFragen[2].valueOf();
                     }
-            }else if (objValidation.schwierigkeit.length == 2) {                        //Falls zwei Schwierigkeiten gewählt wurde
-
+            }else if (objValidation.schwierigkeit.length == 2)                         //Falls zwei Schwierigkeiten gewählt wurde
+            {
+                hinweisSchwierigkeit.innerHTML = "";
                     if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
-                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {    //Falls Leicht und Mittel gewählt wurden
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer"))     //Falls Leicht und Mittel gewählt wurden
+                    {
                         jsonDaten = quizFragen[6].valueOf();
                     }else if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
-                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {     //Falls Leicht und Schwer gewählt wurden
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer"))      //Falls Leicht und Schwer gewählt wurden
+                    {
                         jsonDaten = quizFragen[7].valueOf();
-                    }else {
+                    }else
+                    {
                         jsonDaten = quizFragen[8].valueOf();
                     }
-            }else {                                                             //Falls keine Schwierigkeit gewählt wurde
-                document.getElementById('fehlerMeldung3').innerHTML = "Es wurde keine Schwierigkeit ausgew&auml;hlt. Eine Schwierigkeit wurde zuf&auml;llig gew&auml;hlt.";
+            }else {
+                hinweisSchwierigkeit.innerHTML = "Hinweis: Es wurde keine Schwierigkeit ausgew&auml;hlt. Eine Schwierigkeit wurde daher zuf&auml;llig gew&auml;hlt.";
+                hinweisSchwierigkeit.setAttribute("class", csshinweisfarbeClass);
                     auswahlZufall = Math.floor(Math.random() * 3);
                     jsonDaten = quizFragen[auswahlZufall].valueOf();
             }
-    }else if (objValidation.kategorie.valueOf() == "See") {                     //Kategorie "See" wurde gewählt
+    }else if (objValidation.kategorie.valueOf() == "See")             //Kategorie "See" wurde gewählt
+    {
         console.log("in See verzweigt");
-            if (objValidation.schwierigkeit.length == 1) {        //Falls eine Schwierigkeit gewählt wurde
-                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht") {          //Falls Leicht gewählt wurde
+            hinweisKategorie.innerHTML ="";
+                if (objValidation.schwierigkeit.length == 1)         //Falls eine Schwierigkeit gewählt wurde
+                {
+                    hinweisSchwierigkeit.innerHTML = "";
+                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht")           //Falls Leicht gewählt wurde
+                    {
                         jsonDaten = quizFragen[3].valueOf();
-                    }else if (objValidation.schwierigkeit[0].valueOf() == "Mittel") {    //Falls Mittel gewählt wurde
+                    }else if (objValidation.schwierigkeit[0].valueOf() == "Mittel")     //Falls Mittel gewählt wurde
+                    {
                         jsonDaten = quizFragen[4].valueOf();
-                    }else{                                                               //Falls Schwer gewählt wurde
+                    }else                                                               //Falls Schwer gewählt wurde
+                    {
                         console.log("in Schwer verzweigt");
                         jsonDaten = quizFragen[5].valueOf();
                     }
-            }else if (objValidation.schwierigkeit.length == 2) {                //Falls zwei Schwierigkeiten gewählt wurde
+            }else if (objValidation.schwierigkeit.length == 2)                 //Falls zwei Schwierigkeiten gewählt wurde
+            {
+                hinweisSchwierigkeit.innerHTML = "";
                     if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
-                        && (objValidation.schwierigkeit[1].valueOf() == "Mittel")) {      //Falls Leicht und Mitte gewählt wurde
+                        && (objValidation.schwierigkeit[1].valueOf() == "Mittel"))       //Falls Leicht und Mitte gewählt wurde
+                    {
                         jsonDaten = quizFragen[9].valueOf();
                     }else if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")      //Falls Leicht und Schwer gewählt wurde
-                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer"))
+                    {
                         jsonDaten = quizFragen[10].valueOf();
-                    }else {                                                               //Falls Mittel und Schwer gewählt wurde
+                    }else                                                                //Falls Mittel und Schwer gewählt wurde
+                    {
                         jsonDaten = quizFragen[11].valueOf();
                     }
-            }else {                                                                //Fallwierigkeit gewählt wurdes keine Sch
-                    document.getElementById('fehlerMeldung3').innerHTML = "Es wurde keine Schwierigkeit ausgew&auml;hlt. Eine Schwierigkeit wurde zuf&auml;llig gew&auml;hlt.";
-                    auswahlZufall = Math.floor(Math.random() * 3);
-                    jsonDaten = quizFragen[auswahlZufall].valueOf();
+            }else                                                                 //Fallwierigkeit gewählt wurdes keine Sch
+            {
+                    hinweisSchwierigkeit.innerHTML = "Hinweis: Es wurde keine Schwierigkeit ausgew&auml;hlt. Eine Schwierigkeit wurde daher zuf&auml;llig gew&auml;hlt.";
+                    hinweisSchwierigkeit.setAttribute("class", csshinweisfarbeClass);
+                        auswahlZufall = Math.floor(Math.random() * 3);
+                        jsonDaten = quizFragen[auswahlZufall].valueOf();
             }
         }
     else{                                                                          //keine Kategorie wurde gewählt
         console.log("Keine Kategorie");
-        document.getElementById('fehlerMeldung4').innerHTML = "Es wurde keine Kategorie ausgew&auml;hlt. Eine Kategorie wurde zuf&auml;llig gew&auml;hlt.";
+            hinweisKategorie.innerHTML = "Hinweis: Es wurde keine Kategorie ausgew&auml;hlt. Eine Kategorie wurde daher zuf&auml;llig gew&auml;hlt.";
+            hinweisKategorie.setAttribute("class", csshinweisfarbeClass);
         auswahlZufall = Math.floor(Math.random() * 2);
-            if (objValidation.schwierigkeit.length == 1) {                                  //Falls eine Schwierigkeit gewählt wurde
-                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht"){              //Falls Leicht gewählt wurde
+            if (objValidation.schwierigkeit.length == 1)
+            {
+                hinweisSchwierigkeit.innerHTML = "";//Falls eine Schwierigkeit gewählt wurde
+                    if (objValidation.schwierigkeit[0].valueOf() == "Leicht")              //Falls Leicht gewählt wurde
+                    {
                         jsonDaten = quizFragen[auswahlZufall * 3].valueOf();
-                    } else if (objValidation.schwierigkeit[0].valueOf() == "Mittel") {      //Falls Mittel gewählt wurde
+                    } else if (objValidation.schwierigkeit[0].valueOf() == "Mittel")       //Falls Mittel gewählt wurde
+                    {
                         jsonDaten = quizFragen[(auswahlZufall * 3) + 1].valueOf();
                     } else {
                         jsonDaten = quizFragen[(auswahlZufall * 3) + 2].valueOf();          //Falls Schwer gewählt wurde
                     }
-            }else {                                                                         //Falls zwei Schwierigkeiten gewählt wurde
+            }else if (objValidation.schwierigkeit.length == 2)  {                     //Falls zwei Schwierigkeiten gewählt wurde
+                    hinweisSchwierigkeit.innerHTML = "";
                     if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
-                        && (objValidation.schwierigkeit[1].valueOf() == "Mittel")) {        //Falls Leicht und Mittel gewählt wurden
+                        && (objValidation.schwierigkeit[1].valueOf() == "Mittel"))         //Falls Leicht und Mittel gewählt wurden
+                    {
                         jsonDaten = quizFragen[(auswahlZufall * 3) + 6].valueOf();
                     }else if ((objValidation.schwierigkeit[0].valueOf() == "Leicht")
-                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer")) {        //Falls Leicht und Schwer gewählt wurden
+                        && (objValidation.schwierigkeit[1].valueOf() == "Schwer"))         //Falls Leicht und Schwer gewählt wurden
+                    {
                         jsonDaten = quizFragen[(auswahlZufall * 3) + 7].valueOf();
-                    }else {                                                                 //Falls Mittel und Schwer gewählt wurden
+                    }else                                                                  //Falls Mittel und Schwer gewählt wurden
+                    {
                         jsonDaten = quizFragen[(auswahlZufall * 3) + 8].valueOf();
                     }
+            }else{
+                    hinweisSchwierigkeit.innerHTML = "";
             }
     }
+
     fragenErstellen();
+
 }
 
 /**
@@ -241,7 +320,7 @@ function fragenErstellen(){
     var random;  //Variable für die Zufallszahl. Diese wird im Schleifendurchlauf immer neu vergeben
 
         var str;                                                     //Stringvariable, in das die HTML Elemente gespeichert werden
-        str = '<h4>Beantworte alle Fragen</h4>';
+        str = '<div class="alleFragen"><h2>Beantworte alle Fragen</h2>';
 
         for (var i = 0; i < AnzahlFragenUserInput; i++){            //for Schleife, die die Anzahl der gewählte Fragen durchläuft
 
@@ -267,17 +346,18 @@ function fragenErstellen(){
                     }
             }
 
-            str += (i+1) + '.  '+jsonDaten[random].Frage + '<br>';          //Generiert Radiobutton
-            str += '<form><table>' +
+            str += '<h3>'+(i+1) + '.  '+jsonDaten[random].Frage + '</h3>';          //Generiert Radiobutton
+            str += '<table class="frageTable">' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
                         '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
-                    '</table></form><br>';
-            track[i] = random;                                              //Speichert Zufallszahl in einem Array,
+                    '</table>';
+            track[i] = random;                                             //Speichert Zufallszahl in einem Array,
                                                                             // um auf die Fragen in der json zugreifen zu können
             loesung[i] = jsonDaten[random].richtig[0];                      //Speichert Lösungen in einem Array
         }
+        str += '</div>';
 
         document.getElementById('hierEntstehtQuizID').innerHTML = str;      //zusammengesetzter String wird in HTML ausgegeben
 
@@ -331,31 +411,29 @@ function korrektur() {
                 document.getElementById('anzahlFalschID').value = AnzahlFragenUserInput - richtig;
                 document.getElementById('prozentID').value = richtig / AnzahlFragenUserInput * 100 + "%";
 
-                //inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, selectedIndexArray, kategorieAuswahl.value, fragenWaehler.value, bootsTypenListe.value);
                 nichtAusgefuehrt = false;
-                inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, kategorieAuswahl, fragenWaehler.value, richtig);
-
+                inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, fragenWaehler.value, richtig);
         }
-
-
     }catch (error){
                 window.alert(error.message);
     }
-
 }
 
 /**
  * Funktion, die die Formulareingabe in ein JSON-Objekt umwandelt
  */
-function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, kategorieAuswahl, fragenAnzahl, richtig){
+function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, fragenAnzahl, richtig){
         //kleine notiz
         console.log('inObjektUmwandeln() geladen');
+
+    console.log("test: " + kategorieAuswahl);
+    console.log("test: " + auswahlSchwierigkeit);
 
         var eingabeDaten = {};
                 eingabeDaten.Benutzername = benutzerName;
                 eingabeDaten.Vorname = vorname;
                 eingabeDaten.Schwierigkeit = auswahlSchwierigkeit;
-                eingabeDaten.Kategorie = kategorieAuswahl;
+                eingabeDaten.Kategorie = auswahlKategorieSpeicher;
                 eingabeDaten.Fragenanzahl = fragenAnzahl;
                 eingabeDaten.Richtig = richtig;
                 var datum = new Date();

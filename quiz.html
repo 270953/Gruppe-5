@@ -16,7 +16,9 @@
     <script type="text/javascript" src="js/bootsquiz.js"></script>
     <script type="text/javascript" src="js/jsonEinlesen.js"></script>
 
+    <!--<script type="text/javascript" src="js/validation.js"></script>-->
     <script type="text/javascript" src="js/validation.js"></script>
+    <script type="text/javascript" src="js/quizFormularCheck.js"></script>
 
     <script type="text/javascript" src="js/indexedDB.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
@@ -60,30 +62,31 @@
                             <form id="eingabeFormular" class="f1" method="POST" name="quizErstellen">
 
                                     <!--Benutzername-->
-                                    <p>Gib deinen Benutzernamen ein (mind. 5 Buchstaben): <input id="benutzernameID" type="text"  minlength="5"></p>
-                                    <p class="fehlermeldung" id="fehlerMeldung1"></p>
+                                    <h3>Gib deinen Benutzernamen ein (mind. 5 Buchstaben):</h3>
+                                        <input id="benutzernameID" type="text" required minlength="5"><span class="fehlermeldung" id="fehlerMeldung1"></span>
+
 
                                     <!--Vorname-->
-                                    <p>Gib deinen Vornamen ein (Pflichtfeld): <input id="vornameID" type="text" required></p>
-                                    <p class="fehlermeldung" id="fehlerMeldung2"></p>
-                                    <p class="fehlermeldung" id="fehlerMeldung2.1"></p>
+                                    <h3>Gib deinen Vornamen ein (Pflichtfeld): </h3>
+                                        <input id="vornameID" type="text" required><span class="fehlermeldung" id="fehlerMeldung2"></span>
+
 
                                     <!--Schwierigkeit-->
                                     <div class="selectSchwierigkeit">
-                                        <p>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben):</p>
+                                        <h3>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben):<span class="fehlermeldung" id="fehlerMeldung3"></span></h3>
                                         <ul>
 
-                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID1" value="Leicht"><label for="schwierigkeitID1">leicht</label></li>
-                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID2" value="Mittel"><label for="schwierigkeitID2">mittel</label></li>
-                                            <li><input type="checkbox" name="schwierigkeitID" id="schwierigkeitID3" value="Schwer"><label for="schwierigkeitID3">schwer</label></li>
+                                            <li><input type="checkbox" class="schwierigkeit" id="schwierigkeitID1" value="Leicht"><label for="schwierigkeitID1">leicht</label></li>
+                                            <li><input type="checkbox" class="schwierigkeit" id="schwierigkeitID2" value="Mittel"><label for="schwierigkeitID2">mittel</label></li>
+                                            <li><input type="checkbox" class="schwierigkeit" id="schwierigkeitID3" value="Schwer"><label for="schwierigkeitID3">schwer</label></li>
                                         </ul>
-                                        <p class="fehlermeldung" id="fehlerMeldung3"></p>
-                                        <p class="fehlermeldung" id="fehlerMeldung3.1"></p>
+
+
                                     </div>
 
                                     <!--Kategorie-->
                                     <div class="kategoryHeader">
-                                        <p>W&auml;hle eine Kategorie aus</p>
+                                        <h3>W&auml;hle eine Kategorie aus<span class="fehlermeldung" id="fehlerMeldung4"></span></h3>
                                         <div class="kselections">
                                         <ul>
                                             <li><input type="radio" name="kategorie" id="kategorie0" value="Binnenwasser"><label for="kategorie0">Binnengew&auml;sser</label></li>
@@ -91,11 +94,12 @@
                                         </ul>
                                         </div>
                                     </div>
-                                    <p class="fehlermeldung" id="fehlerMeldung4"></p>
+
 
                                     <!--Anzahl der Fragen bestimmen-->
-                                    <p>W&auml;hle bis zu 8 Fragen: <input type="number" id="numberID" min="1" max="8" value="1"></p>
-                                    <p class="fehlermeldung" id="fehlerMeldung5"></p>
+                                    <p><h3>W&auml;hle bis zu 8 Fragen: </h3>
+                                        <input type="number" id="numberID" required min="1" max="8"><span class="fehlermeldung" id="fehlerMeldung5"></span></p>
+
 
                                     <!--Button zum Abschicken der Benutereingaben-->
                                     <input type="button" id="neuesQuiz" value="Neues Quiz erstellen">
@@ -106,6 +110,7 @@
 
             <section id="quizBereich">
                             <form class="f2" method="POST" name="meinQuiz">
+
 
                                     <div class="hierEntstehtQuiz" id="hierEntstehtQuizID">
                                         <!-- Platzhalter für das Quiz -->
@@ -124,6 +129,10 @@
                                     <!--Bereich fuer die Resultate-->
                                     <div class="Ergebnis" id="ErgebnisID">
                                         <form method="Post" name="result">
+
+                                            <div>
+                                                <input type="textarea" id="hinweise" readonly>
+                                            </div>
 
                                             <p>Richtige Antworten:
                                                 <input id = "antwortRichtigID" type="textarea" name="p" readonly>
