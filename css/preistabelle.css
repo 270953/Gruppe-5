@@ -4,7 +4,7 @@ table
  border-spacing: 0;
  font: 18px helvetica, arial, sans-serif;
  margin : 30px auto;
- box-shadow : 10px 10px 10px 0px grey;
+ box-shadow : 10px 10px 10px 0 grey;
 
 }
 
@@ -39,7 +39,8 @@ tr
 
 #preisRechner, #ergebnis
 {
-	margin-left : 4%;
+    margin-left : 4%;
+    margin-right : 4%;
 }
 
 #ergebnis
@@ -52,7 +53,7 @@ tr
 
 h1
 {
-	margin-left: 0px;
+	margin-left: 0;
 }
 
 td

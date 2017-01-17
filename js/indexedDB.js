@@ -114,7 +114,7 @@ function datenLesen(herkunft) {
 function pruefeHerkunft(herkunft) {
 
     if (herkunft == 'preis') {                              // ist die Prüfvariable = 'preis', wird eine Transaction für den Objectstore 'letztePreisBerechnungen' geöffnet
-        //noinspection JSUnresolvedFunction
+        //noinspection JSUnresolvedFunction,JSCheckFunctionSignatures
         objectStore = datenbank.transaction(['letztePreisBerechnungen'], 'readwrite').objectStore('letztePreisBerechnungen');
     }
     else if (herkunft == 'quiz') {                          // ist die Prüfvariable = 'quiz', wird eine Transaction für den Objectstore 'quizErgebnisse' geöffnet
@@ -123,7 +123,8 @@ function pruefeHerkunft(herkunft) {
     }
 	else if(herkunft == 'letzteKontakte')
 	{
-		objectStore = datenbank.transaction(['letzteKontakte'], 'readwrite').objectStore('letzteKontakte');
+		//noinspection JSUnresolvedFunction
+        objectStore = datenbank.transaction(['letzteKontakte'], 'readwrite').objectStore('letzteKontakte');
 	}
 	else
 	{

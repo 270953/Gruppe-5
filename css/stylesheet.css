@@ -78,12 +78,14 @@ nav li
 	line-height: 40px;
 	padding: 14px 4% 12px 4%;
 	margin : 0px;
+	font-size: x-large;
 }
 
 /*Beim anvisieren mit der Maus, soll der Menüpunkt einen grauen Hintergrund bekommen*/
 nav li:hover 
 {
 	background-color: #e6e6e6;
+	cursor: pointer;
 }
 
 /*Hier wird der Text der Menüpunkte dargestellt*/
@@ -109,6 +111,14 @@ h1
 	padding-left: 25px;
 	
 	margin-left : 0px;/*Setze den Margin des "articles *" zurück*/
+}
+
+h2{
+	font-size: x-large;
+}
+
+h3{
+	font-font-weight: bold;
 }
 
 /*Die Darstellun des Footers*/

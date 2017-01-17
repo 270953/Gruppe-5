@@ -9,54 +9,74 @@
 
     <meta charset="UTF-8">
     <meta name="author" content="Gruppe 5">
-
-  
     <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
     <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
-	
 	<script type="text/javascript" src="js/navigation.js"></script>		
 	<script type="text/javascript" src="js/codeLessSide.js"></script>			
 
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
-	
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-
 </head>
 
 <!-- sichtbarer Inhalt der Seite-->
 <body>
 
-         <header>
-                 <!-- div-Container für das Logo | Logo ist gleichzeitig Link auf Startseite -->
-                 <div id="Logo">
-                    <a href="index.html">
-						<img src="pictures/querbild2.jpg" id="querbild">
-					</a>
-                 </div>
+            <header>
+                <div  id = "Anker">
+                    <img src="pictures/querbild2.jpg" id="querbild">
+                </div>
+            </header>
 
-                 <!-- Menüleiste - als unsorted list -->
-                 <nav>
-                         <ul>
-                                 <li id="activeNav"><a href="index.html">Startseite</a></li>
-                                 <li><a href="preise.html">Preisrechner</a></li>
-                                 <li><a href="quiz.html">Quiz</a></li>
-								 <li><a href="kontakt.html">Kontakt</a></li>
-                                 <li><a href="impressum.html">Impressum</a></li>
-
-                         </ul>
-                 </nav>
-         </header>
+            <!-- Menüleiste - als unsorted list -->
+            <nav>
+                <ul>
+                    <li id="activeNav">Startseite</li>
+                    <li>Preisrechner</li>
+                    <li>Quiz</li>
+                    <li>Kontakt</li>
+                    <li>Impressum</li>
+                </ul>
+            </nav>
 
          <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
          <main>
 
-                    <!-- ein erster Artikel -->
+
+             <!-- ein erster Artikel -->
+             <article>
+
+                 <!-- Ueberschrift des Artikels -->
+                 <h1>Die Bootsvermietung "Steife Brise"</h1>
+
+                 <!-- Bild zum Artikel -->
+                 <img src="pictures/art0img1.jpg" title="Flotte" name="art0img1">
+
+                 <!-- Text zum Artikel -->
+                 <p>Herzlich Willkommen auf den Seiten der Bootsvermietung "Steife Brise". Bei uns können Sie Boote
+                     verschiedenster Größen anmieten. Sollten Sie an einer Anmietung interessiert sein, überzeugen Sie
+                     sich mittels unseres Preisrechners selbst von unseren günstigen Angeboten.<br><br>
+                     Darüber hinaus bieten wir Ihnen die Möglichkeit, Ihren Bootsführerschein
+                     bei uns abzulegen, um noch freier zu sein - sei es auf dem See in der Nähe, oder auf den Meeren
+                     dieser Welt.<br><br>
+
+                     Wir wünschen Ihnen viel Spaß bei Ihrem nächsten Bootstrip und bedanken uns für das entgegen gebrachte
+                     Vertrauen.<br><br>
+
+                     Ihr Bernd Bootsmann
+
+                     <a href="#Anker">nach oben</a></p>
+
+                 <address>Autor: <a href="kontakt.html">Bernd Bootsmann</a></address>
+
+             </article>
+
+             <!-- beispielhaft ein zweiter Artikel -->
                     <article>
 
                          <!-- Ueberschrift des Artikels -->
-                         <h1 id = "Anker">Herbstregatta</h1>
+                         <h1 id = "Anker2">Herbstregatta</h1>
 
                          <!-- Bild zum Artikel -->
                          <img src="pictures/art1img1.jpg" title="Regatta" name="art1img1">
@@ -76,7 +96,7 @@
 
                     </article>
 
-                  <!-- Beispielhaft ein zweiter Artikel -->
+                  <!-- Beispielhaft ein dritter Artikel -->
                     <article>
                          <h1>Kinder ahoi!</h1>
 
