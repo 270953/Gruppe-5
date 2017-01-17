@@ -21,3 +21,9 @@ form p
 }
 
 
+#fehlerMeldungText, #fehlerMeldungEMail, #fehlerMeldungName, #fehlerMeldungVorName
+{
+	padding-left: 24px;
+	font-weight : bold;
+	color: red;
+}
