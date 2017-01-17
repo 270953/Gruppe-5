@@ -2,8 +2,6 @@
 //public variables, if the html is changed in the future
 //easier to adapt this code
 
-var cssFalseInputClass = "falseInput";
-
 var formElementsText;
 var formEmail;
 var formTextArea;
@@ -17,6 +15,35 @@ function initOnLoad ()
 	getForms();
 }
 
+function vornameCheck()
+	{ 			
+		fehlerDoc = document.getElementById("fehlerMeldungVorName");
+	
+		return (checkVal(formElementsText[0], formElementsText[0].validationMessage, fehlerDoc) &&
+		checkPattern(formElementsText[0], regexLetters, "Bitte nur Buchstaben", fehlerDoc));
+	}
+
+function nachNameCheck()
+	{ 			
+		fehlerDoc = document.getElementById("fehlerMeldungName");
+	
+		return (checkVal(formElementsText[1], formElementsText[1].validationMessage, fehlerDoc) &&
+		checkPattern(formElementsText[1], regexLetters, "Bitte nur Buchstaben", fehlerDoc));	
+	}
+	
+function emailCheck()
+	{ 
+		return (checkVal(formEmail, formEmail.validationMessage, document.getElementById("fehlerMeldungEMail")));
+	
+	} 
+	
+function textAreaCheck()
+	{ 
+		fehlerDoc = document.getElementById("fehlerMeldungText");
+	
+		return (checkVal(formTextArea, formTextArea.validationMessage, fehlerDoc) &&
+		checkPattern(formTextArea, regexSpecial, "Der Text darf folgende Zeichen nicht enthalten : <, >, {, }, $, ;", fehlerDoc, false));
+	}
 
 function getForms()
 {
@@ -36,11 +63,18 @@ function getForms()
 	 + formEmail + "\n" 
 	 + buttonAbschicken);
 	 
+	formElementsText[0].onchange = vornameCheck;
+	formElementsText[1].onchange = nachNameCheck;
+	formEmail.onchange = emailCheck;
+	formTextArea.onchange = textAreaCheck;
+	 
 	//eventlistener beim kilicken zum überprüfen der formulare
 	buttonAbschicken.onclick = function(){ 
 		
-	if (checkKontakt(formEmail, formTextArea, formElementsText))
+	if (nachNameCheck() && vornameCheck() && emailCheck() && textAreaCheck())
 		{
+			console.log("abschicken");
+			
 			inObjektUmwandeln();
 			datenSpeichern(eingabeDaten, 'letzteKontakte'); 			
 		}
@@ -68,4 +102,3 @@ function inObjektUmwandeln(){
 }
 
 window.onload = initOnLoad;
-
