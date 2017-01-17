@@ -67,7 +67,6 @@ function getForms()
 	//eventlistener beim kilicken zum überprüfen der formulare
 	buttonAbschicken.onclick = function()
 	{ 
-		
 	//überprüfe alle methoden
 	if (vornameCheck() & nachNameCheck() & emailCheck() & textAreaCheck())
 		{
@@ -99,4 +98,3 @@ function inObjektUmwandeln(){
 }
 
 window.onload = initOnLoad;
-

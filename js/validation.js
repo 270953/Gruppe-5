@@ -8,6 +8,15 @@ regexSpecial = new RegExp("<+|>+|;+|\{+|\}+|\\$+");
 
 var cssFalseInputClass = "falseInput";
 
+var korrekterBenutzername = false;
+var korrekteSchwierigkeit = false;
+var korrekteKategorie = false;
+var korrekteAnzahl = false;
+var korrekterVorname = false;
+var korrekterNachname = false;
+var korrekteEmail = false;
+var korrekterText = false;
+
 //checks the validity and sets the errorText
 function checkVal(inputElement, errorText, fehlermeldungOutput)
 {

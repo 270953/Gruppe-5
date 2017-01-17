@@ -1,47 +1,5 @@
-.benutzerInfo
+.fehlermeldung
 {
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-bottom: 25px;
-	padding-top: 25px;
-
-}
-
-.a{
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-bottom: 25px;
-	padding-top: 25px;
-	border: 1px solid ;
-}
-
-.quizButton2
-{
-	padding-left: 50px;
-	padding-right: 50px;
-	padding-bottom: 25px;
-	padding-top: 25px;
-}
-
-
-.schwierigkeit
-{
-	padding-bottom: 25px;
-	padding-top: 25px;
-}
-
-
-.kategoryHeader{
-	padding-bottom: 25px;
-	padding-top: 25px;
-}
-
-.kategoryHeader{
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.fehlermeldung{
 	padding-left: 50px;
 	font-weight : bold;
 	color: red;
@@ -50,5 +8,34 @@
 #quizBereich, #eingabeFormular
 {
 	margin-left: 4%;
+	margin-right: 4%;
+}
+
+.hinweisfarbe
+{
+	color: yellow;
+	text-shadow: 2px 1px #3e3c3d;
+}
+
+.hierEntstehtQuiz
+{
+	background-color: #cac7e0;
+
+}
+
+.alleFragen
+{
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-bottom: 4%;
+	margin-bottom: 4%;
+}
+
+table{
+	padding-bottom: 10px;
+}
+
+tr{
+	text-align: justify;
 }
 
