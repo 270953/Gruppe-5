@@ -1,10 +1,10 @@
-
 <!DOCTYPE HTML>
 
 <html>
 
 <!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
 <head>
+	<!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
 	<title>Bootsvermietung und Bootsführerschein</title>
 
 	<meta charset="UTF-8">
@@ -12,40 +12,36 @@
 	<meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
 	<meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-		
-		<script type="text/javascript" src="js/kontakt_javascript.js"></script>
-		<script type="text/javascript" src="js/validation.js"></script>	
-		<script type="text/javascript" src="js/indexedDB.js"></script>
-		<script type="text/javascript" src="js/navigation.js"></script>			
-		
-		<link rel="stylesheet" type="text/css" href="css/kontakt.css">
-		<link rel="stylesheet" type="text/css" href="css/formular.css">
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">			
+	<script type="text/javascript" src="js/kontakt_javascript.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
+	<script type="text/javascript" src="js/indexedDB.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
+
+	<!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
+	<link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+	<link rel="stylesheet" type="text/css" href="css/kontakt.css">
+	<link rel="stylesheet" type="text/css" href="css/formular.css">
+	<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 </head>
 
 <!-- sichtbarer Inhalt der Seite-->
 <body>
-         <header>
-                 <!-- div-Container für das Logo | Logo ist gleichzeitig Link auf Startseite -->
-                 <div id="Logo">
-                    <a href="index.html">
-						<img src="pictures/querbild2.jpg" id="querbild">
-					</a>
-                 </div>
+		<header>
+			<div>
+				<img src="pictures/querbild2.jpg" id="querbild">
+			</div>
+		</header>
 
-                 <!-- Menüleiste - als unsorted list -->
-                 <nav>
-                         <ul>
-                                 <li><a href="index.html">Startseite</a></li>
-                                 <li><a href="preise.html">Preisrechner</a></li>
-                                 <li><a href="quiz.html">Quiz</a></li>
-				 <li id="activeNav"><a href="kontakt.html">Kontakt</a></li>
-                                 <li><a href="impressum.html">Impressum</a></li>
-		
+		<!-- Menüleiste - als unsorted list -->
+		<nav>
+			<ul>
+				<li>Startseite</li>
+				<li>Preisrechner</li>
+				<li>Quiz</li>
+				<li id="activeNav">Kontakt</li>
+				<li>Impressum</li>
 			</ul>
-                 </nav>
-         </header>
+		</nav>
 
          <main> <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
 				<h1>
@@ -56,26 +52,26 @@
 			  
 				<p>
 					Vorname 
-					</br>
-					<input type="text" name="vorname" minLength="2" maxLength="25" required/>
+					<br>
+					<input type="text" name="vorname" title="Vorname" minLength="2" maxLength="25" required/>
 				</p>
 				
 				<p>
 					Nachname 
-					</br>
-					<input type="text" name="nachname" minLength="3" maxLength="25" required/>
+					<br>
+					<input type="text" name="nachname" title="Nachname" minLength="3" maxLength="25" required/>
 				</p>
 				
 				<p>
 					Ihre E-Mail Adresse 
-					</br>
-					<input type="email" name="email" minLength="3" maxLength="25" required/>
+					<br>
+					<input type="email" name="email" title="E-Mail" minLength="3" maxLength="25" required/>
 				</p>	
 
 				<p>
 					Ihre Nachricht 
-					</br>
-					<textarea rows="5" cols="50" minLength="15" required></textarea>
+					<br>
+					<textarea title="Ihre Nachricht" rows="5" cols="50" minLength="15" required></textarea>
 				</p>
 				
 				

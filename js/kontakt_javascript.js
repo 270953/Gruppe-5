@@ -2,8 +2,6 @@
 //public variables, if the html is changed in the future
 //easier to adapt this code
 
-var cssFalseInputClass = "falseInput";
-
 var formElementsText;
 var formEmail;
 var formTextArea;
@@ -17,6 +15,35 @@ function initOnLoad ()
 	getForms();
 }
 
+function vornameCheck()
+	{ 			
+		fehlerDoc = document.getElementById("fehlerMeldungVorName");
+	
+		return (checkVal(formElementsText[0], formElementsText[0].validationMessage, fehlerDoc) &&
+		checkPattern(formElementsText[0], regexLetters, "Bitte nur Buchstaben", fehlerDoc));
+	}
+
+function nachNameCheck()
+	{ 			
+		fehlerDoc = document.getElementById("fehlerMeldungName");
+	
+		return (checkVal(formElementsText[1], formElementsText[1].validationMessage, fehlerDoc) &&
+		checkPattern(formElementsText[1], regexLetters, "Bitte nur Buchstaben", fehlerDoc));	
+	}
+	
+function emailCheck()
+	{ 
+		return (checkVal(formEmail, formEmail.validationMessage, document.getElementById("fehlerMeldungEMail")));
+	
+	} 
+	
+function textAreaCheck()
+	{ 
+		fehlerDoc = document.getElementById("fehlerMeldungText");
+	
+		return (checkVal(formTextArea, formTextArea.validationMessage, fehlerDoc) &&
+		checkPattern(formTextArea, regexSpecial, "Der Text darf folgende Zeichen nicht enthalten : <, >, {, }, $, ;", fehlerDoc, false));
+	}
 
 function getForms()
 {
@@ -36,72 +63,16 @@ function getForms()
 	 + formEmail + "\n" 
 	 + buttonAbschicken);
 	 
-	formElementsText[0].onchange = function()
-	{ 			
-		if (checkVal(formElementsText[0], "fehler vorname") &&
-		checkPattern(formElementsText[0], regexSpecial, "<>", null, false) &&
-		checkPattern(formElementsText[0], regexLetters, "abc", null, true))
-		{
-			korrekterBenutzername = true;
-			setTrue(formElementsText[0]);
-		}
-		else
-		{
-			korrekterBenutzername = false;
-			setFalse(formElementsText[0]);
-		}
-	}
-	
-	formElementsText[1].onchange = function()
-	{ 			
-		if (checkVal(formElementsText[1], "fehler name") &&
-		checkPattern(formElementsText[1], regexSpecial, "<>", null, false) &&
-		checkPattern(formElementsText[1], regexLetters, "abc", null, true))
-		{
-			korrekterNachname = true;
-			setTrue(formElementsText[1]);
-		}
-		else
-		{
-			korrekterNachname = false;
-			setFalse(formElementsText[1]);
-		}		
-	}
-	
-	formEmail.onchange = function()
-	{ 
-		if (checkVal(formEmail, "fehler email"))
-		{
-			korrekteEmail = true;
-			setTrue(formEmail);
-		}
-		else
-		{
-			korrekteEmail = false;
-			setFalse(formEmail);
-		}		
-	} 
-	
-	
-	formTextArea.onchange = function()
-	{ 
-		if (checkVal(formTextArea, "fehler text") &&
-		checkPattern(formTextArea, regexSpecial, "<>", null, false))
-		{
-			korrekterText = true;
-			setTrue(formTextArea);
-		}
-		else
-		{
-			korrekterText = false;
-			setFalse(formTextArea);
-		}		
-	} 
+	formElementsText[0].onchange = vornameCheck;
+	formElementsText[1].onchange = nachNameCheck;
+	formEmail.onchange = emailCheck;
+	formTextArea.onchange = textAreaCheck;
 	 
 	//eventlistener beim kilicken zum überprüfen der formulare
 	buttonAbschicken.onclick = function(){ 
 		
-	if (korrekterNachname && korrekterBenutzername && korrekteEmail && korrekterText)
+	if (nachNameCheck() && vornameCheck() && emailCheck() && textAreaCheck())
+
 		{
 			console.log("abschicken");
 			
@@ -132,4 +103,3 @@ function inObjektUmwandeln(){
 }
 
 window.onload = initOnLoad;
-

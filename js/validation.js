@@ -18,7 +18,6 @@ var korrekterNachname = false;
 var korrekteEmail = false;
 var korrekterText = false;
 
-
 //checks the validity and sets the errorText
 function checkVal(inputElement, errorText, fehlermeldungOutput)
 {
@@ -26,16 +25,8 @@ function checkVal(inputElement, errorText, fehlermeldungOutput)
 	var bool = inputElement.checkValidity();
 	var ausgabeText = "";
 	
-	setTrue(inputElement);
-	
-	if (!bool)
-	{
-		setFalse(inputElement);
-		ausgabeText = errorText;
-		inputElement.setAttribute("class", cssFalseInputClass);
-		console.log(errorText);
-	}
-	
+	ausgabeText = toggleCssField(inputElement, bool, errorText);
+			
 	if (fehlermeldungOutput != null)
 	{
 		fehlermeldungOutput.innerHTML = ausgabeText;
@@ -45,58 +36,57 @@ function checkVal(inputElement, errorText, fehlermeldungOutput)
 }
 
 //checks the pattern
-function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match)
+
+function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match = true)//default true
 {
-	//bool wird falsch gesetzt
+	//bool wird falsch gesetzt (negation vom parameter)
+
 	var bool = !match;
 	//initialisiere den ausgabetext
 	var ausgabeText = "";
 	
 	if (inputElement.value.match(regExPattern))
+
 	{
+		//inventiere das bool
 		bool = !bool;
 		
-		if (match)
-		{
-			setTrue(inputElement);
-		}
-		else
-		{
-			//falls es standartmäßig falsch ist
-			ausgabeText = errorText;
-			setFalse(inputElement);
-		}
+		//entscheide ob das element gefärbt wird oder auf normal gesetzt wird
+		//und übergebe den fehlertext
+		ausgabeText = toggleCssField(inputElement, match, errorText);
 	}
 	else
 	{
-		if (match)
-		{
-			//falls es standartmäßig falsch ist
-			ausgabeText = errorText;
-			setFalse(inputElement);
-		}
-		else
-		{	
-			setTrue(inputElement);
-		}
+		//entscheide ob das element gefärbt wird oder auf normal gesetzt wird
+		//und übergebe den fehlertext
+		ausgabeText = toggleCssField(inputElement, !match, errorText);
 	}
 	
+	//falls es ein output feld gibt
 	if (fehlermeldungOutput != null)
 	{
+		//setze die neue fehlermeldung
 		fehlermeldungOutput.innerHTML = ausgabeText;
 	}
 	
+	//gebe den bool wert zurück
 	return bool;
 }
 
 
-function setTrue(inputElement)
+//entscheide ob das element gefärbt wird oder auf normal gesetzt wird
+function toggleCssField (inputElement, bool, errorText)
 {
-	inputElement.removeAttribute("class", cssFalseInputClass);
-}
-
-
-function setFalse(inputElement)
-{
-	inputElement.setAttribute("class", cssFalseInputClass);
+		if (bool)
+		{
+			inputElement.removeAttribute("class", cssFalseInputClass);
+			errorText = "";
+		}
+		else
+		{	
+			inputElement.setAttribute("class", cssFalseInputClass);
+			console.log(errorText);
+		}
+		
+		return errorText;
 }

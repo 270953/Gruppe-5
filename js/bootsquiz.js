@@ -65,8 +65,7 @@ function initOnLoad ()
         console.log("eventHandler geladen");
         datenbankOeffnen();
         getForms();
-
-
+        navigationEventhandler();
 
         for (var i = 0; i < quellDateien.length; i++)
         {                                                       //quellDateien-Quellepfade werden Methode übergeben und
