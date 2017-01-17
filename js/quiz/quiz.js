@@ -63,6 +63,8 @@ function initOnLoad ()
         datenbankOeffnen();
         getForms();
 
+        navigationEventhandler();                   //belegt die Menuepunkte mit Eventhandlern
+
         for (var i = 0; i < quellDateien.length; i++)
         {                                                       //quellDateien-Quellepfade werden Methode übergeben und
             jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
