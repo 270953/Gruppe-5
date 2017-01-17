@@ -12,13 +12,14 @@
     <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
     <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
-
-    <script type="text/javascript" src="js/bootsquiz.js"></script>
+    <script type="text/javascript" src="js/quiz/quiz.js"></script>
     <script type="text/javascript" src="js/jsonEinlesen.js"></script>
 
     <!--<script type="text/javascript" src="js/validation.js"></script>-->
     <script type="text/javascript" src="js/validation.js"></script>
-    <script type="text/javascript" src="js/quizFormularCheck.js"></script>
+    <script type="text/javascript" src="js/quiz/quizFormularCheck.js"></script>
+    <script type="text/javascript" src="js/quiz/quizErstellen.js"></script>
+    <script type="text/javascript" src="js/quiz/quizPruefen.js"></script>
 
     <script type="text/javascript" src="js/indexedDB.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
@@ -129,10 +130,6 @@
                                     <!--Bereich fuer die Resultate-->
                                     <div class="Ergebnis" id="ErgebnisID">
                                         <form method="Post" name="result">
-
-                                            <div>
-                                                <input type="textarea" id="hinweise" readonly>
-                                            </div>
 
                                             <p>Richtige Antworten:
                                                 <input id = "antwortRichtigID" type="textarea" name="p" readonly>

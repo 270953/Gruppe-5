@@ -3,9 +3,6 @@
  * .onchange prueft erst bei Veraenderung
  */
 
-var csshinweisfarbeFehlerClass= "fehlermeldung";   //Pfad aus css/quiz_stylesheet.css
-
-
 function pruefeVorname(){
     if (checkVal(vornameInput, vornameInput.validationMessage, fehlermeldungVorname) &&
         checkPattern(vornameInput, regexLetters, "Bitte nur Buchstaben.", fehlermeldungVorname, true)){
@@ -48,7 +45,7 @@ function pruefenAnzahlFragen(){
  * @param auswahlKategorie
  * @param fragenWaehler
  * @param quizErstellenButton
- * Funktion überprüft die formulardaten aus js/bootsquiz.js
+ * Funktion überprüft die formulardaten aus js/quiz.js
  */
 function quizCheck(benutzerNameInput, vornameInput, schwierigkeitSelect, auswahlKategorie, fragenWaehler) //wird quizerstellenButton hier gebraucht?
 {
