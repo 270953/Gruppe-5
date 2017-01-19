@@ -1,8 +1,11 @@
-.fehlermeldung
-{
-	padding-left: 50px;
-	font-weight : bold;
-	color: red;
+#quizBild{
+	float: right;
+	width: auto;
+	height: auto;
+}
+
+figcaption{
+	font-size: small;
 }
 
 #quizBereich, #eingabeFormular
@@ -11,31 +14,64 @@
 	margin-right: 4%;
 }
 
+/*Hinweis fuer den Benutzer*/
 .hinweisfarbe
 {
 	color: yellow;
 	text-shadow: 2px 1px #3e3c3d;
 }
 
+/*den Quizbereich durch eine andere Hintergrundfarbe abgrenzen*/
 .hierEntstehtQuiz
 {
 	background-color: #cac7e0;
 
 }
 
+/*Position*/
 .alleFragen
 {
 	margin-left: 2%;
 	margin-right: 2%;
 	margin-bottom: 4%;
-	margin-bottom: 4%;
+	margin-top: 4%;
 }
 
-table{
-	padding-bottom: 10px;
+/*gecheckte Checkboxen verändern die Farbe*/
+input[type=checkbox]:checked ~ label
+{
+	color: #007ea1;
 }
 
-tr{
-	text-align: justify;
+/*gecheckte Radiobutton verändern die Farbe*/
+input[type=radio]:checked ~ label
+{
+	color: #0093a1;
 }
+
+/*Cursor wird zu einer Hand*/
+ul li label
+{
+	cursor: pointer;
+}
+
+/*Wenn die Maus über Listeeintraege geht */
+ul li:hover label
+{
+	color: #007ea1;
+}
+
+/*bei falscher Eingabe der Fragen werden diese ausgeblendet und rot gefärbt*/
+input[type=radio]:disabled ~ label
+{
+	color: red;
+}
+
+
+
+
+
+
+
+
 

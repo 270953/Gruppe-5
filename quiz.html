@@ -19,6 +19,7 @@
     <script type="text/javascript" src="js/quiz/quizFormularCheck.js"></script>
     <script type="text/javascript" src="js/quiz/quizErstellen.js"></script>
     <script type="text/javascript" src="js/quiz/quizPruefen.js"></script>
+    <script type="text/javascript" src="js/quiz/quizInObjektUmwandeln.js"></script>
 
     <script type="text/javascript" src="js/indexedDB.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
@@ -59,8 +60,12 @@
 
                             <form id="eingabeFormular" class="f1" method="POST" name="quizErstellen">
 
-                                    <!--Benutzername-->
+                                    <figure id="quizBild">
+                                        <img src="pictures/quizBild.jpg" title="Mach deinen Bootsschein, denn die Boote warten auf dich!" alt="Quelle: Hans Wurst">
+                                        <figcaption>Abb. 1 "2016 Kellersee, Malente"</figcaption>
+                                    </figure>
 
+                                    <!--Benutzername-->
                                     <h3>Gib deinen Benutzernamen ein (mind. 5 Buchstaben):</h3>
                                         <input id="benutzernameID" type="text" title="Benutzername" required minlength="5"><span class="fehlermeldung" id="fehlerMeldung1"></span>
 
@@ -101,9 +106,12 @@
                                         <span class="fehlermeldung" id="fehlerMeldung5"></span>
                                     </div>
 
-                                    <!--Button zum Abschicken der Benutereingaben-->
-                                    <input type="button" id="neuesQuiz" value="Neues Quiz erstellen">
-                                    <input type="button" value="Formular l&ouml;schen" id="formularLeerenOben">
+                                    <fieldset>
+                                        <legend>Quiz erstellen</legend>
+                                        <!--Button zum Abschicken der Benutereingaben-->
+                                        <input type="button" class="Button" id="neuesQuiz" value="Neues Quiz erstellen">
+                                        <input type="button" class="Button" value="Formular l&ouml;schen" id="formularLeerenOben">
+                                    </fieldset>
                             </form>
             </section>
 
@@ -119,9 +127,10 @@
 
                                     <!--Buttons-->
                                     <div class="buttonErgebnis" id="buttonErgebnis">
-                                    <input type="button" value="Ergebnis" id="auswerten">
-                                    <input type="button" id="letzteErgebnisse" value="letzte Ergebnisse">
-                                    <input type="button" value="Eingabe l&ouml;schen" id="formularLeeren">
+                                    <input type="button" class="Button" value="Ergebnis" id="auswerten">
+                                    <input type="button" class="Button" value="Quiz wiederholen" id="formularLeeren">
+                                    <input type="button" class="Button" id="letzteErgebnisse" value="letzte Ergebnisse">
+
                                     <p class="fehlermeldung" id="fehlerMeldung6"></p>
 
                                     </div>
@@ -133,6 +142,11 @@
                                                 <legend>Ergebnisse</legend>
 
                                                 <ul>
+                                                    <li>
+                                                        Versuche:
+                                                        <output id="versucheID"></output>
+                                                    </li>
+
                                                     <li>
                                                     Richtige Antworten:
                                                     <output id="antwortRichtigID"></output>

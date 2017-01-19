@@ -35,7 +35,7 @@ function checkVal(inputElement, errorText, fehlermeldungOutput)
 }
 
 //checks the pattern
-function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match = true)//default true
+function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match)//default true
 {
 	//bool wird falsch gesetzt (negation vom parameter)
 	var bool = !match;

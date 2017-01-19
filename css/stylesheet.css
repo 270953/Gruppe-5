@@ -150,4 +150,31 @@ footer a:hover
 	color: black;
 }
 
+:hover .Button
+{
+	cursor: pointer;
+}
 
+/*wird in javascript aufgerufen*/
+.falseInput
+{
+	border-color: red;
+	background-color: #F7D5D5;
+}
+
+
+/*Wenn der Bentzer etwas falsch eingibt*/
+.fehlermeldung
+{
+	padding-left: 50px;
+	font-weight : bold;
+	color: red;
+}
+
+
+#fehlerMeldungText, #fehlerMeldungEMail, #fehlerMeldungName, #fehlerMeldungVorName
+{
+	padding-left: 24px;
+	font-weight : bold;
+	color: red;
+}

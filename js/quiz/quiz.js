@@ -54,6 +54,7 @@ AnzahlFragenUserInput = 0;      //Zunächst mit 0 initialisiert
 
 var nichtAusgefuehrt = false;   //Quiz kann noch nicht ausgewertet werden, wird bei fragenErstellen() auf true gesetzt
 
+var versuche;
  /**
   * Funktionen, die beim Laden von quiz.html ausgeführt werden
   */
@@ -89,6 +90,7 @@ function initOnLoad ()
 
        var formularLoeschenButton = document.getElementById('formularLeeren');      //loescht alle Eingaben
         formularLoeschenButton.addEventListener('click', function () {              //aus dem Quizbereich
+            versuche++;
             nichtAusgefuehrt = true;
             document.getElementById('fehlerMeldung6').innerHTML = "";
             document.meinQuiz.reset();
@@ -143,27 +145,3 @@ function getForms()
 
 
 
-
-/**
- * Funktion, die die Formulareingabe in ein JSON-Objekt umwandelt
- */
-function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, fragenAnzahl, richtig)
-{
-        console.log('inObjektUmwandeln() geladen');//kleine notiz
-
-    console.log("test: " + kategorieAuswahl);
-    console.log("test: " + auswahlSchwierigkeit);
-
-        var eingabeDaten = {};
-                eingabeDaten.Benutzername = benutzerName;
-                eingabeDaten.Vorname = vorname;
-                eingabeDaten.Schwierigkeit = auswahlSchwierigkeit;
-                eingabeDaten.Kategorie = auswahlKategorieSpeicher;
-                eingabeDaten.Fragenanzahl = fragenAnzahl;
-                eingabeDaten.Richtig = richtig;
-                var datum = new Date();
-                eingabeDaten.Datum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
-        jsonObjekt = JSON.stringify(eingabeDaten);        // umwandeln des JavaScript Objektes in ein JSON Objekt
-        console.log('JSON Objekt: ' + jsonObjekt);              // Ausgabe des JSON Objektes in der Konsole
-        datenSpeichern(eingabeDaten, 'quiz');
-}

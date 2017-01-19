@@ -8,7 +8,10 @@
  */
 function quizZusammenStellen(objValidation)
 {
+    versuche = 1;
+
     console.log('quizZusammenStellen(objValidation) geladen'); //kleine notiz
+    document.getElementById('fehlerMeldung6').innerHTML = "";   //Falls Hinweis noch vorhanden
 
     var auswahlZufall;
     var csshinweisfarbeClass = "hinweisfarbe";
@@ -165,6 +168,8 @@ function quizZusammenStellen(objValidation)
 
 function fragenErstellen()
 {
+    versuche = 1;
+
     console.log("fragenErstellen geladen"); //kleine notiz
     nichtAusgefuehrt = true;
 
@@ -173,7 +178,6 @@ function fragenErstellen()
 
     var str;                                                     //Stringvariable, in das die HTML Elemente gespeichert werden
     str = '<div class="alleFragen"><h2>Beantworte alle Fragen</h2>';
-
     for (var i = 0; i < AnzahlFragenUserInput; i++)             //for Schleife, die die Anzahl der gewählte Fragen durchläuft
     {
         if (AnzahlFragenUserInput == 1)                         //wenn nur eine Frage gewählt wurde
@@ -203,12 +207,12 @@ function fragenErstellen()
         }
 
         str += '<h3>'+(i+1) + '.  '+jsonDaten[random].Frage + '</h3>';          //Generiert Radiobutton
-        str += '<table class="frageTable">' +
-            '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[0] + '</td></tr>' +
-            '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[1] + '</td></tr>' +
-            '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[2] + '</td></tr>' +
-            '<tr><td><input type="radio" class ="frage" name="frage' + i + '"/>'+'&nbsp;&nbsp;' + jsonDaten[random].Antworten[3] + '</td></tr>' +
-            '</table>';
+        str += '<ul class="frageList">' +
+            '<li><input type="radio" name ="frage' + i + '" id="frage0' + i + '"/><label for="frage0' + i + '">' + jsonDaten[random].Antworten[0] + '</label></li>' +
+            '<li><input type="radio" name ="frage' + i + '" id="frage1' + i + '"/><label for="frage1' + i + '">' + jsonDaten[random].Antworten[1] + '</label></li>' +
+            '<li><input type="radio" name ="frage' + i + '" id="frage2' + i + '"/><label for="frage2' + i + '">' + jsonDaten[random].Antworten[2] + '</label></li>' +
+            '<li><input type="radio" name ="frage' + i + '" id="frage3' + i + '"/><label for="frage3' + i + '">' + jsonDaten[random].Antworten[3] + '</label></li>' +
+            '</ul>';
         track[i] = random;                                             //Speichert Zufallszahl in einem Array,
         // um auf die Fragen in der json zugreifen zu können
         loesung[i] = jsonDaten[random].richtig[0];                      //Speichert Lösungen in einem Array
