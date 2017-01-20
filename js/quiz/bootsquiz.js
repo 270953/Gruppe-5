@@ -1,6 +1,6 @@
 window.onload = initOnLoad;
 
-var csshinweisfarbeFehlerClass= "fehlermeldung";   //Pfad aus css/quiz_stylesheet.css
+var csshinweisfarbeFehlerClass= "fehlermeldung";   //Pfad aus css/bootsquiz_stylesheet.css
 
 //hier werden die nodes gelagert, damit mehrere funktionen auf diese zugreifen können
 var benutzerNameInput;
@@ -56,7 +56,7 @@ var nichtAusgefuehrt = false;   //Quiz kann noch nicht ausgewertet werden, wird 
 
 var versuche;
  /**
-  * Funktionen, die beim Laden von quiz.html ausgeführt werden
+  * Funktionen, die beim Laden von bootsquiz.html ausgeführt werden
   */
 function initOnLoad ()
 {
@@ -91,16 +91,18 @@ function initOnLoad ()
        var formularLoeschenButton = document.getElementById('formularLeeren');      //loescht alle Eingaben
         formularLoeschenButton.addEventListener('click', function () {              //aus dem Quizbereich
             versuche++;
+            document.getElementById("ErgebnisID").style.visibility = "invisible";
             nichtAusgefuehrt = true;
             document.getElementById('fehlerMeldung6').innerHTML = "";
             document.meinQuiz.reset();
-            FrageUserInput = document.querySelectorAll('div table input[type="radio"]');
+            FrageUserInput = document.querySelectorAll('.hierEntstehtQuiz div ul li input[type="radio"]');
             for(var i=0 ; i<FrageUserInput.length ; i++) {
                 FrageUserInput[i].checked = false;
-            }}, false);
+}}, false);
 
         var letzteErgebnisse = document.getElementById('letzteErgebnisse');
         letzteErgebnisse.addEventListener('click', function () {
+            document.getElementById("ErgebnisID").style.visibility = "visible";
             datenLesen('quiz');
         }, false);
 

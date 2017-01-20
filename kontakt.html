@@ -37,7 +37,7 @@
 			<ul>
 				<li>Startseite</li>
 				<li>Preisrechner</li>
-				<li>Quiz</li>
+				<li>Bootsquiz</li>
 				<li id="activeNav">Kontakt</li>
 				<li>Impressum</li>
 			</ul>
@@ -55,17 +55,17 @@
 					<br>
 					<input type="text" name="vorname" title="Vorname" minLength="2" maxLength="25" required/>
 				</p>
-				
-				<p id="fehlerMeldungVorName"></p>
 
-				
+				<p class="fehlermeldung" id="fehlerMeldungVorName"></p>
+
+
 				<p>
 					Nachname 
 					<br>
 					<input type="text" name="nachname" title="Nachname" minLength="3" maxLength="25" required/>
 				</p>
-				
-				<p id="fehlerMeldungName"></p>
+
+				<p class="fehlermeldung" id="fehlerMeldungName"></p>
 				
 				<p>
 					Ihre E-Mail Adresse 
@@ -73,7 +73,7 @@
 					<input type="email" name="email" title="E-Mail" minLength="3" maxLength="25" required/>
 				</p>	
 
-				<p id="fehlerMeldungEMail"></p>
+				<p class="fehlermeldung" id="fehlerMeldungEMail"></p>
 				
 				<p>
 					Ihre Nachricht 
@@ -81,7 +81,7 @@
 					<textarea title="Ihre Nachricht" rows="5" cols="50" minLength="15" required></textarea>
 				</p>
 				
-				<p id="fehlerMeldungText"></p>
+				<p class="fehlermeldung" id="fehlerMeldungText"></p>
 				
 				
 				<input type="submit" class="Button" value="Abschicken" id="abschicken"/>

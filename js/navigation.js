@@ -1,5 +1,5 @@
 
-var htmlSeiten = ["index.html","preise.html","quiz.html","kontakt.html","impressum.html"];
+var htmlSeiten = ["index.html","preise.html","bootsquiz.html","kontakt.html","impressum.html"];
 
 function navigationEventhandler ()
 {

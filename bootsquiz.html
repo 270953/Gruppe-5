@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
+<head>
+    <!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
+    <title>Bootsvermietung und Bootsführerschein</title>
+
+    <meta charset="UTF-8">
+    <meta name="author" content="Gruppe 5">
+    <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
+    <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
+
+    <script type="text/javascript" src="js/quiz/bootsquiz.js"></script>
+    <script type="text/javascript" src="js/jsonEinlesen.js"></script>
+
+    <script type="text/javascript" src="js/validation.js"></script>
+    <script type="text/javascript" src="js/quiz/bootsquizFormularCheck.js"></script>
+    <script type="text/javascript" src="js/quiz/bootsquizErstellen.js"></script>
+    <script type="text/javascript" src="js/quiz/bootsquizPruefen.js"></script>
+    <script type="text/javascript" src="js/quiz/bootsquizInObjektUmwandeln.js"></script>
+
+    <script type="text/javascript" src="js/indexedDB.js"></script>
+    <script type="text/javascript" src="js/navigation.js"></script>
+
+    <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
+    <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootsquiz_stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/formular.css" />
+</head>
+
+<!-- sichtbarer Inhalt der Seite-->
+<body>
+
+        <header>
+            <div>
+                <img src="pictures/querbild2.jpg" id="querbild">
+            </div>
+        </header>
+
+        <!-- Menüleiste - als unsorted list -->
+        <nav>
+            <ul>
+                <li>Startseite</li>
+                <li>Preisrechner</li>
+                <li id="activeNav">Bootsquiz</li>
+                <li>Kontakt</li>
+                <li>Impressum</li>
+            </ul>
+        </nav>
+
+        <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
+        <main>
+
+            <section id="quiz">
+                    <!-- Ueberschrift -->
+                    <h1>Mach dich fit f&uuml;r deinen Segelschein!</h1>
+
+                            <form id="eingabeFormular" class="f1" method="POST" name="quizErstellen">
+
+                                    <figure id="quizBild">
+                                        <a href="http://www.kellersee.info/rund-um-den-see.htm">
+                                            <img src="pictures/quizBild.jpg" title="Mach deinen Bootsschein, denn die Boote warten auf dich!" alt="Quelle: Hans Wurst">
+                                        </a>
+                                        <figcaption>Abb. 1 "2016 Kellersee, Malente"</figcaption>
+                                    </figure>
+
+                                    <!--Benutzername-->
+                                    <h3>Gib deinen Benutzernamen ein (mind. 5 Buchstaben):</h3>
+                                        <input id="benutzernameID" type="text" title="Benutzername" required minlength="5"><span class="fehlermeldung" id="fehlerMeldung1"></span>
+
+                                    <!--Vorname-->
+                                    <h3>Gib deinen Vornamen ein (Pflichtfeld):</h3>
+                                        <input id="vornameID" type="text" title="Vorname" required><span class="fehlermeldung" id="fehlerMeldung2"></span>
+
+                                    <!--Schwierigkeit-->
+                                    <div class="selectSchwierigkeit">
+                                        <h3>W&auml;hle Schwierigkeitsstufe(max. 2 Angaben):<span class="fehlermeldung" id="fehlerMeldung3"></span></h3>
+                                        <ul>
+
+                                            <li><input type="checkbox" class="schwierigkeit" id="schwierigkeitID1" value="Leicht"><label for="schwierigkeitID1">leicht</label></li>
+                                            <li><input type="checkbox" class="schwierigkeit" id="schwierigkeitID2" value="Mittel"><label for="schwierigkeitID2">mittel</label></li>
+                                            <li><input type="checkbox" class="schwierigkeit" id="schwierigkeitID3" value="Schwer"><label for="schwierigkeitID3">schwer</label></li>
+                                        </ul>
+
+
+                                    </div>
+
+                                    <!--Kategorie-->
+                                    <div class="kategoryHeader">
+                                        <h3>W&auml;hle eine Kategorie aus<span class="fehlermeldung" id="fehlerMeldung4"></span></h3>
+                                        <div class="kselections">
+                                        <ul>
+                                            <li><input type="radio" name="kategorie" id="kategorie0" value="Binnenwasser"><label for="kategorie0">Binnengew&auml;sser</label></li>
+                                            <li><input type="radio" name="kategorie" id="kategorie1" value="See"><label for="kategorie1">Die See</label></li>
+                                        </ul>
+                                        </div>
+                                    </div>
+
+
+                                    <!--Anzahl der Fragen bestimmen-->
+
+                                    <div>
+                                        <h3>W&auml;hle bis zu 8 Fragen: </h3>
+                                        <input type="number" id="numberID" title="Fragenanzahl" required min="1" max="8">
+                                        <span class="fehlermeldung" id="fehlerMeldung5"></span>
+                                    </div>
+
+                                    <fieldset>
+                                        <legend>Quiz erstellen</legend>
+                                        <!--Button zum Abschicken der Benutereingaben-->
+                                        <input type="button" class="Button" id="neuesQuiz" value="Neues Quiz erstellen">
+                                        <input type="button" class="Button" value="Formular l&ouml;schen" id="formularLeerenOben">
+                                    </fieldset>
+                            </form>
+            </section>
+
+
+            <section id="quizBereich">
+                            <form class="f2" method="POST" name="meinQuiz">
+
+
+                                    <div class="hierEntstehtQuiz" id="hierEntstehtQuizID">
+                                        <!-- Platzhalter für das Quiz -->
+                                        <p class="quizText" id="quizText">Hier ensteht das Quiz.</p>
+                                    </div>
+
+                                    <!--Buttons-->
+                                    <div class="buttonErgebnis" id="buttonErgebnis">
+                                    <input type="button" class="Button" value="Ergebnis" id="auswerten">
+                                    <input type="button" class="Button" value="Quiz wiederholen" id="formularLeeren">
+                                    <input type="button" class="Button" id="letzteErgebnisse" value="letzte Ergebnisse">
+
+                                    <p class="fehlermeldung" id="fehlerMeldung6"></p>
+
+                                    </div>
+
+                                    <!--Bereich fuer die Resultate-->
+                                    <div class="Ergebnis" id="ErgebnisID">
+                                        <form method="Post" name="result">
+                                            <fieldset>
+                                                <legend>Ergebnisse</legend>
+
+                                                <ul>
+                                                    <li>
+                                                        Versuche:
+                                                    <input type="text" class="korrekturAngaben" id="versucheID" readonly>
+                                                    </li>
+
+                                                    <li>
+                                                    Richtige Antworten:
+                                                    <input type="text" class="korrekturAngaben" id="antwortRichtigID" readonly>
+                                                    </li>
+
+                                                    <li>
+                                                    Falsche Antworten:
+                                                    <input type="text"  class="korrekturAngaben" id="anzahlFalschID" readonly>
+                                                    </li>
+
+                                                    <li>
+                                                    Prozentual richtige Antworten:
+                                                    <input type="text"  class="korrekturAngaben" id="prozentID" readonly>
+                                                    </li>
+                                                </ul>
+
+                                                <output></output>
+
+                                            </fieldset>
+                                        </form>
+                                    </div>
+
+                                    <output></output>
+                            </form>
+            </section>
+        </main>
+
+        <!-- footer Bereich fuer Impressum und Kontakt -->
+        <footer>
+            <ul>
+                <li><a href="impressum.html">Impressum</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+            </ul>
+        </footer>
+
+</body>
+</html>
+
+

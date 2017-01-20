@@ -9,6 +9,7 @@
 function quizZusammenStellen(objValidation)
 {
     versuche = 1;
+    document.getElementById("ErgebnisID").style.visibility = "invisible";
 
     console.log('quizZusammenStellen(objValidation) geladen'); //kleine notiz
     document.getElementById('fehlerMeldung6').innerHTML = "";   //Falls Hinweis noch vorhanden

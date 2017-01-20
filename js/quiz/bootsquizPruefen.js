@@ -37,7 +37,6 @@ function korrektur()
                     } else {
                         console.log("Antwort richtig");
                         richtig++;
-                        FrageUserInput[j].setAttribute('value', 'green');
                     }
                 } else {
                     console.log("nicht gechecked");

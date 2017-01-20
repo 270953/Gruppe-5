@@ -45,7 +45,7 @@ function pruefenAnzahlFragen(){
  * @param auswahlKategorie
  * @param fragenWaehler
  * @param quizErstellenButton
- * Funktion überprüft die formulardaten aus js/quiz.js
+ * Funktion überprüft die formulardaten aus js/bootsquiz.js
  */
 function quizCheck(benutzerNameInput, vornameInput, schwierigkeitSelect, auswahlKategorie, fragenWaehler) //wird quizerstellenButton hier gebraucht?
 {
@@ -53,7 +53,7 @@ function quizCheck(benutzerNameInput, vornameInput, schwierigkeitSelect, auswahl
     benutzerNameInput.onchange = pruefeBenutzername;
     vornameInput.onchange = pruefeVorname;
     fragenWaehler.onchange = pruefenAnzahlFragen;
-        //CSS-Einstellungen aus css/quiz_stylesheet.css wiederherstellen, da diese moeglicherweise durch quizZusammenStellen() veraendert wurden
+        //CSS-Einstellungen aus css/bootsquiz_stylesheet.css wiederherstellen, da diese moeglicherweise durch quizZusammenStellen() veraendert wurden
     fehlermeldungSchwierigkeit.setAttribute("class", csshinweisfarbeFehlerClass);
     fehlermeldungKategorie.setAttribute("class", csshinweisfarbeFehlerClass);
     fehlermeldungBenutzername.setAttribute("class", csshinweisfarbeFehlerClass);

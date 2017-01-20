@@ -1,6 +1,6 @@
 *
 {
-	font-size:20px;
+	font-size:18px;
 }
 
 p
@@ -36,145 +36,166 @@ header img
 	float: left;
 }
 
-article *
-{
-	margin-left : 4%;
-}
-
-/*Alle weiter verschachtelten Elemente sollen kein margin left mehr haben*/
-article * *
-{
-	margin-left : 0px;
-}
-
-article img 
-{
-	border-radius : 15px;/*CSS3 rounded borders property*/
-}
 
 
-nav 
-{
-	background-color: white;
-	width : 100%;
-}
+/*********************************************/
+/***Die Darsellung des Navigations-Bereichs***/
+/*********************************************/
+	nav
+	{
+		background-color: white;
+		width : 100%;
+	}
 
-/*Um die Navigationsleiste auf die gesammte Breite zu strecken, 
-wird die Liste als Tabelle "behandelt"*/
-nav ul 
-{
-	list-style: none;
-	margin:0;
-	padding:0;
-	display: table;
-	width: 100%;
-}
+	/*Um die Navigationsleiste auf die gesammte Breite zu strecken,
+	wird die Liste als Tabelle "behandelt"*/
+	nav ul
+	{
+		list-style: none;
+		margin:0;
+		padding:0;
+		display: table;
+		width: 100%;
+	}
 
-/*Hier werden die Listenelemnte/Menüpunkte geformt*/
-nav li 
-{
-	text-align: center;
-	display: table-cell;
-	line-height: 40px;
-	padding: 14px 4% 12px 4%;
-	margin : 0px;
-	font-size: x-large;
-}
+	/*Hier werden die Listenelemnte/Menüpunkte geformt*/
+	nav li
+	{
+		text-align: center;
+		display: table-cell;
+		line-height: 40px;
+		padding: 14px 4% 12px 4%;
+		margin : 0px;
+		font-size: x-large;
+	}
 
-/*Beim anvisieren mit der Maus, soll der Menüpunkt einen grauen Hintergrund bekommen*/
-nav li:hover 
-{
-	background-color: #e6e6e6;
-	cursor: pointer;
-}
+	/*Beim anvisieren mit der Maus, soll der Menüpunkt einen grauen Hintergrund bekommen*/
+	nav li:hover
+	{
+		background-color: #e6e6e6;
+		cursor: pointer;
+	}
 
-/*Hier wird der Text der Menüpunkte dargestellt*/
-nav a 
-{
-	color: black;
-    text-decoration: none;
-	font-size: x-large;
-}
+	/*Hier wird der Text der Menüpunkte dargestellt*/
+	nav a
+	{
+		color: black;
+		text-decoration: none;
+		font-size: x-large;
+	}
 
-/*Das active Element der jeweiligen Seite wird bläulich dargestellt*/
-#activeNav
-{
-	background-color: #78C9FF;
-}
-
-/*Alle h1 Überschriften...*/
-h1
-{
-	background-color: #479bf5;
-	font-size: x-large;
-	color: white;
-	padding-left: 25px;
-	
-	margin-left : 0px;/*Setze den Margin des "articles *" zurück*/
-}
-
-h2{
-	font-size: x-large;
-}
-
-h3{
-	font-font-weight: bold;
-}
-
-/*Die Darstellun des Footers*/
-footer
-{
-	width: 100%;
-	background-color: #479bf5;	
-}
-
-footer ul
-{	
-	padding: 25px;
-}
-
-footer ul li
-{
-	display: inline;
-	padding-right: 20px;
-}
-
-footer a
-{
-	color: white;
-	font: 18px sans-serif;
-}
-
-footer a:hover
-{
-	color: black;
-}
-
-:hover .Button
-{
-	cursor: pointer;
-}
-
-/*wird in javascript aufgerufen*/
-.falseInput
-{
-	border-color: red;
-	background-color: #F7D5D5;
-}
+	/*Das active Element der jeweiligen Seite wird bläulich dargestellt*/
+	#activeNav
+	{
+		background-color: #78C9FF;
+	}
 
 
-/*Wenn der Bentzer etwas falsch eingibt*/
-.fehlermeldung
-{
-	padding-left: 50px;
-	font-weight : bold;
-	color: red;
-}
+
+/***************************************/
+/***Die Darstellung des Main-Bereichs***/
+/***************************************/
+	article *
+	{
+		margin-left : 4%;
+	}
+
+	/*Alle weiter verschachtelten Elemente sollen kein margin left mehr haben*/
+	article * *
+	{
+		margin-left : 0px;
+	}
 
 
-#fehlerMeldungText, #fehlerMeldungEMail, #fehlerMeldungName, #fehlerMeldungVorName
-{
-	padding-left: 24px;
-	font-weight : bold;
-	color: red;
-}
+	/*Alle h1 Überschriften...*/
+	h1
+	{
+		background-color: #479bf5;
+		font-size: x-large;
+		color: white;
+		padding-left: 25px;
+
+		margin-left : 0px;/*Setze den Margin des "articles *" zurück*/
+	}
+
+	h2{
+		font-size: x-large;
+	}
+
+	h3{
+		font-font-weight: bold;
+	}
+
+	main img
+	{
+		border-radius : 15px;/*CSS3 rounded borders property*/
+	}
+
+	address
+	{
+		font-family: "French Script MT";
+		font-size: xx-large;
+
+	}
+
+	:hover .Button
+	{
+		cursor: pointer;
+	}
+
+	/*wird in javascript aufgerufen*/
+	.falseInput
+	{
+		border-color: red;
+		background-color: #F7D5D5;
+	}
+
+	.gruppe
+	{
+		margin-bottom: 2px;
+		font-size: large;
+	}
+
+	/*Wenn der Bentzer etwas falsch eingibt*/
+	.fehlermeldung
+	{
+		padding-left: 24px;
+		font-weight : bold;
+		color: red;
+	}
+
+
+
+
+
+/*****************************************/
+/***Die Darstellung des Footer-Bereichs***/
+/*****************************************/
+	footer
+	{
+		width: 100%;
+		background-color: #479bf5;
+	}
+
+	footer ul
+	{
+		padding: 25px;
+	}
+
+	footer ul li
+	{
+		display: inline;
+		padding-right: 20px;
+	}
+
+	footer a
+	{
+		color: white;
+		font: 18px sans-serif;
+	}
+
+	footer a:hover
+	{
+		color: black;
+	}
+

@@ -9,9 +9,6 @@ function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, fragenAn
 {
     console.log('inObjektUmwandeln() geladen');//kleine notiz
 
-    console.log("test: " + kategorieAuswahl);
-    console.log("test: " + auswahlSchwierigkeit);
-
     var eingabeDaten = {};
     eingabeDaten.Versuche = versuche;
     eingabeDaten.Benutzername = benutzerName;
