@@ -1,5 +1,10 @@
 window.onload = initOnLoad;
 
+/**
+ * Daklaration (Initialisation) der globalen Variablen
+ * @type {string}
+ */
+
 var csshinweisfarbeFehlerClass= "fehlermeldung";   //Pfad aus css/bootsquiz_stylesheet.css
 
 //hier werden die nodes gelagert, damit mehrere funktionen auf diese zugreifen können
@@ -10,7 +15,6 @@ var auswahlSchwierigkeit;
 var kategorieAuswahl;
 var fragenWaehler;
 var quizErstellenButton;
-var jsonObjekt;
 var auswahlKategorieSpeicher;
 
 var fehlermeldungBenutzername;
@@ -36,31 +40,32 @@ var quellDateien = [                //Pfade der Fragen, die in jsonEinlesen vera
     "'json/quizSeeMittelSchwer.json'"
 ];
 
-var jsonDaten;                  //Deklariert JSON Objekt
+var quizJsonDaten;                  //Deklariert JSON Objekt
 
 var quizFragen = [];            //in diesem Array werden die JavaScript Objekte abgelegt,
                                 // die aus den den JSON Dateien mit der funkticn jsonEinlesen abgerufen werden
-var track;                      //Variable, die die Zufallszahenl als Array speichert, anhand der Fragen-Index
-track = [];                     //identifiziert werden kann. Dies ist für den Vergleich von Eingabe und Lösung notwendig
+var quizTrack;                      //Variable, die die Zufallszahenl als Array speichert, anhand der Fragen-Index
+quizTrack = [];                     //identifiziert werden kann. Dies ist für den Vergleich von Eingabe und Lösung notwendig
 
-var loesung;                    //Variable für die richtige Lösungen. Beim Erstellen des Quiz, werden die Lösungen darin gespeichert.
-loesung = [];                   //werden die Lösungen darin gespeichert.
+var quizLoesung;                    //Variable für die richtige Lösungen. Beim Erstellen des Quiz, werden die Lösungen darin gespeichert.
+quizLoesung = [];                   //werden die Lösungen darin gespeichert.
 
-var FrageUserInput;             //Speichert die Eingabe aus dem Bootsquiz
-FrageUserInput= [];
+var quizFrageUserInput;             //Speichert die Eingabe aus dem Bootsquiz
+quizFrageUserInput= [];
 
-var AnzahlFragenUserInput;      //Anzahl der Fragen, die vom Benutzer eingegeben werden.
-AnzahlFragenUserInput = 0;      //Zunächst mit 0 initialisiert
+var quizAnzahlFragenUserInput;      //Anzahl der Fragen, die vom Benutzer eingegeben werden.
+quizAnzahlFragenUserInput = 0;      //Zunächst mit 0 initialisiert
 
-var nichtAusgefuehrt = false;   //Quiz kann noch nicht ausgewertet werden, wird bei fragenErstellen() auf true gesetzt
+var quiznichtAusgefuehrt = false;   //Quiz kann noch nicht ausgewertet werden, wird bei fragenErstellen() auf true gesetzt
 
-var versuche;
+var quizVersuche;
+
  /**
   * Funktionen, die beim Laden von bootsquiz.html ausgeführt werden
   */
-function initOnLoad ()
+function initOnLoad()
 {
-        console.log("eventHandler geladen");
+        console.log("initOnLoad () geladen");    //kleine notizen
         datenbankOeffnen();
         getForms();
 
@@ -68,7 +73,7 @@ function initOnLoad ()
 
         for (var i = 0; i < quellDateien.length; i++)
         {                                                       //quellDateien-Quellepfade werden Methode übergeben und
-            jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in jsonDaten gespeichert
+            jsonEinlesen(quellDateien[i], i, 'quiz');           //Objekte werden in quizJsonDaten gespeichert
 
         }
 
@@ -77,9 +82,9 @@ function initOnLoad ()
 
         var formularLoeschenButtonOben = document.getElementById('formularLeerenOben');     //loescht alle Eingaben aus dem
         formularLoeschenButtonOben.addEventListener('click', function () {                  //oberen Formularbereich
-            benutzerNameInput.removeAttribute("class", cssFalseInputClass);
-            vornameInput.removeAttribute("class", cssFalseInputClass);
-            fragenWaehler.removeAttribute("class", cssFalseInputClass);
+            benutzerNameInput.removeAttribute("class", cssFalseInputClass);     //Deklaration ud Initialisierung in js/validation.js
+            vornameInput.removeAttribute("class", cssFalseInputClass);          //Deklaration ud Initialisierung in js/validation.js
+            fragenWaehler.removeAttribute("class", cssFalseInputClass);         //Deklaration ud Initialisierung in js/validation.js
             fehlermeldungBenutzername.innerHTML = "";
             fehlermeldungVorname.innerHTML = "";
             fehlermeldungSchwierigkeit.innerHTML = "";
@@ -90,14 +95,14 @@ function initOnLoad ()
 
        var formularLoeschenButton = document.getElementById('formularLeeren');      //loescht alle Eingaben
         formularLoeschenButton.addEventListener('click', function () {              //aus dem Quizbereich
-            versuche++;
+            quizVersuche++;
             document.getElementById("ErgebnisID").style.visibility = "invisible";
-            nichtAusgefuehrt = true;
+            quiznichtAusgefuehrt = true;
             document.getElementById('fehlerMeldung6').innerHTML = "";
             document.meinQuiz.reset();
-            FrageUserInput = document.querySelectorAll('.hierEntstehtQuiz div ul li input[type="radio"]');
-            for(var i=0 ; i<FrageUserInput.length ; i++) {
-                FrageUserInput[i].checked = false;
+            quizFrageUserInput = document.querySelectorAll('.hierEntstehtQuiz div ul li input[type="radio"]');
+            for(var i=0 ; i<quizFrageUserInput.length ; i++) {
+                quizFrageUserInput[i].checked = false;
 }}, false);
 
         var letzteErgebnisse = document.getElementById('letzteErgebnisse');
@@ -115,7 +120,7 @@ function initOnLoad ()
 function getForms()
 {
         console.log("getForms() geladen"); //kleine notizen
-        console.log("beginne die formulare zu laden");
+        console.log("beginne die formulare zu laden"); //kleine notizen
 
         //die documents werden geladen
         benutzerNameInput = document.getElementById("benutzernameID");
@@ -132,16 +137,16 @@ function getForms()
         fehlermeldungAnzahlFragen = document.getElementById('fehlerMeldung5');
 
 
-        console.log("documente geladen : \n" + benutzerNameInput + "\n " + vornameInput + "\n"          //zum überprüfen hier ausgegeben
+        console.log("documente geladen : \n" + benutzerNameInput + "\n " + vornameInput + "\n"          //zum Ueberprüfen hier ausgegeben
             + "Anzahl Schwierigkeit: " + schwierigkeitsGradSelect.length + "\n"
             + kategorieAuswahl + " : " + kategorieAuswahl.length + "\n" + fragenWaehler + "\n" + quizErstellenButton);
 
-        quizErstellenButton.addEventListener("click", function () //der button zum voranschreiten kriegt einen click listener
+        quizErstellenButton.addEventListener("click", function () //der button zum Voranschreiten kriegt einen click listener
         {
             pruefeBenutzername();
             pruefeVorname();
             pruefenAnzahlFragen();
-            quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, kategorieAuswahl, fragenWaehler)
+            quizCheck(benutzerNameInput, vornameInput, schwierigkeitsGradSelect, kategorieAuswahl, fragenWaehler);
         }, false);
 }
 

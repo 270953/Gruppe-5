@@ -1,6 +1,9 @@
 
 var htmlSeiten = ["index.html","preise.html","bootsquiz.html","kontakt.html","impressum.html"];
 
+/**
+ *
+ */
 function navigationEventhandler ()
 {
 	var allNavLists = document.querySelectorAll("nav li");

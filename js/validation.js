@@ -17,7 +17,13 @@ var korrekterNachname = false;
 var korrekteEmail = false;
 var korrekterText = false;
 
-//checks the validity and sets the errorText
+/**
+ * checks the validity and sets the errorText
+ * @param inputElement
+ * @param errorText
+ * @param fehlermeldungOutput
+ * @returns {boolean}
+ */
 function checkVal(inputElement, errorText, fehlermeldungOutput)
 {
 	//setze den boolean wert auf checkvalidity
@@ -34,7 +40,15 @@ function checkVal(inputElement, errorText, fehlermeldungOutput)
 	return bool;
 }
 
-//checks the pattern
+/**
+ * checks the pattern
+ * @param inputElement
+ * @param regExPattern
+ * @param errorText
+ * @param fehlermeldungOutput
+ * @param match
+ * @returns {boolean}
+ */
 function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match)//default true
 {
 	//bool wird falsch gesetzt (negation vom parameter)
@@ -70,7 +84,13 @@ function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput
 }
 
 
-//entscheide ob das element gefärbt wird oder auf normal gesetzt wird
+/**
+ * entscheide ob das element gefärbt wird oder auf normal gesetzt wird
+ * @param inputElement
+ * @param bool
+ * @param errorText
+ * @returns {*}
+ * */
 function toggleCssField (inputElement, bool, errorText)
 {
 		if (bool)

@@ -1,9 +1,11 @@
-// lädt die Preistabelle auf der Seite dynamisch
+/**
+ * lädt die Preistabelle auf der Seite dynamisch
+ */
 function listeLaden () {
 
     var tabelle = document.getElementById('preise');
 
-    for (var zaehlerArray=0; zaehlerArray<jsonDaten.length; zaehlerArray++) {           // durchläuft die JSON Daten je nach Anzahl der darin gespeicherten Boote
+    for (var zaehlerArray=0; zaehlerArray<quizJsonDaten.length; zaehlerArray++) {           // durchläuft die JSON Daten je nach Anzahl der darin gespeicherten Boote
 
         var neueZeile = document.createElement('tr');                                   // erschafft ein neues Zeilenelement
 
@@ -18,12 +20,12 @@ function listeLaden () {
 
         neueZeile.setAttributeNode(neuesAttribut);          // der Zeile wird hier der class-Knoten zugewiesen
 
-        for (var zaehlerObjekt in jsonDaten[zaehlerArray]) {        // durchläuft das jeweilige 'Bootsobjekt' in Bezug auf die Anzahl der Eigenschaften jedes Bootes
+        for (var zaehlerObjekt in quizJsonDaten[zaehlerArray]) {        // durchläuft das jeweilige 'Bootsobjekt' in Bezug auf die Anzahl der Eigenschaften jedes Bootes
 
             var neueSpalte = document.createElement('td');          // und erschafft für jede Eigenschaft eine neue Spalte in der Tabelle
 
-            if (jsonDaten[zaehlerArray].hasOwnProperty(zaehlerObjekt)) {
-                var inhalt = document.createTextNode(jsonDaten[zaehlerArray][zaehlerObjekt]);       // Zuweisen des Wertes der Eigenschaft an einen Textknoten
+            if (quizJsonDaten[zaehlerArray].hasOwnProperty(zaehlerObjekt)) {
+                var inhalt = document.createTextNode(quizJsonDaten[zaehlerArray][zaehlerObjekt]);       // Zuweisen des Wertes der Eigenschaft an einen Textknoten
             }
 
             neueSpalte.appendChild(inhalt);     // Zuweisung des Textknotens an die Spalte
@@ -36,16 +38,20 @@ function listeLaden () {
 }
 
 
-/* wird aus der Funktion anzahlPersonen() heraus aufgerufen und färbt die Tabelle so ein, dass
- die Boote grün angezeigt werden, die mit der gewählten Personenzahl nutzbar sind */
+
+/**
+ * wird aus der Funktion anzahlPersonen() heraus aufgerufen und färbt die Tabelle so ein, dass
+ * die Boote grün angezeigt werden, die mit der gewählten Personenzahl nutzbar sind
+ * @param personenZahl
+ */
 function tabelleEinfaerben(personenZahl) {
 
     var zeile = document.querySelectorAll('tr');    // holt sich alle Zeilen der Preistabelle in einen Array
 
-    for (var zaehlerArray = 0; zaehlerArray < jsonDaten.length; zaehlerArray++) {       // durchläuft wieder die Boote aus der JSON Datei
+    for (var zaehlerArray = 0; zaehlerArray < quizJsonDaten.length; zaehlerArray++) {       // durchläuft wieder die Boote aus der JSON Datei
 
         //noinspection JSUnresolvedVariable
-        if (personenZahl <= jsonDaten[zaehlerArray].maxPersonen && personenZahl != 0) { // nur wenn Personenzahl des Boots >= der eingegebenen Personenzahl ist,
+        if (personenZahl <= quizJsonDaten[zaehlerArray].maxPersonen && personenZahl != 0) { // nur wenn Personenzahl des Boots >= der eingegebenen Personenzahl ist,
             // wird der folgende Code ausgeführt
             if (zaehlerArray % 2 == 0) {
                 zeile[zaehlerArray+1].className = 'gruenGerade';            // bei geraden Zeilen, wird die Zeile mit einem anderen grün eingefärbt...
@@ -66,8 +72,9 @@ function tabelleEinfaerben(personenZahl) {
     }
 }
 
-
-// wird aufgerufen, wenn die Personenanzahl geändert wird
+/**
+ * wird aufgerufen, wenn die Personenanzahl geändert wird
+ */
 function anzahlPersonen() {
 
     var personenZahl = document.getElementById('personen');
@@ -90,16 +97,16 @@ function anzahlPersonen() {
             bootsKlasse.removeChild(bootsKlasse.lastChild);
         }
 
-        for (var zaehlerArray = 0; zaehlerArray < jsonDaten.length; zaehlerArray++) {   // durchläuft wieder die Boote, die aus JSON eingelesen worden waren
+        for (var zaehlerArray = 0; zaehlerArray < quizJsonDaten.length; zaehlerArray++) {   // durchläuft wieder die Boote, die aus JSON eingelesen worden waren
 
             //noinspection JSUnresolvedVariable
-            if (jsonDaten[zaehlerArray].maxPersonen >= personenZahl) {      // wenn die max Personenanzahl des Bootes gleich oder über der Eingabe des Nutzers ist, wird das
+            if (quizJsonDaten[zaehlerArray].maxPersonen >= personenZahl) {      // wenn die max Personenanzahl des Bootes gleich oder über der Eingabe des Nutzers ist, wird das
                 // Boot in die Liste der checkbox aufgenommen
                 var neuesElement = document.createElement('option');        // entsprechend werden dafür Kindelemente der Checkbox angelegt
                 var neuesAttribut = document.createAttribute('value');
 
-                if (jsonDaten[zaehlerArray].hasOwnProperty('name')) {
-                    var text = jsonDaten[zaehlerArray].name;
+                if (quizJsonDaten[zaehlerArray].hasOwnProperty('name')) {
+                    var text = quizJsonDaten[zaehlerArray].name;
                     var neuerTextKnoten = document.createTextNode(text);
                     neuesAttribut.value = text;
                 }
@@ -119,4 +126,4 @@ function anzahlPersonen() {
             bootsKlasse.value = bootsKlasseAktuell;     // ansonsten wird die Bootsklasse genommen, die zuvor ausgewählt war (wenn sie denn noch Teil der neuen Liste ist)
         }
     }
-} // function anzahlPersonen
+}

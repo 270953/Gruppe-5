@@ -54,11 +54,11 @@ function quizCheck(benutzerNameInput, vornameInput, schwierigkeitSelect, auswahl
     vornameInput.onchange = pruefeVorname;
     fragenWaehler.onchange = pruefenAnzahlFragen;
         //CSS-Einstellungen aus css/bootsquiz_stylesheet.css wiederherstellen, da diese moeglicherweise durch quizZusammenStellen() veraendert wurden
-    fehlermeldungSchwierigkeit.setAttribute("class", csshinweisfarbeFehlerClass);
-    fehlermeldungKategorie.setAttribute("class", csshinweisfarbeFehlerClass);
-    fehlermeldungBenutzername.setAttribute("class", csshinweisfarbeFehlerClass);
-    fehlermeldungVorname.setAttribute("class", csshinweisfarbeFehlerClass);
-    fehlermeldungAnzahlFragen.setAttribute("class", csshinweisfarbeFehlerClass);
+    fehlermeldungSchwierigkeit.setAttribute("class", csshinweisfarbeFehlerClass);   //Deklaration ud Initialisierung in js/quiz/bootsquiz.js
+    fehlermeldungKategorie.setAttribute("class", csshinweisfarbeFehlerClass);       //Deklaration ud Initialisierung in js/quiz/bootsquiz.js
+    fehlermeldungBenutzername.setAttribute("class", csshinweisfarbeFehlerClass);    //Deklaration ud Initialisierung in js/quiz/bootsquiz.js
+    fehlermeldungVorname.setAttribute("class", csshinweisfarbeFehlerClass);         //Deklaration ud Initialisierung in js/quiz/bootsquiz.js
+    fehlermeldungAnzahlFragen.setAttribute("class", csshinweisfarbeFehlerClass);    //Deklaration ud Initialisierung in js/quiz/bootsquiz.js
 
     var counterSchwierigkeit = 0;    //es wird gezählt, wie viele optionen selektiert werden
     var selectedIndexArray = [];               //selectedIndexArray speichert die Value von der Checkbox
@@ -85,62 +85,27 @@ function quizCheck(benutzerNameInput, vornameInput, schwierigkeitSelect, auswahl
                                                                             //werden zusammengelegt, zur Fallunterscheidung
     console.log("Fallunterscheidung: " + fallunterscheidung);
 
-    switch(fallunterscheidung){
-        case("0,0"):{           //Weder Schwierigkeit noch Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "W&auml;hle Kategorie und/oder Schwierigkeit!";
-            fehlermeldungKategorie.innerHTML = "W&auml;hle Kategorie und/oder Schwierigkeit!";
-            korrekteSchwierigkeit = false;          //boolean wird auf false gesetzt, falls vorher auf true war
-            korrekteKategorie = false;              //boolean wird auf false gesetzt, falls vorher auf true war
-            break;
-        }
-        case("0,1"):{           //Keine Schwierigkeit, eine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "";  //falls zuvor eine Fehlermeldung ausgeloest wurde, soll
-            fehlermeldungKategorie.innerHTML = "";      //diese durch leeren String ersetzt werden
-            korrekteSchwierigkeit = true;               //boolean wird auf true gesetzt, falls vorher auf false war
-            korrekteKategorie = true;                   //boolean wird auf true gesetzt, falls vorher auf false war
-            break;
-        }
-        case("1,0"):{           //Eine Schwierigkeit, keine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "";  //falls zuvor eine Fehlermeldung ausgeloest wurde, soll
-            fehlermeldungKategorie.innerHTML = "";      //diese durch leeren String ersetzt werden
-            korrekteSchwierigkeit = true;               //boolean wird auf true gesetzt, falls vorher auf false war
-            korrekteKategorie = true;                   //boolean wird auf true gesetzt, falls vorher auf false war
-            break;
-        }
-        case("1,1"):{           //Eine Schwierigkeit, eine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "";  //falls zuvor eine Fehlermeldung ausgeloest wurde, soll
-            fehlermeldungKategorie.innerHTML = "";      //diese durch leeren String ersetzt werden
-            korrekteSchwierigkeit = true;               //boolean wird auf true gesetzt, falls vorher auf false war
-            korrekteKategorie = true;                   //boolean wird auf true gesetzt, falls vorher auf false war
-            break;
-        }
-        case("2,0"):{           //Zwei Schwierigkeiten, keine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "";  //falls zuvor eine Fehlermeldung ausgeloest wurde, soll
-            fehlermeldungKategorie.innerHTML = "";      //diese durch leeren String ersetzt werden
-            korrekteSchwierigkeit = true;               //boolean wird auf true gesetzt, falls vorher auf false war
-            korrekteKategorie = true;                   //boolean wird auf true gesetzt, falls vorher auf false war
-            break;
-        }
-        case("2,1"):{           //Zwei Schwierigkeiten, eine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "";  //falls zuvor eine Fehlermeldung ausgeloest wurde, soll
-            fehlermeldungKategorie.innerHTML = "";      //diese durch leeren String ersetzt werden
-            korrekteSchwierigkeit = true;               //boolean wird auf true gesetzt, falls vorher auf false war
-            korrekteKategorie = true;                   //boolean wird auf true gesetzt, falls vorher auf false war
-            break;
-        }
-        case("3,0"):{           //Drei Schwierigkeiten, keine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "Nicht mehr als zwei Angaben!";//schwierigkeitSelect.validationMessage;
-            korrekteSchwierigkeit = false;              //boolean wird auf false gesetzt, falls vorher auf true war
-            break;
-        }
-        case("3,1"):{           //Drei Schwierigkeiten, eine Kategorie wurde gewaehlt
-            fehlermeldungSchwierigkeit.innerHTML = "Nicht mehr als zwei Angaben!";//schwierigkeitSelect.validationMessage;
-            korrekteSchwierigkeit = false;               //boolean wird auf false gesetzt, falls vorher auf true war
-            break;
-        }
+
+    if(fallunterscheidung == "3,1") {           //Drei Schwierigkeiten, eine Kategorie wurde gewaehlt
+        fehlermeldungSchwierigkeit.innerHTML = "Nicht mehr als zwei Angaben!";//schwierigkeitSelect.validationMessage;
+        korrekteSchwierigkeit = false;               //boolean wird auf false gesetzt, falls vorher auf true war
+
+    }else if (fallunterscheidung == "3,0") {           //Drei Schwierigkeiten, eine Kategorie wurde gewaehlt
+        fehlermeldungSchwierigkeit.innerHTML = "Nicht mehr als zwei Angaben!";//schwierigkeitSelect.validationMessage;
+        korrekteSchwierigkeit = false;
+    }else if (fallunterscheidung == "0,0") {           //Weder Schwierigkeit noch Kategorie wurde gewaehlt
+        fehlermeldungSchwierigkeit.innerHTML = "W&auml;hle Kategorie und/oder Schwierigkeit!";
+        fehlermeldungKategorie.innerHTML = "W&auml;hle Kategorie und/oder Schwierigkeit!";
+        korrekteSchwierigkeit = false;          //boolean wird auf false gesetzt, falls vorher auf true war
+        korrekteKategorie = false;              //boolean wird auf false gesetzt, falls vorher auf true war
+    }else {
+        fehlermeldungSchwierigkeit.innerHTML = "";  //falls zuvor eine Fehlermeldung ausgeloest wurde, soll
+        fehlermeldungKategorie.innerHTML = "";      //diese durch leeren String ersetzt werden
+        korrekteSchwierigkeit = true;               //boolean wird auf true gesetzt, falls vorher auf false war
+        korrekteKategorie = true;                   //boolean wird auf true gesetzt, falls vorher auf false war
     }
 
-    if (korrekterBenutzername && korrekterVorname && korrekteSchwierigkeit && korrekteKategorie && korrekteAnzahl){
+        if (korrekterBenutzername && korrekterVorname && korrekteSchwierigkeit && korrekteKategorie && korrekteAnzahl){
             console.log("Formularbedingung erfuellt");
             var checkObjekt;        //Objekt erstellen, welches an Funktion quizZusammenstellen() uebergeben wird
             checkObjekt = {kategorie: auswahlKategorie , schwierigkeit: selectedIndexArray};

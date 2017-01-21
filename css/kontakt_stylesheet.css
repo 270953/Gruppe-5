@@ -1,0 +1,19 @@
+
+form
+{
+	padding-left: 25px;
+}
+
+form *
+{
+	font: 16px sans-serif; /* für alle folgenden elemente auch buttons */
+}
+
+form p
+{
+	font: bold 22px sans-serif;
+}
+
+.kontaktEingaben{
+	padding-bottom: 5px;
+}

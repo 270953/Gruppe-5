@@ -15,6 +15,10 @@ function initOnLoad ()
 	getForms();
 }
 
+/**
+ *
+ * @returns {boolean}
+ */
 function vornameCheck()
 	{ 			
 		var fehlerDoc = document.getElementById("fehlerMeldungVorName");
@@ -22,18 +26,30 @@ function vornameCheck()
 		return (checkVal(formElementsText[0], formElementsText[0].validationMessage, fehlerDoc) && checkPattern(formElementsText[0], regexLetters, "Bitte nur Buchstaben", fehlerDoc));
 	}
 
+/**
+ *
+ * @returns {boolean}
+ */
 function nachNameCheck()
 	{ 			
 		var fehlerDoc = document.getElementById("fehlerMeldungName");
 	
 		return (checkVal(formElementsText[1], formElementsText[1].validationMessage, fehlerDoc) && checkPattern(formElementsText[1], regexLetters, "Bitte nur Buchstaben", fehlerDoc));	
 	}
-	
+
+/**
+ *
+ * @returns {boolean}
+ */
 function emailCheck()
 	{ 
 		return (checkVal(formEmail, formEmail.validationMessage, document.getElementById("fehlerMeldungEMail")));
-	} 
-	
+	}
+
+/**
+ *
+ * @returns {boolean}
+ */
 function textAreaCheck()
 	{ 
 		var fehlerDoc = document.getElementById("fehlerMeldungText");
@@ -41,6 +57,9 @@ function textAreaCheck()
 		return (checkVal(formTextArea, formTextArea.validationMessage, fehlerDoc) && checkPattern(formTextArea, regexSpecial, "Der Text darf folgende Zeichen nicht enthalten : <, >, {, }, $, ;", fehlerDoc, false));
 	}
 
+/**
+ *
+ */
 function getForms()
 {
 	console.log("beginne die formulare zu laden");

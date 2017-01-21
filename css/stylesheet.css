@@ -1,40 +1,43 @@
-*
-{
-	font-size:18px;
-}
+/***************/
+/***Allgemein***/
+/***************/
+	*
+	{
+		font-size:18px;
+	}
 
-p
-{
-	width : 70%;
-}
+	p
+	{
+		width : 70%;
+	}
 
-/*Die "Hintergrundfarbe"*/
-html
-{
-	background-color: white;	
-	height: 100%;
-}
+		/*Die "Hintergrundfarbe"*/
+	html
+	{
+		background-color: white;
+		height: 100%;
+	}
 
-/*Der Body soll sich vom Hintergrund abheben*/
-body
-{
-	margin : 0px 10%;
-	background : linear-gradient(#D0D7F2, #9BA9E0);
-	font: 15px sans-serif;
-}
+		/*Der Body soll sich vom Hintergrund abheben*/
+	body
+	{
+		margin : 0px 10%;
+		background : linear-gradient(#D0D7F2, #9BA9E0);
+		font: 15px sans-serif;
+	}
 
-ul
-{	
-	padding: 0px; /*Setze das Vordefinierte Padding von ul auf 0px*/
-	list-style-type: none;	
-}
+	ul
+	{
+		padding: 0px; /*Setze das Vordefinierte Padding von ul auf 0px*/
+		list-style-type: none;
+	}
 
-/*Die Darstellun des großen Bildes am Seitenanfang*/
-header img
-{
-	width: 100%;
-	float: left;
-}
+		/*Die Darstellun des großen Bildes am Seitenanfang*/
+	header img
+	{
+		width: 100%;
+		float: left;
+	}
 
 
 
@@ -47,8 +50,8 @@ header img
 		width : 100%;
 	}
 
-	/*Um die Navigationsleiste auf die gesammte Breite zu strecken,
-	wird die Liste als Tabelle "behandelt"*/
+		/*Um die Navigationsleiste auf die gesammte Breite zu strecken,
+		wird die Liste als Tabelle "behandelt"*/
 	nav ul
 	{
 		list-style: none;
@@ -58,7 +61,7 @@ header img
 		width: 100%;
 	}
 
-	/*Hier werden die Listenelemnte/Menüpunkte geformt*/
+		/*Hier werden die Listenelemnte/Menüpunkte geformt*/
 	nav li
 	{
 		text-align: center;
@@ -69,14 +72,14 @@ header img
 		font-size: x-large;
 	}
 
-	/*Beim anvisieren mit der Maus, soll der Menüpunkt einen grauen Hintergrund bekommen*/
+		/*Beim anvisieren mit der Maus, soll der Menüpunkt einen grauen Hintergrund bekommen*/
 	nav li:hover
 	{
 		background-color: #e6e6e6;
 		cursor: pointer;
 	}
 
-	/*Hier wird der Text der Menüpunkte dargestellt*/
+		/*Hier wird der Text der Menüpunkte dargestellt*/
 	nav a
 	{
 		color: black;
@@ -84,7 +87,7 @@ header img
 		font-size: x-large;
 	}
 
-	/*Das active Element der jeweiligen Seite wird bläulich dargestellt*/
+		/*Das active Element der jeweiligen Seite wird bläulich dargestellt*/
 	#activeNav
 	{
 		background-color: #78C9FF;
@@ -100,14 +103,14 @@ header img
 		margin-left : 4%;
 	}
 
-	/*Alle weiter verschachtelten Elemente sollen kein margin left mehr haben*/
+		/*Alle weiter verschachtelten Elemente sollen kein margin left mehr haben*/
 	article * *
 	{
 		margin-left : 0px;
 	}
 
 
-	/*Alle h1 Überschriften...*/
+		/*Alle h1 Überschriften...*/
 	h1
 	{
 		background-color: #479bf5;
@@ -131,19 +134,12 @@ header img
 		border-radius : 15px;/*CSS3 rounded borders property*/
 	}
 
-	address
-	{
-		font-family: "French Script MT";
-		font-size: xx-large;
-
-	}
-
 	:hover .Button
 	{
 		cursor: pointer;
 	}
 
-	/*wird in javascript aufgerufen*/
+		/*wird in javascript aufgerufen*/
 	.falseInput
 	{
 		border-color: red;
@@ -156,7 +152,7 @@ header img
 		font-size: large;
 	}
 
-	/*Wenn der Bentzer etwas falsch eingibt*/
+		/*Wenn der Bentzer etwas falsch eingibt*/
 	.fehlermeldung
 	{
 		padding-left: 24px;

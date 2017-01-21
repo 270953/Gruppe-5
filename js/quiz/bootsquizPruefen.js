@@ -10,51 +10,49 @@ function korrektur()
 {
     console.log('korrektur() geladen'); //kleine notiz
 
-    if (nichtAusgefuehrt == false)         //preft, ob Korrektur schon ausgeführt wurde
+    if (quiznichtAusgefuehrt == false)         //preft, ob Korrektur schon ausgeführt wurde
     {
         document.getElementById('fehlerMeldung6').innerHTML = "Klicke \"neues Quiz erstellen\", um ein neues Quiz zu starten, oder klicke auf \"Quiz wiederholen\", wenn das Quiz bereits erstellt und korrigiert wurde. Viel Erfolg!";
     }
     try                             // Fehlerbehandlung, die mit catch aufgefangen wird
     {
-        while (nichtAusgefuehrt) {
+        while (quiznichtAusgefuehrt) {
             document.getElementById("ErgebnisID").style.visibility = "visible";
 
             var richtig;                    //Speichert die Anzahl der nicht richtig beantworteten Fragen
             richtig = 0;
 
-            FrageUserInput = document.querySelectorAll('.hierEntstehtQuiz div ul li input[type="radio"]');
-            console.log(FrageUserInput);
+            quizFrageUserInput = document.querySelectorAll('.hierEntstehtQuiz div ul li input[type="radio"]');
+            console.log(quizFrageUserInput);
 
-            for (var j = 0; j < (AnzahlFragenUserInput * 4); j++)      //prueft jede Frage, in Abhaengigkeit von AnzahlFragenUserInput
+            for (var j = 0; j < (quizAnzahlFragenUserInput * 4); j++)      //prueft jede Frage, in Abhaengigkeit von quizAnzahlFragenUserInput
             {
-                if ((FrageUserInput[j].checked == true))           //prueft, ob gecheckt
+                if ((quizFrageUserInput[j].checked == true))           //prueft, ob gecheckt
                 {
                     console.log("gechecked");
-                    if ((j - (4 * (Math.floor(j / 4)))) != loesung[Math.floor(j / 4)]) {
+                    if ((j - (4 * (Math.floor(j / 4)))) != quizLoesung[Math.floor(j / 4)]) {
                         console.log("Antwort falsch");
-                        FrageUserInput[j].setAttribute('disabled', 'disabled');     //falsche Antworten werden ausgeblendet und per css rot gefärbt
+                        quizFrageUserInput[j].setAttribute('disabled', 'disabled');     //falsche Antworten werden ausgeblendet und per css rot gefärbt
 
                     } else {
                         console.log("Antwort richtig");
                         richtig++;
                     }
                 } else {
-                    console.log("nicht gechecked");
-                    console.log("nicht gechecked");
+                    console.log("Antwort falsch");
                 }
             }
 
-            document.getElementById('versucheID').value = versuche;
+            document.getElementById('versucheID').value = quizVersuche;
                 document.getElementById('antwortRichtigID').value = richtig;
-            document.getElementById('anzahlFalschID').value = AnzahlFragenUserInput - richtig;
-            document.getElementById('prozentID').value = richtig / AnzahlFragenUserInput * 100 + "%";
+            document.getElementById('anzahlFalschID').value = quizAnzahlFragenUserInput - richtig;
+            document.getElementById('prozentID').value = richtig / quizAnzahlFragenUserInput * 100 + "%";
 
-            nichtAusgefuehrt = false;
-            inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, fragenWaehler.value, richtig);
+            quiznichtAusgefuehrt = false;
+            inObjektUmwandeln(benutzerNameInput.value, vornameInput.value, auswahlSchwierigkeit, quizAnzahlFragenUserInput, richtig);
         }
     }catch (error)
     {
         window.alert(error.message);
     }
-
 }

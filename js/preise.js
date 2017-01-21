@@ -2,6 +2,9 @@ window.onload = initOnLoad;
 
 var jsonDaten;      // Objekt, in das später die Daten aus der JSON Datei geschrieben werden
 
+/**
+ * Funktionen, die direkt beim Laden ausgefuehrt werden
+ */
 function initOnLoad() {
 
     // Fügt Events auf die Navigationsleiste hinzu
@@ -34,7 +37,10 @@ function initOnLoad() {
 }
 
 
-function changeMietdauerText() {                // wird aufgerufen, wenn die Bootsklasse geändert wird
+/**
+ * wird aufgerufen, wenn die Bootsklasse geändert wird
+ */
+function changeMietdauerText() {
 
     var mietdauer = document.getElementById('mietdauer');
     var mietdauerText = document.getElementById('mietdauerText').innerHTML;
@@ -54,7 +60,11 @@ function changeMietdauerText() {                // wird aufgerufen, wenn die Boo
 
 }
 
-
+/**
+ *
+ * @param input
+ * @returns {boolean}
+ */
 function pruefFunktion(input) {
 
     var ausgabeFeld = document.getElementById('Fehlermeldungen');
@@ -68,7 +78,10 @@ function pruefFunktion(input) {
 }
 
 
-function berechnePreis() {              // wird beim Click auf den Button 'Preis berechnen' aufgerufen
+/**
+ * wird beim Click auf den Button 'Preis berechnen' aufgerufen
+ */
+function berechnePreis() {
 
     var mietdauer = document.getElementById('mietdauer');
 
@@ -120,7 +133,11 @@ function berechnePreis() {              // wird beim Click auf den Button 'Preis
 }
 
 
-function ermittleBootsklasse() {        // wurde ausgelagert, um den Code übersichtlicher zu gestalten
+/**
+ * wurde ausgelagert, um den Code übersichtlicher zu gestalten
+ * @returns {Array|[*,*]}
+ */
+function ermittleBootsklasse() {
 
     var selectedBoot = document.getElementById('bootsKlasse').value;
     var rueckgabe;
@@ -142,8 +159,12 @@ function ermittleBootsklasse() {        // wurde ausgelagert, um den Code übers
 
 }
 
-
-function ermittleSaisonPreis(selectedBoot) {            // ermittelt den Saisonpreis des an die Funktion übergebenen Bootes
+/**
+ * ermittelt den Saisonpreis des an die Funktion übergebenen Bootes
+ * @param selectedBoot
+ * @returns {*}
+ */
+function ermittleSaisonPreis(selectedBoot) {
 
     var rueckgabe;
     if (document.getElementById('saison').value == 'Hauptsaison') {
@@ -157,8 +178,12 @@ function ermittleSaisonPreis(selectedBoot) {            // ermittelt den Saisonp
     return(rueckgabe);
 }
 
-
-function ermittleRabatt(selectedBoot) {                 // ermittelt den Rabatt des an die Funktion übergebenene Bootes
+/**
+ * ermittelt den Rabatt des an die Funktion übergebenene Bootes
+ * @param selectedBoot
+ * @returns {number|*}
+ */
+function ermittleRabatt(selectedBoot) {
 
     var rueckgabe;
     if (document.getElementById('rabatt').value == 'ja') {      // wenn rabattfähig gewählt wurde...

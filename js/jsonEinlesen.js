@@ -1,4 +1,4 @@
-/*
+/**
  *Funktion, zum Einlesen von JSON mittels AJAX
  */
 function jsonEinlesen(quellDatei, zaehler, herkunft) {
@@ -18,7 +18,7 @@ function jsonEinlesen(quellDatei, zaehler, herkunft) {
         anfrage = new XMLHttpRequest();
         anfrage.open('GET', quellDatei, true);
         anfrage.onload = function () {
-            jsonDaten = JSON.parse(anfrage.responseText);
+            quizJsonDaten = JSON.parse(anfrage.responseText);
             listeLaden();                                       // lädt die Preistabelle auf der Seite dynamisch, je nach Inhalt der JSON Datei
             anzahlPersonen();                                   // legt erstmalig die Liste der Checkbox 'Bootswahl' dynamisch an
         };

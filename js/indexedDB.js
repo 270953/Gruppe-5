@@ -5,7 +5,9 @@ var objectStore;
 var ausgabeFeld;      // im output-Bereich werden später die letzten Ergebnisse angezeigt
 
 
-// Funktion, um die Datenbank anzulegen oder zu öffnen
+/**
+ * Funktion, um die Datenbank anzulegen oder zu öffnen
+ */
 function datenbankOeffnen() {
 
 	ausgabeFeld = document.getElementsByTagName('output');
@@ -63,8 +65,11 @@ function datenbankOeffnen() {
     };
 }
 
-
-// Funktion, um Daten in die Datenbank zu schreiben
+/**
+ * Funktion, um Daten in die Datenbank zu schreiben
+ * @param eingabeDaten
+ * @param herkunft
+ */
 function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum einen die Daten, die gespeichert werden sollen, übergeben. zum anderen aber auch eine Prüfvariable
 
     objectStore = pruefeHerkunft(herkunft);                 // mit der Funktion wird geprüft, welche Datei die Datenbank geöffnet hat
@@ -76,8 +81,10 @@ function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum ein
     };
 }
 
-
-// Funktion, um die Datenbank auszulesen
+/**
+ * Funktion, um die Datenbank auszulesen
+ * @param herkunft
+ */
 function datenLesen(herkunft) {
 
     ausgabeFeld[0].innerHTML = '<strong>Hier sehen Sie die letzten Ergebnisse (neueste zuerst):</Strong><br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
@@ -110,7 +117,11 @@ function datenLesen(herkunft) {
 }       // schließt datenLesen
 
 
-
+/**
+ * Funktion, die die Herkuft ueberprueft
+ * @param herkunft
+ * @returns {*}
+ */
 function pruefeHerkunft(herkunft) {
 
     if (herkunft == 'preis') {                              // ist die Prüfvariable = 'preis', wird eine Transaction für den Objectstore 'letztePreisBerechnungen' geöffnet
@@ -136,7 +147,11 @@ function pruefeHerkunft(herkunft) {
 }
 
 
-
+/**
+ * Funktion, die das Auslesen der Funktion auf 5 beschränkt
+ * @param zaehler
+ * @returns {*}
+ */
 function setzeAbfragebegrenzung(zaehler) {
 
     var abfrageBegrenzung;
@@ -157,8 +172,10 @@ function setzeAbfragebegrenzung(zaehler) {
 }
 
 
-
-// Ausgabe der gelesenen Daten in HTML
+/**
+ * Ausgabe der gelesenen Daten in HTML
+ * @param jsObjekt
+ */
 function inHTMLwiedergeben(jsObjekt) {
 
     ausgabeFeld[0].innerHTML += '<br>';             // erzeugt eine Freizeile zwischen den Einträgen

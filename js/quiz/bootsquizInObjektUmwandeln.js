@@ -9,18 +9,17 @@ function inObjektUmwandeln(benutzerName, vorname, auswahlSchwierigkeit, fragenAn
 {
     console.log('inObjektUmwandeln() geladen');//kleine notiz
 
-    var eingabeDaten = {};
-    eingabeDaten.Versuche = versuche;
-    eingabeDaten.Benutzername = benutzerName;
-    eingabeDaten.Vorname = vorname;
-    eingabeDaten.Schwierigkeit = auswahlSchwierigkeit;
-    eingabeDaten.Kategorie = auswahlKategorieSpeicher;;
-    eingabeDaten.Richtig = richtig;
-    eingabeDaten.Fragenanzahl = fragenAnzahl;
-    eingabeDaten.Richtig = richtig;
+    var quizDaten = {};
+    quizDaten.Versuche = quizVersuche;
+    quizDaten.Benutzername = benutzerName;
+    quizDaten.Vorname = vorname;
+    quizDaten.Schwierigkeit = auswahlSchwierigkeit;
+    quizDaten.Kategorie = auswahlKategorieSpeicher;
+    quizDaten.Richtig = richtig;
+    quizDaten.Fragenanzahl = fragenAnzahl;
+    quizDaten.Richtig = richtig;
     var datum = new Date();
-    eingabeDaten.Datum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
-    jsonObjekt = JSON.stringify(eingabeDaten);        // umwandeln des JavaScript Objektes in ein JSON Objekt
-    console.log('JSON Objekt: ' + jsonObjekt);              // Ausgabe des JSON Objektes in der Konsole
-    datenSpeichern(eingabeDaten, 'quiz');
+    quizDaten.Datum = datum.getDate() + "." + (datum.getMonth() + 1) + "." + datum.getFullYear() + " um " + datum.getHours() + ":" + datum.getMinutes() + " Uhr";
+    console.log("Zu speichernde Daten: " + quizDaten);
+    datenSpeichern(quizDaten, 'quiz');
 }
