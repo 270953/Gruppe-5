@@ -110,7 +110,6 @@ function getForms()
 	var buttonLetzteErgebnisse = document.getElementById("ergebnisseAbrufen");
 	
 	var buttonUebernehmen = document.getElementById("uebernehmen");
-	var buttonLoeschen = document.getElementById("loesche");
 	
 	//log zum überprüfen
 	console.log("documente geladen : \n"
