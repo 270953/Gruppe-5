@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<!-- Kopfbereich | nicht sichtbarer Bereich der Seite -->
+<head>
+    <!-- Titel der Seite, der in der Browserleiste, im Tab oder der Favoritenleiste angezeigt wird -->
+    <title>Bootsvermietung und Bootsführerschein</title>
+
+    <meta charset="UTF-8">
+    <meta name="author" content="Gruppe 5">
+    <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
+    <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
+
+    <script type="text/javascript" src="js/bootsverleih/preise.js"></script>
+    <script type="text/javascript" src="js/bootsverleih/preistabelle.js"></script>
+    <script type="text/javascript" src="js/jsonEinlesen.js"></script>
+    <script type="text/javascript" src="js/indexedDB.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
+	<script type="text/javascript" src="js/validation.js"></script>
+
+    <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
+    <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootsverleih.css" />
+    <link rel="stylesheet" type="text/css" href="css/formular.css" />
+</head>
+
+<!-- sichtbarer Inhalt der Seite-->
+<body>
+
+        <header>
+            <div>
+                <img src="pictures/querbild2.jpg" id="querbild">
+            </div>
+        </header>
+
+        <!-- Menüleiste - als unsorted list -->
+        <nav>
+            <ul>
+                <li>Startseite</li>
+                <li id="activeNav">Bootsverleih</li>
+                <li>Bootsquiz</li>
+                <li>Kontakt</li>
+                <li>Impressum</li>
+            </ul>
+        </nav>
+
+         <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
+         <main>
+
+		        <h1>Preistabelle</h1>
+
+		 
+                <section id="preisTabelle">
+				
+				<article>
+				In unserer Preistabelle können Sie ablesen, welche Bootsklasse unter welchen Konditionen zur Verfügung steht und welche Rabatte möglich sind.
+				</article>
+
+                                 <!-- Preistabelle: Daten werden aus Json eingelesen -->
+                                 <table id="preise">
+                                     <tr>
+                                         <th>Bootsklasse</th>
+                                         <th>max. Personen</th>
+                                         <th>Abrechnungszeitraum</th>
+                                         <th>Preis Hauptsaison</th>
+                                         <th>Preis Nebensaison</th>
+                                         <th>Rabatt in %</th>
+                                     </tr>
+                                 </table>
+
+                 </section>
+
+                <h1>Preisrechner</h1>
+				 
+                    <form>
+
+					    <p>Treffen Sie Ihre Auswahl:</p>
+
+                         <div>
+                             <span>Personenanzahl (max 24):</span>
+                             <input type="number" title="Personenanzahl" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0">
+							 <span class="fehlermeldung" id ="f1"></span>
+                         </div>
+
+                         <p>
+                             Bootsklasse:
+                             <select class="eingabeFeld" id="bootsKlasse" title="Bootsklasse wählen">
+
+                             </select>
+                         </p>
+
+                         <p>
+                             Zu welcher Zeit möchten Sie mieten:
+                             <select title="Saison" class="eingabeFeld" id="saison">
+                                 <option value="Hauptsaison">Hauptsaison</option>
+                                 <option value="Nebensaison">Nebensaison</option>
+
+                             </select>
+                         </p>
+
+
+                         <div>
+                             <span>Sind Sie rabattberechtigt?</span>
+
+                             <select title="Rabatt" class="eingabeFeld" id="rabatt">
+                                 <option value="ja">ja</option>
+                                 <option value="nein">nein</option>
+
+                             </select>
+
+                       </div>
+
+                         <p>
+                             <span id='mietdauerText'>Mietdauer in Tagen (max. 30): </span>
+                             <input type="number" title="Mietdauer" class="eingabeFeld" id="mietdauer" min="1" max="30" step="1" value="1">
+							 <span class="fehlermeldung" id ="f2"></span>
+                         </p>
+
+                         <div>
+                             <input type="button" id="berechnePreis" value="Preis berechnen">
+                             <input type="button" id="letzteBerechnungen" value="die letzten Preisberechnungen anzeigen">
+							 <input type="button" value="L&ouml;sche alte Daten" id="loesche"/>
+                         </div>
+						 
+                    <p id="Preisberechnungen"></p>
+					
+                    <output></output>
+
+                     </form>
+
+
+         </main>
+
+         <!-- footer Bereich f�r Impressum und Kontakt -->
+         <footer>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+         </footer>
+
+</body>
+</html>

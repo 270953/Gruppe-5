@@ -12,7 +12,7 @@
 	<meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
 	<meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
-	<script type="text/javascript" src="js/kontakt_javascript.js"></script>
+	<script type="text/javascript" src="js/kontakt.js"></script>
 	<script type="text/javascript" src="js/validation.js"></script>
 	<script type="text/javascript" src="js/indexedDB.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
@@ -36,8 +36,8 @@
 		<nav>
 			<ul>
 				<li>Startseite</li>
-				<li>Preisrechner</li>
-				<li>Quiz</li>
+				<li>Bootsverleih</li>
+				<li>Bootsquiz</li>
 				<li id="activeNav">Kontakt</li>
 				<li>Impressum</li>
 			</ul>
@@ -50,46 +50,53 @@
 			  			  
 			<form action="mailto:nikog3@tlen.pl" method="POST" enctype="text/plain">
 						  
+				<div>
 				<p>
 					Vorname 
-					<br>
-					<input type="text" name="vorname" title="Vorname" minLength="2" maxLength="25" required/>
 				</p>
+					<input type="text" name="vorname" title="Vorname" minLength="2" maxLength="25" required/>
+					<span id="fehlerMeldungVorName" class="fehlermeldung"></span>
+				</div>
 				
-				<p id="fehlerMeldungVorName"></p>
-
 				
+				<div>
 				<p>
 					Nachname 
-					<br>
+					</p>
 					<input type="text" name="nachname" title="Nachname" minLength="3" maxLength="25" required/>
-				</p>
-				
-				<p id="fehlerMeldungName"></p>
-				
+					<span id="fehlerMeldungName" class="fehlermeldung"></span>			
+				</div>
+								
+				<div>
 				<p>
 					Ihre E-Mail Adresse 
-					<br>
+				</p>
 					<input type="email" name="email" title="E-Mail" minLength="3" maxLength="25" required/>
-				</p>	
+					<span id="fehlerMeldungEMail" class="fehlermeldung"></span>
+				</div>	
 
-				<p id="fehlerMeldungEMail"></p>
 				
+				<div>
 				<p>
 					Ihre Nachricht 
-					<br>
+					</p>
 					<textarea title="Ihre Nachricht" rows="5" cols="50" minLength="15" required></textarea>
-				</p>
+					<span id="fehlerMeldungText" class="fehlermeldung"></span>	
+				</div>
+								
 				
-				<p id="fehlerMeldungText"></p>
+				<div>
+					<input type="submit" value="Abschicken" id="abschicken"/>
 				
-				
-				<input type="submit" value="Abschicken" id="abschicken"/>
-				
-				<input type="reset" value="Zur&uuml;cksetzen"/>
-				
-				<input type="button" value="Kontaktdaten" id="ergebnisseAbrufen"/>
-				
+					<input type="reset" value="Zur&uuml;cksetzen"/>
+					
+					<input type="button" value="Alte Eingaben anzeigen" id="ergebnisseAbrufen"/>
+					
+					<input type="button" value="Letzte Eingabe &Uuml;bernehmen" id="uebernehmen"/>
+									
+					<input type="button" value="L&ouml;sche alte Daten" id="loesche"/>
+				</div>
+								
 				<output>
 				
 				</output>
@@ -102,7 +109,6 @@
           <!-- footer Bereich für Impressum und Kontakt -->
           <footer>
                  <ul id="footer">
-                         <li><a href="index.html">Created by Gruppe 5</a></li>
                          <li><a href="impressum.html">Impressum</a></li>
                          <li><a href="kontakt.html">Kontakt</a></li>
                  </ul>

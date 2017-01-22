@@ -12,18 +12,5 @@ form *
 form p
 {
 	font: bold 22px sans-serif;
-}
-
-.falseInput
-{
-	border-color: red;
-	background-color: #F7D5D5;
-}
-
-
-#fehlerMeldungText, #fehlerMeldungEMail, #fehlerMeldungName, #fehlerMeldungVorName
-{
-	padding-left: 24px;
-	font-weight : bold;
-	color: red;
+	width : 100%;
 }

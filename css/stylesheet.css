@@ -150,4 +150,11 @@ footer a:hover
 	color: black;
 }
 
+.fehlermeldung
+{
+	padding-left: 30px;
+	font-weight : bold;
+	color: red;
+}
+
 
