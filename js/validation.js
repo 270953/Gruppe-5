@@ -3,60 +3,51 @@
 
 //must only contain letters
 regexLetters = new RegExp('^[a-zA-Z\x7f-\xff]+$');
-regexMail = new RegExp('^[^ ]*@[^ ]*$');//must match a mail domain
+//mail domain
+regexMail = new RegExp('^[^ ]*@[^ ]*$');
+//special characters
 regexSpecial = new RegExp("<+|>+|;+|\{+|\}+|\\$+");
 
+//der name der css regel, die das eingabefeld einfärbt
 var cssFalseInputClass = "falseInput";
 
-var korrekterBenutzername = false;
-var korrekteSchwierigkeit = false;
-var korrekteKategorie = false;
-var korrekteAnzahl = false;
-var korrekterVorname = false;
-var korrekterNachname = false;
-var korrekteEmail = false;
-var korrekterText = false;
 
 //checks the validity and sets the errorText
 function checkVal(inputElement, errorText, fehlermeldungOutput)
 {
-	//setze den boolean wert auf checkvalidity
+	console.log(inputElement.value);
+	//setze den boolean wert von dem checkvalidity resultat
 	var bool = inputElement.checkValidity();
-	var ausgabeText = "";
 	
-	ausgabeText = toggleCssField(inputElement, bool, errorText);
+	//setzte den fehlertext und färbe das eingabefeld ein, falls die ingaben falsch waren
+	var ausgabeText = toggleCssField(inputElement, bool, errorText);
 			
+	//gibt es ein ausgabefeld?
 	if (fehlermeldungOutput != null)
 	{
+		//der ausgabetext soll in dem ausgabefeld erscheinen
 		fehlermeldungOutput.innerHTML = ausgabeText;
 	}
 	
+	//gebe den boolean wert weiter
 	return bool;
 }
 
-//checks the pattern
-function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match = true)//default true
+//checks the pattern of the inputelement
+function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput, match = true)//match default value = true
 {
-	//bool wird falsch gesetzt (negation vom parameter)
+	//bool wird falsch gesetzt (negation vom parameter match)
 	var bool = !match;
-	//initialisiere den ausgabetext
-	var ausgabeText = "";
 	
+	//der string des inputelemnts stimmt mit dem regex überein
 	if (inputElement.value.match(regExPattern))
 	{
-		//inventiere das bool
+		//negiere den boolean
 		bool = !bool;
-		
-		//entscheide ob das element gefärbt wird oder auf normal gesetzt wird
-		//und übergebe den fehlertext
-		ausgabeText = toggleCssField(inputElement, match, errorText);
 	}
-	else
-	{
-		//entscheide ob das element gefärbt wird oder auf normal gesetzt wird
-		//und übergebe den fehlertext
-		ausgabeText = toggleCssField(inputElement, !match, errorText);
-	}
+	
+	//markiere das Feld gelb, falls der boolean falsch ist und hole den Fehlertext
+	var ausgabeText = toggleCssField(inputElement, bool, errorText);
 	
 	//falls es ein output feld gibt
 	if (fehlermeldungOutput != null)
@@ -65,7 +56,7 @@ function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput
 		fehlermeldungOutput.innerHTML = ausgabeText;
 	}
 	
-	//gebe den bool wert zurück
+	//gebe den boolean wert zurück
 	return bool;
 }
 
@@ -73,16 +64,20 @@ function checkPattern(inputElement, regExPattern, errorText, fehlermeldungOutput
 //entscheide ob das element gefärbt wird oder auf normal gesetzt wird
 function toggleCssField (inputElement, bool, errorText)
 {
+		//falls der parameter wahr ist, soll das feld wieder die normale farbe bekommen (die css regel gilt nicht mehr)
 		if (bool)
 		{
 			inputElement.removeAttribute("class", cssFalseInputClass);
+			//die fehlermeldung ist ungültig, wird also mit "" überschrieben
 			errorText = "";
 		}
 		else
 		{	
+			//färbe das feld entsprechend der css regel (gelb)
 			inputElement.setAttribute("class", cssFalseInputClass);
 			console.log(errorText);
 		}
 		
+		//reiche die fehlermeldung weiter
 		return errorText;
 }

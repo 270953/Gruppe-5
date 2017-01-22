@@ -12,8 +12,8 @@
     <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
     <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
-    <script type="text/javascript" src="js/preise.js"></script>
-    <script type="text/javascript" src="js/preistabelle.js"></script>
+    <script type="text/javascript" src="js/bootsverleih/preise.js"></script>
+    <script type="text/javascript" src="js/bootsverleih/preistabelle.js"></script>
     <script type="text/javascript" src="js/jsonEinlesen.js"></script>
     <script type="text/javascript" src="js/indexedDB.js"></script>
 	<script type="text/javascript" src="js/navigation.js"></script>
@@ -22,7 +22,7 @@
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-	<link rel="stylesheet" type="text/css" href="css/preistabelle.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootsverleih.css" />
     <link rel="stylesheet" type="text/css" href="css/formular.css" />
 </head>
 
@@ -39,8 +39,8 @@
         <nav>
             <ul>
                 <li>Startseite</li>
-                <li id="activeNav">Preisrechner</li>
-                <li>Quiz</li>
+                <li id="activeNav">Bootsverleih</li>
+                <li>Bootsquiz</li>
                 <li>Kontakt</li>
                 <li>Impressum</li>
             </ul>
@@ -53,6 +53,10 @@
 
 		 
                 <section id="preisTabelle">
+				
+				<article>
+				In unserer Preistabelle können Sie ablesen, welche Bootsklasse unter welchen Konditionen zur Verfügung steht und welche Rabatte möglich sind.
+				</article>
 
                                  <!-- Preistabelle: Daten werden aus Json eingelesen -->
                                  <table id="preise">
@@ -70,18 +74,14 @@
 
                 <h1>Preisrechner</h1>
 				 
-				 
-                <section id="preisRechner">
+                    <form>
 
-
-                     <p>Treffen Sie Ihre Auswahl:</p>
-
-                    <div>
-
+					    <p>Treffen Sie Ihre Auswahl:</p>
 
                          <div>
-                             <span>Personenanzahl:</span>
+                             <span>Personenanzahl (max 24):</span>
                              <input type="number" title="Personenanzahl" class="eingabeFeld" id="personen" min="0" max="24" step="1" value="0">
+							 <span class="fehlermeldung" id ="f1"></span>
                          </div>
 
                          <p>
@@ -115,29 +115,29 @@
                          <p>
                              <span id='mietdauerText'>Mietdauer in Tagen (max. 30): </span>
                              <input type="number" title="Mietdauer" class="eingabeFeld" id="mietdauer" min="1" max="30" step="1" value="1">
+							 <span class="fehlermeldung" id ="f2"></span>
                          </p>
 
                          <div>
                              <input type="button" id="berechnePreis" value="Preis berechnen">
                              <input type="button" id="letzteBerechnungen" value="die letzten Preisberechnungen anzeigen">
+							 <input type="button" value="L&ouml;sche alte Daten" id="loesche"/>
                          </div>
-
-                     </div>
-
-                    <p id="Fehlermeldungen"></p>
+						 
                     <p id="Preisberechnungen"></p>
+					
                     <output></output>
 
+                     </form>
 
-                 </section>
 
          </main>
 
          <!-- footer Bereich f�r Impressum und Kontakt -->
          <footer>
                 <ul>
-                        <li><a href="impressum.html">Impressum</a></li>
-                        <li><a href="kontakt.html">Kontakt</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
                 </ul>
          </footer>
 

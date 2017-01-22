@@ -12,13 +12,14 @@
     <meta name="keywords" content="Bootsvermietung, Bootsführerschein, Steife Brise, Hamburg">
     <meta name="description" content="Wir sind eine Hamburger Bootsvermietung und bieten Kurse für Bootsführerscheine an.">
 
-    <script type="text/javascript" src="js/quiz/quiz.js"></script>
+    <script type="text/javascript" src="js/bootsquiz/bootsquiz.js"></script>
     <script type="text/javascript" src="js/jsonEinlesen.js"></script>
 
     <script type="text/javascript" src="js/validation.js"></script>
-    <script type="text/javascript" src="js/quiz/quizFormularCheck.js"></script>
-    <script type="text/javascript" src="js/quiz/quizErstellen.js"></script>
-    <script type="text/javascript" src="js/quiz/quizPruefen.js"></script>
+    <script type="text/javascript" src="js/bootsquiz/bootsquizFormularCheck.js"></script>
+    <script type="text/javascript" src="js/bootsquiz/bootsquizErstellen.js"></script>
+	<script type="text/javascript" src="js/bootsquiz/bootsquizInObjectUmwandeln.js"></script>
+    <script type="text/javascript" src="js/bootsquiz/bootsquizPruefen.js"></script>
 
     <script type="text/javascript" src="js/indexedDB.js"></script>
     <script type="text/javascript" src="js/navigation.js"></script>
@@ -26,7 +27,7 @@
     <!-- Logo, das z.B. in der Adressleiste, im Tab oder in der Favoritenliste angezeigt wird -->
     <link rel="shortcut icon" type="image/x-icon" href="pictures/logo.ico">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
-    <link rel="stylesheet" type="text/css" href="css/quiz_stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootsquiz.css" />
     <link rel="stylesheet" type="text/css" href="css/formular.css" />
 </head>
 
@@ -43,12 +44,13 @@
         <nav>
             <ul>
                 <li>Startseite</li>
-                <li>Preisrechner</li>
-                <li id="activeNav">Quiz</li>
+                <li>Bootsverleih</li>
+                <li id="activeNav">Bootsquiz</li>
                 <li>Kontakt</li>
                 <li>Impressum</li>
             </ul>
         </nav>
+
 
         <!-- Hauptbereich der Seite - dieser Bereich umfasst den relevanten Inhalt -->
         <main>
@@ -59,13 +61,19 @@
 
                             <form id="eingabeFormular" class="f1" method="POST" name="quizErstellen">
 
-                                    <!--Benutzername-->
+                                    <figure id="quizBild">
+                                        <a href="http://www.kellersee.info/rund-um-den-see.htm">
+                                            <img src="pictures/quizBild.jpg" title="Mach deinen Bootsschein, denn die Boote warten auf dich!" alt="Quelle: Hans Wurst">
+                                        </a>
+                                        <figcaption>Abb. 1 "2016 Kellersee, Malente"</figcaption>
+                                    </figure>
 
+                                    <!--Benutzername-->
                                     <h3>Gib deinen Benutzernamen ein (mind. 5 Buchstaben):</h3>
                                         <input id="benutzernameID" type="text" title="Benutzername" required minlength="5"><span class="fehlermeldung" id="fehlerMeldung1"></span>
 
                                     <!--Vorname-->
-                                    <h3>Gib deinen Vornamen ein (Pflichtfeld): </h3>
+                                    <h3>Gib deinen Vornamen ein (Pflichtfeld):</h3>
                                         <input id="vornameID" type="text" title="Vorname" required><span class="fehlermeldung" id="fehlerMeldung2"></span>
 
                                     <!--Schwierigkeit-->
@@ -101,9 +109,12 @@
                                         <span class="fehlermeldung" id="fehlerMeldung5"></span>
                                     </div>
 
-                                    <!--Button zum Abschicken der Benutereingaben-->
-                                    <input type="button" id="neuesQuiz" value="Neues Quiz erstellen">
-                                    <input type="button" value="Formular l&ouml;schen" id="formularLeerenOben">
+                                    <fieldset>
+                                        <legend>Quiz erstellen</legend>
+                                        <!--Button zum Abschicken der Benutereingaben-->
+                                        <input type="button" class="Button" id="neuesQuiz" value="Neues Quiz erstellen">
+                                        <input type="button" class="Button" value="Formular l&ouml;schen" id="formularLeerenOben">
+                                    </fieldset>
                             </form>
             </section>
 
@@ -119,9 +130,11 @@
 
                                     <!--Buttons-->
                                     <div class="buttonErgebnis" id="buttonErgebnis">
-                                    <input type="button" value="Ergebnis" id="auswerten">
-                                    <input type="button" id="letzteErgebnisse" value="letzte Ergebnisse">
-                                    <input type="button" value="Eingabe l&ouml;schen" id="formularLeeren">
+                                    <input type="button" class="Button" value="Ergebnis" id="auswerten">
+                                    <input type="button" class="Button" value="Quiz wiederholen" id="formularLeeren">
+                                    <input type="button" class="Button" id="letzteErgebnisse" value="letzte Ergebnisse">
+									<input type="button" class="Button" id="loesche" value="l&ouml;sche alte Ergebnisse">
+
                                     <p class="fehlermeldung" id="fehlerMeldung6"></p>
 
                                     </div>
@@ -134,21 +147,27 @@
 
                                                 <ul>
                                                     <li>
+                                                        Versuche:
+                                                    <input type="text" class="korrekturAngaben" id="versucheID" readonly>
+                                                    </li>
+
+                                                    <li>
                                                     Richtige Antworten:
-                                                    <output id="antwortRichtigID"></output>
+                                                    <input type="text" class="korrekturAngaben" id="antwortRichtigID" readonly>
                                                     </li>
 
                                                     <li>
                                                     Falsche Antworten:
-                                                    <output id="anzahlFalschID"></output>
+                                                    <input type="text"  class="korrekturAngaben" id="anzahlFalschID" readonly>
                                                     </li>
 
                                                     <li>
                                                     Prozentual richtige Antworten:
-                                                    <output id="prozentID"></output>
+                                                    <input type="text"  class="korrekturAngaben" id="prozentID" readonly>
                                                     </li>
-
                                                 </ul>
+
+                                                <output></output>
 
                                             </fieldset>
                                         </form>

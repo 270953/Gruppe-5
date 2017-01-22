@@ -1,6 +1,11 @@
 window.onload = initOnLoad;
 
 var jsonDaten;      // Objekt, in das später die Daten aus der JSON Datei geschrieben werden
+var mietdauer;
+var personenZahl;
+
+var ausgabeFeld1;
+var ausgabeFeld2;
 
 function initOnLoad() {
 
@@ -12,19 +17,26 @@ function initOnLoad() {
 
     jsonEinlesen('json/preise.json', null, 'preise');
 
+	
+    ausgabeFeld1 = document.getElementById('f1');
+	ausgabeFeld2 = document.getElementById('f2');
+	
     var buttonPreis = document.getElementById('berechnePreis');
     buttonPreis.addEventListener('click', berechnePreis, false);
 
     var bootsWahl = document.getElementById('bootsKlasse');
     bootsWahl.addEventListener('change', changeMietdauerText, false);
+	
+	var buttonLoeschen = document.getElementById("loesche");
+	buttonLoeschen.onclick = function ()
+	{datenBankLoeschen('preis');};
 
-    var personenZahl = document.getElementById('personen');
-    personenZahl.addEventListener('change', anzahlPersonen, false);
+    personenZahl = document.getElementById('personen');
+	personenZahl.onchange = pruefePers;
 
-    var mietdauer = document.getElementById('mietdauer');
-    mietdauer.onchange = function() {
-        pruefFunktion(mietdauer);
-    };
+    mietdauer = document.getElementById('mietdauer');
+	
+    mietdauer.onchange = pruefeMietDauer;
 
     var letzteBerechnungen = document.getElementById('letzteBerechnungen');
     letzteBerechnungen.addEventListener('click', function () {
@@ -33,13 +45,33 @@ function initOnLoad() {
 
 }
 
+function pruefeMietDauer ()
+{
+	return (checkVal(mietdauer, "Eingabewert darf maximal 30 sein!", ausgabeFeld2));
+}
 
-function changeMietdauerText() {                // wird aufgerufen, wenn die Bootsklasse geändert wird
+function pruefePers()
+{
+	var bool = checkVal(personenZahl, "Die Personenzahl darf den Wert 24 nicht &uuml;berschreiten!" , ausgabeFeld1);
+	
+	//falls die eingabe im gültigen bereich war, soll sich die tabelleneinfärbung aktualisieren
+	if (bool)
+	{
+		//färbe die tabelle ein, entsprechend der ausgewählten personen
+		tabelleEinfaerben(personenZahl.value);
+	}
+	
+	//gebe den boolean wert weiter
+	return bool;
+}
 
-    var mietdauer = document.getElementById('mietdauer');
+// wird aufgerufen, wenn die Bootsklasse geändert wird
+function changeMietdauerText() {                
+
     var mietdauerText = document.getElementById('mietdauerText').innerHTML;
     var bootsKlasse = ermittleBootsklasse();            // ermittelt das richtige Boot innerhalb der JSON Daten, um darauf direkt zugreifen zu können
     console.log(bootsKlasse);
+	
     //noinspection JSUnresolvedVariable                                           // nur für Webstorm, da Webstorm nicht weiß, woher die Eigenschaft 'abrechnungsZeitraum' kommt
     var abrechnungsZeitraum = jsonDaten[bootsKlasse[0]].abrechnungsZeitraum;        // holt sich aus den JSON Daten den Abrechnungszeitraum für das ausgewählte Boot
 
@@ -55,30 +87,19 @@ function changeMietdauerText() {                // wird aufgerufen, wenn die Boo
 }
 
 
-function pruefFunktion(input) {
-
-    var ausgabeFeld = document.getElementById('Fehlermeldungen');
-
-    // Speicherung einer allgemein gültigen Fehlermeldung in einer Variablen
-    var errorText = 'Der eingegebene Wert entspricht nicht den Vorgaben.<br>' +
-                    'Personenzahl: 0-24<br>' +
-                    'Mietdauer: wie angegeben';
-
-    return(checkVal(input, errorText, ausgabeFeld));    // hier wird die function checkVal aus validation.js aufgerufen
-}
-
-
 function berechnePreis() {              // wird beim Click auf den Button 'Preis berechnen' aufgerufen
 
-    var mietdauer = document.getElementById('mietdauer');
-
-    if (pruefFunktion(mietdauer) == true) {          // nur wenn die Mietdauer einen gültigen Wert enthält, wird in die Berechnung des Preises eingestiegen
+//nur wenn die Personenanzahl und die Mietdauer im gültigen bereich sind 
+//das & zeichen zwingt das überprüfen von allen bedingungen in dem if statement, da die methoden aufgerufen werden müssen
+    if (pruefePers() & pruefeMietDauer()) {     
 
         var bootsKlasse = ermittleBootsklasse();
-        mietdauer = mietdauer.value;
+		
+        mietdauerValue = mietdauer.value;
+		
         var saisonPreis = ermittleSaisonPreis(bootsKlasse);
         var rabatt = ermittleRabatt(bootsKlasse);
-        var endPreis = saisonPreis * mietdauer * rabatt;    // die Berechnung des Preises ist selbsterklärend
+        var endPreis = saisonPreis * mietdauerValue * rabatt;    // die Berechnung des Preises ist selbsterklärend
 
         document.getElementById('Preisberechnungen').innerHTML = 'Der Preis beträgt für diesen Zeitraum <b>' + endPreis.toFixed(2) + ' Euro</b>.';
 
@@ -92,23 +113,23 @@ function berechnePreis() {              // wird beim Click auf den Button 'Preis
         var abrechnungsZeitraum = jsonDaten[bootsKlasse[0]].abrechnungsZeitraum;        // holt sich aus den JSON Daten den Abrechnungszeitraum für das ausgewählte Boot
 
         if (abrechnungsZeitraum == 'pro Tag') {             // je nach Abrechnungszeitraum der gerade gewählten Bootsklasse werden bei der Mietdauer der Text vor dem Input-Feld und das max-Attribut angepasst
-            if (mietdauer > 1) {
-                mietdauer += ' Tage';
+            if (mietdauerValue > 1) {
+                mietdauerValue += ' Tage';
             }
             else {
-                mietdauer += ' Tag';
+                mietdauerValue += ' Tag';
             }
         }
         else {
-            if (mietdauer > 1) {
-                mietdauer += ' Stunden';
+            if (mietdauerValue > 1) {
+                mietdauerValue += ' Stunden';
             }
             else {
-                mietdauer += ' Stunde';
+                mietdauerValue += ' Stunde';
             }
         }
 
-        eingabeDaten.Mietdauer = mietdauer;
+        eingabeDaten.Mietdauer = mietdauerValue;
         eingabeDaten.Preis = '<b>' + endPreis.toFixed(2) + ' Euro</b>';
 
         var datum = new Date();

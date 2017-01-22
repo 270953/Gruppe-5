@@ -1,0 +1,92 @@
+
+/*Die Darstellung der Preistabelle*/
+table
+{
+	/*Der Default Wert für Border-Spacing wird überschrieben*/
+ border-spacing: 0;
+ font: 18px helvetica, arial, sans-serif;
+ margin : 30px auto;
+ box-shadow : 10px 10px 10px 0 grey;
+
+}
+
+/*Die Darstellung der Tabellen -köpfe/überschriften*/
+th
+{
+ color: white;
+ background-color: #479bf5;
+ padding: 10px;
+
+ text-align: left;
+ font-weight: bold;
+ font-size: 18px;
+ 
+ border-bottom: 2px solid black;
+}
+
+/*jeder zweite Tabellenkopf soll eine linke grenze haben*/
+th:nth-child(n+2)
+{
+ border-left: 2px solid black;
+}
+
+/*Die Tabellenreihenhöhe*/
+tr
+{
+ height: 35px;
+}
+
+/*Die Inhalte der Tabellen*/
+td
+{
+ padding: 5px;
+ text-align: center;
+}
+
+/*jedes zweite element soll eine linke grenze haben*/
+td:nth-child(n+2)
+{
+ border-left: 2px solid #479bf5;
+}
+
+
+/*Die allgemeine Darstellung des form areals*/
+form
+{
+    margin-left : 4%;
+    margin-right : 4%;
+}
+
+/*alle geraden und ungeraden tabellenreihen*/
+.gerade
+{
+ background-color: #F8FACF;
+}
+
+.ungerade
+{
+ background-color: #CFDAFA;
+}
+
+/*Die ausgewählten geraden und ungeraden tabellenreihen*/
+.gruenGerade
+{
+ background-color: #6BED6D;
+}
+
+.gruenUngerade
+{
+ background-color: #96FAA2;
+}
+
+/*überschreibe das p tag mit der neuen größe*/
+p
+{
+	width: 100%;
+}
+
+/*Für den einführungstext*/
+article 
+{
+	padding : 0px 40px;
+}

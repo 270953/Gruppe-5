@@ -70,20 +70,19 @@ function tabelleEinfaerben(personenZahl) {
 // wird aufgerufen, wenn die Personenanzahl geändert wird
 function anzahlPersonen() {
 
-    var personenZahl = document.getElementById('personen');
 
-    if (pruefFunktion(personenZahl) == true) {     // prüft die Richtigkeit der Eingabe (Erläuterung: siehe Z. 115ff)
+    if (pruefePers()) {     // prüft die Richtigkeit der Eingabe 
         // erst wenn diese korrekt ist, wird der weitere Code ausgeführt
-        personenZahl = personenZahl.value;
+        personenZahlValue = personenZahl.value;
 
         var bootsKlasse = document.getElementById('bootsKlasse');
         var bootsKlasseAktuell = bootsKlasse.value;
 
-        if (personenZahl != 0) {               // färbt die Tabelle nur ein, wenn die Personenanzahl ungleich 0 ist
-            tabelleEinfaerben(personenZahl);   // übergibt die Variable Personenzahl an die Funktion 'tabelleEinfaerben'
+        if (personenZahlValue != 0) {               // färbt die Tabelle nur ein, wenn die Personenanzahl ungleich 0 ist
+            tabelleEinfaerben(personenZahlValue);   // übergibt die Variable Personenzahl an die Funktion 'tabelleEinfaerben'
         }
         else {
-            personenZahl = 1;                   // ändert die personenzahl auf 1 für die folgende for-Schleife
+            personenZahlValue = 1;                   // ändert die personenzahl auf 1 für die folgende for-Schleife
         }
 
         while (bootsKlasse.childElementCount > 0) {     // löscht alle Elemente der Check-Box, um im Folgenden die Elemente mit den richtigen Elementen neu anzulegen
@@ -93,7 +92,7 @@ function anzahlPersonen() {
         for (var zaehlerArray = 0; zaehlerArray < jsonDaten.length; zaehlerArray++) {   // durchläuft wieder die Boote, die aus JSON eingelesen worden waren
 
             //noinspection JSUnresolvedVariable
-            if (jsonDaten[zaehlerArray].maxPersonen >= personenZahl) {      // wenn die max Personenanzahl des Bootes gleich oder über der Eingabe des Nutzers ist, wird das
+            if (jsonDaten[zaehlerArray].maxPersonen >= personenZahlValue) {      // wenn die max Personenanzahl des Bootes gleich oder über der Eingabe des Nutzers ist, wird das
                 // Boot in die Liste der checkbox aufgenommen
                 var neuesElement = document.createElement('option');        // entsprechend werden dafür Kindelemente der Checkbox angelegt
                 var neuesAttribut = document.createAttribute('value');

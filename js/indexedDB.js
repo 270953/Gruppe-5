@@ -1,6 +1,7 @@
 // ausgelagerte .js Datei für die Browserdatenbank
 
 var datenbank;
+var transaction;
 var objectStore;
 var ausgabeFeld;      // im output-Bereich werden später die letzten Ergebnisse angezeigt
 
@@ -18,8 +19,8 @@ function datenbankOeffnen() {
         console.log('Die Datenbank wurde erfolgreich geladen.');
     };
     
-    request.onupgradeneeded = function () {                             // konnte die Datenbank nicht gefunden werden, wird eine neue Datenbank angelegt
-        datenbank = this.result;                                        // auch in diesem Fall wird das Datenbank-Objekt an die Variable 'datenbank' übergeben
+    request.onupgradeneeded = function (event) {                             // konnte die Datenbank nicht gefunden werden, wird eine neue Datenbank angelegt
+        datenbank = event.target.result;                                        // auch in diesem Fall wird das Datenbank-Objekt an die Variable 'datenbank' übergeben
         console.log('Neue Datenbank angelegt.');
 
             //noinspection JSUnresolvedVariable
@@ -63,6 +64,29 @@ function datenbankOeffnen() {
     };
 }
 
+//lösche einen objectstore
+function datenBankLoeschen(herkunft)
+{
+	objectStore = pruefeHerkunft(herkunft);
+	
+	if(objectStore != null)
+	{
+		var request = objectStore.clear();
+		
+		//bei erfolg soll die console einen eintrag machen
+		request.onsuccess = function()
+		{
+			console.log(herkunft + " erfolgreich gelöscht!");
+		};
+	}
+	else
+	{
+		//falls der objectstore nicht exisistiert
+		console.log(herkunft + " gibt es nicht!");
+	}
+	
+}
+
 
 // Funktion, um Daten in die Datenbank zu schreiben
 function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum einen die Daten, die gespeichert werden sollen, übergeben. zum anderen aber auch eine Prüfvariable
@@ -93,17 +117,24 @@ function datenLesen(herkunft) {
         console.log(abfrageBegrenzung);
 
         //noinspection JSUnresolvedFunction
-        objectStore.openCursor(abfrageBegrenzung, 'prev').onsuccess = function (event) {        // auf dem Objectstore wird ein Zeiger geöffnet, der den Store rückwärts durchläuft. Wenn ein Eintrag gefunden wird, wird das onsuccess-Event ausgelöst
-            var jsObjekt = event.target.result;                                         // findet er einen Eintrag, übergibt er das Ergebnis an 'jsObjekt'
+		// auf dem Objectstore wird ein Zeiger geöffnet, der den Store rückwärts durchläuft. Wenn ein Eintrag gefunden wird, wird das onsuccess-Event ausgelöst
+        objectStore.openCursor(abfrageBegrenzung, 'prev').onsuccess = function (event) 
+		{      
+            var jsObjekt = event.target.result;  // findet er einen Eintrag, übergibt er das Ergebnis an 'jsObjekt'
 
-            if (jsObjekt) {                                                             // da auch undefined übergeben werden kann, erfolgt sicherheitshalber eine Abfrage
-                inHTMLwiedergeben(jsObjekt);                                            // wenn positiv, dann wird die Funktion 'inHTMLwiedergeben' aufgerufen
+			// da auch undefined übergeben werden kann, erfolgt sicherheitshalber eine Abfrage
+            if (jsObjekt) {        
+			 // wenn positiv, dann wird die Funktion 'inHTMLwiedergeben' aufgerufen
+                inHTMLwiedergeben(jsObjekt);                                           
                 //noinspection JSUnresolvedFunction
-                jsObjekt.continue();                                                    // hiermit wird der Zeiger aufgefordert, zum nächsten Eintrag zu springen
+				  // hiermit wird der Zeiger aufgefordert, zum nächsten Eintrag zu springen
+                jsObjekt.continue();                                                  
             }
 
-            else {
-                console.log("Keine weiteren Einträge vorhanden!");                      // findet der Zeiger keinen Eintrag, erfolgt ein Konsoleneintrag
+            else 
+			{
+				 // findet der Zeiger keinen Eintrag, erfolgt ein Konsoleneintrag
+                console.log("Keine weiteren Einträge vorhanden!");                     
             }
         };      // schließt openCursor
     };      // schließt countRequest
