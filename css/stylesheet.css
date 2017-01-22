@@ -15,7 +15,7 @@ p
 /*Die "Hintergrundfarbe"*/
 html
 {
-	background-color: white;	
+	background-color: white;
 	height: 100%;
 }
 
@@ -23,14 +23,14 @@ html
 body
 {
 	margin : 0px 10%;
-	background : linear-gradient(#D0D7F2, #9BA9E0);
+	background : linear-gradient(#D0D7F2, #9BA9E0); /*Farbverlauf des Hintergrundes*/
 	font: 15px sans-serif;
 }
 
 ul
-{	
+{
 	padding: 0px; /*Setze das Vordefinierte Padding von ul auf 0px*/
-	list-style-type: none;	
+	list-style-type: none;
 }
 
 /*Die Darstellun des großen Bildes am Seitenanfang*/
@@ -137,7 +137,7 @@ h1
 	font-size: x-large;
 	color: white;
 	padding-left: 25px;
-	
+
 	margin-left : 0px;/*Setze den Margin des "articles *" zurück*/
 }
 
@@ -147,6 +147,13 @@ h2{
 
 h3{
 	font-font-weight: bold;
+}
+
+.Button
+{
+	background-color: #00608a;
+	border: none;
+	color: white;
 }
 
 :hover .Button
