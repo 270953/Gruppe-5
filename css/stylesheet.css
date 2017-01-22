@@ -115,9 +115,19 @@ article * *
 	margin-left : 0px;
 }
 
-article img 
-{
+main img{
 	border-radius : 15px;/*CSS3 rounded borders property*/
+}
+
+.bild
+{
+	float: right;
+	width: auto;
+	height: auto;
+}
+
+figcaption{
+	font-size: small;
 }
 
 /*Alle h1 Überschriften...*/
