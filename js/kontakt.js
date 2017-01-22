@@ -124,12 +124,6 @@ function getForms()
 	formEmail.onchange = emailCheck;
 	formTextArea.onchange = textAreaCheck;
 	
-	//hier werden click listener auf die buttons gelegt
-	buttonLoeschen.onclick = function ()
-	{
-		datenBankLoeschen('letzteKontakte');
-	};	
-	
 	buttonUebernehmen.onclick = eingabenUebernehmen;
 	
 	//eventlistener beim kilicken zum überprüfen der formulare

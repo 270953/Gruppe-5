@@ -74,9 +74,11 @@ function datenBankLoeschen(herkunft)
 		var request = objectStore.clear();
 		
 		//bei erfolg soll die console einen eintrag machen
-		request.onsuccess = function()
+		request.onsuccess = function(event)
 		{
 			console.log(herkunft + " erfolgreich gelöscht!");
+			//resete das output feld
+			datenLesen(herkunft);
 		};
 	}
 	else
@@ -104,7 +106,7 @@ function datenSpeichern(eingabeDaten, herkunft) {           // es werden zum ein
 // Funktion, um die Datenbank auszulesen
 function datenLesen(herkunft) {
 
-    ausgabeFeld[0].innerHTML = '<strong>Hier sehen Sie die letzten Ergebnisse (neueste zuerst):</strong><br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
+    ausgabeFeld[0].innerHTML = 'Hier sehen Sie die letzten Ergebnisse (neueste zuerst):<br>';    // löscht gleichzeitig den Inhalt des Ausgabefeldes bei jedem Aufruf, damit die Liste sich nicht wiederholt
 
     objectStore = pruefeHerkunft(herkunft);                 // mit der Funktion wird geprüft, welche Datei die Datenbank geöffnet hat
     console.log(objectStore);
