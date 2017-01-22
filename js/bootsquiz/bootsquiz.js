@@ -26,18 +26,18 @@ var hinweisSchwierigkeit;
 var hinweisKategorie;
 
 var quellDateien = [                //Pfade der Fragen, die in jsonEinlesen verarbeitet werden
-    "'json/quizBinnenwasserLeicht.json'",
-    "'json/quizBinnenwasserMittel.json'",
-    "'json/quizBinnenwasserSchwer.json'",
-    "'json/quizSeeLeicht.json'",
-    "'json/quizSeeMittel.json'",
-    "'json/quizSeeSchwer.json'",
-    "'json/quizBinnenwasserLeichtMittel.json'",
-    "'json/quizBinnenwasserLeichtSchwer.json'",
-    "'json/quizBinnenwasserMittelSchwer.json'",
-    "'json/quizSeeLeichtMittel.json'",
-    "'json/quizSeeLeichtSchwer.json'",
-    "'json/quizSeeMittelSchwer.json'"
+    "json/quizBinnenwasserLeicht.json",
+    "json/quizBinnenwasserMittel.json",
+    "json/quizBinnenwasserSchwer.json",
+    "json/quizSeeLeicht.json",
+    "json/quizSeeMittel.json",
+    "json/quizSeeSchwer.json",
+    "json/quizBinnenwasserLeichtMittel.json",
+    "json/quizBinnenwasserLeichtSchwer.json",
+    "json/quizBinnenwasserMittelSchwer.json",
+    "json/quizSeeLeichtMittel.json",
+    "json/quizSeeLeichtSchwer.json",
+    "json/quizSeeMittelSchwer.json"
 ];
 
 var quizJsonDaten;                  //Deklariert JSON Objekt
